@@ -356,7 +356,7 @@ def main():
     params['if_sum_eq'] = if_sum_eq
 
     # --- System parameters ---
-    N = 10
+    N = 30
     params['N'] = N
     dt = 0.1
     params['dt'] = dt
