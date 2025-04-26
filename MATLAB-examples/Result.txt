@@ -1,0 +1,245 @@
+
+
+PushBot: 
+
+Ite: 1, Initial State: 0.7740 -0.6848 0.2446 1.2363
+SELF + NON (2025-01-29_19-04-21): Gap = 0.722754, Residual = 5.770603, Mosek = 24.884992
+SELF + MAX (2025-01-29_19-09-59): Gap = 12.845756, Residual = 3.197896, Mosek = 12.887513
+SELF + MF (2025-01-29_19-13-10): Gap = 34.132960, Residual = 5.456545, Mosek = 5.102704
+
+Ite: 2, Initial State: 0.8605 0.9412 -0.7293 -2.8090
+SELF + NON (2025-01-29_19-04-58): Gap = 0.000002, Residual = 5.417907, Mosek = 18.046879
+SELF + MAX (2025-01-29_19-10-17): Gap = 8.898225, Residual = 3.111573, Mosek = 12.670334
+SELF + MF (2025-01-29_19-13-20): Gap = 34.149648, Residual = 5.249167, Mosek = 6.653599
+
+Ite: 3, Initial State: 0.1206 0.9143 0.5484 -1.3385
+SELF + NON (2025-01-29_19-05-28): Gap = 0.000005, Residual = 6.256020, Mosek = 25.918504
+SELF + MAX (2025-01-29_19-10-35): Gap = 10.537786, Residual = 3.674502, Mosek = 14.325056
+SELF + MF (2025-01-29_19-13-32): Gap = 35.199138, Residual = 5.914525, Mosek = 5.037768
+
+Ite: 4, Initial State: 0.8677 -0.0292 0.6817 -2.7230
+SELF + NON (2025-01-29_19-06-05): Gap = 0.000002, Residual = 6.150066, Mosek = 14.876994
+SELF + MAX (2025-01-29_19-10-54): Gap = 0.062087, Residual = 4.419761, Mosek = 15.335370
+SELF + MF (2025-01-29_19-13-42): Gap = 16.414273, Residual = 5.347728, Mosek = 4.548887
+
+Ite: 5, Initial State: 0.6007 0.6006 0.2808 -2.4172
+SELF + NON (2025-01-29_19-06-32): Gap = 0.000046, Residual = 6.465390, Mosek = 26.036494
+SELF + MAX (2025-01-29_19-11-14): Gap = 12.285023, Residual = 4.304075, Mosek = 14.369557
+SELF + MF (2025-01-29_19-13-52): Gap = 36.480760, Residual = 5.273580, Mosek = 5.268332
+
+Ite: 6, Initial State: 0.0927 -0.7162 0.4049 1.9407
+SELF + NON (2025-01-29_19-07-10): Gap = 0.000012, Residual = 6.870265, Mosek = 28.749666
+SELF + MAX (2025-01-29_19-11-34): Gap = 13.351616, Residual = 3.769635, Mosek = 13.824458
+SELF + MF (2025-01-29_19-14-03): Gap = 36.590537, Residual = 5.693738, Mosek = 6.351987
+
+Ite: 7, Initial State: 0.2646 -0.1565 0.3819 1.1690
+SELF + NON (2025-01-29_19-07-50): Gap = 0.025056, Residual = 4.967571, Mosek = 22.451421
+SELF + MAX (2025-01-29_19-11-53): Gap = 14.047560, Residual = 3.573665, Mosek = 13.692532
+SELF + MF (2025-01-29_19-14-14): Gap = 36.917201, Residual = 5.754961, Mosek = 4.903762
+
+Ite: 8, Initial State: 0.5195 0.8315 -0.1693 -1.0974
+SELF + NON (2025-01-29_19-08-24): Gap = 0.016607, Residual = 5.571733, Mosek = 22.923036
+SELF + MAX (2025-01-29_19-12-12): Gap = 7.937550, Residual = 3.608538, Mosek = 14.181206
+SELF + MF (2025-01-29_19-14-24): Gap = 32.045136, Residual = 5.464048, Mosek = 4.888219
+
+Ite: 9, Initial State: 0.9096 0.5844 0.2442 2.7013
+SELF + NON (2025-01-29_19-08-59): Gap = 0.000004, Residual = 5.547035, Mosek = 18.206884
+SELF + MAX (2025-01-29_19-12-31): Gap = 3.714001, Residual = 3.704864, Mosek = 14.091655
+SELF + MF (2025-01-29_19-14-34): Gap = 27.548222, Residual = 5.198212, Mosek = 4.524481
+
+Ite: 10, Initial State: 0.9166 0.9190 -0.5165 -2.7933
+SELF + NON (2025-01-29_19-09-29): Gap = 0.000084, Residual = 5.993306, Mosek = 18.596443
+SELF + MAX (2025-01-29_19-12-50): Gap = 9.071077, Residual = 3.324374, Mosek = 14.737235
+SELF + MF (2025-01-29_19-14-44): Gap = 34.432015, Residual = 5.315693, Mosek = 4.812250
+
+
+Average: 
+SELF + NON: Ave-Gap = 0.076457, Ave-Residual = 5.900990, Mosek = 22.069131, Max-Cone-Size = 66
+SELF + MAX: Ave-Gap = 9.275068, Ave-Residual = 3.668888, Mosek = 14.011492, Max-Cone-Size = 32
+SELF + MF: Ave-Gap = 32.390989, Ave-Residual = 5.466820, Mosek = 5.209199, Max-Cone-Size = 11
+
+
+PushBox: 
+
+Ite: 1, Initial State: 1.9775 0.1473 0.2967
+SELF + NON (2025-01-30_12-16-07): Gap = 0.086158, Residual = 5.754311, Mosek = 8.876121
+SELF + MAX (2025-01-30_12-19-29): Gap = 0.229412, Residual = 5.845637, Mosek = 6.775001
+SELF + MF (2025-01-30_12-21-40): Gap = 10.605428, Residual = 6.928301, Mosek = 1.647932
+
+Ite: 2, Initial State: 2.5497 0.3912 0.1107
+SELF + NON (2025-01-30_12-16-28): Gap = 0.004455, Residual = 5.823736, Mosek = 7.866223
+SELF + MAX (2025-01-30_12-19-43): Gap = 0.005441, Residual = 5.413524, Mosek = 5.130388
+SELF + MF (2025-01-30_12-21-49): Gap = 18.794192, Residual = 6.399476, Mosek = 1.577868
+
+Ite: 3, Initial State: -2.3437 0.3872 0.3547
+SELF + NON (2025-01-30_12-16-47): Gap = 0.029487, Residual = 5.669981, Mosek = 7.858578
+SELF + MAX (2025-01-30_12-19-55): Gap = 0.050390, Residual = 5.742919, Mosek = 4.972223
+SELF + MF (2025-01-30_12-21-58): Gap = 14.475103, Residual = 6.174609, Mosek = 2.211902
+
+Ite: 4, Initial State: 2.5973 0.2456 0.3802
+SELF + NON (2025-01-30_12-17-06): Gap = 0.875417, Residual = 4.942701, Mosek = 8.769434
+SELF + MAX (2025-01-30_12-20-08): Gap = 1.046341, Residual = 5.551738, Mosek = 7.006859
+SELF + MF (2025-01-30_12-22-08): Gap = 20.430882, Residual = 6.084864, Mosek = 2.926029
+
+Ite: 5, Initial State: 0.8316 0.3401 0.3036
+SELF + NON (2025-01-30_12-17-26): Gap = 0.013775, Residual = 5.220382, Mosek = 6.444727
+SELF + MAX (2025-01-30_12-20-22): Gap = 0.015707, Residual = 5.719458, Mosek = 4.971787
+SELF + MF (2025-01-30_12-22-18): Gap = 0.855494, Residual = 5.895711, Mosek = 1.684492
+
+Ite: 6, Initial State: -2.5287 0.1426 0.3273
+SELF + NON (2025-01-30_12-17-44): Gap = 0.014760, Residual = 5.818717, Mosek = 8.199825
+SELF + MAX (2025-01-30_12-20-34): Gap = 0.023899, Residual = 5.820768, Mosek = 6.741621
+SELF + MF (2025-01-30_12-22-28): Gap = 18.279046, Residual = 7.208771, Mosek = 1.241314
+
+Ite: 7, Initial State: -1.3917 0.2265 0.3229
+SELF + NON (2025-01-30_12-18-03): Gap = 0.035940, Residual = 6.075818, Mosek = 8.737885
+SELF + MAX (2025-01-30_12-20-48): Gap = 0.039882, Residual = 5.750161, Mosek = 4.956155
+SELF + MF (2025-01-30_12-22-36): Gap = 4.992679, Residual = 5.968003, Mosek = 1.141470
+
+Ite: 8, Initial State: 0.2946 0.3747 0.2177
+SELF + NON (2025-01-30_12-18-23): Gap = 0.017849, Residual = 5.797380, Mosek = 9.741273
+SELF + MAX (2025-01-30_12-21-01): Gap = 0.021979, Residual = 5.659420, Mosek = 5.263123
+SELF + MF (2025-01-30_12-22-45): Gap = 1.353162, Residual = 7.566677, Mosek = 1.239286
+
+Ite: 9, Initial State: 2.8746 0.3377 0.2966
+SELF + NON (2025-01-30_12-18-44): Gap = 0.075506, Residual = 5.695643, Mosek = 9.467950
+SELF + MAX (2025-01-30_12-21-13): Gap = 0.140895, Residual = 5.706812, Mosek = 5.571753
+SELF + MF (2025-01-30_12-22-54): Gap = 23.419890, Residual = 5.408642, Mosek = 1.416297
+
+Ite: 10, Initial State: 2.9210 0.3878 0.1514
+SELF + NON (2025-01-30_12-19-04): Gap = 0.355467, Residual = 5.751109, Mosek = 13.076829
+SELF + MAX (2025-01-30_12-21-26): Gap = 0.408719, Residual = 5.802230, Mosek = 6.226414
+SELF + MF (2025-01-30_12-23-03): Gap = 24.491094, Residual = 6.039050, Mosek = 1.638156
+
+
+Average: 
+SELF + NON: Ave-Gap = 0.150881, Ave-Residual = 5.654978, Mosek = 8.903885, Max-Cone-Size = 45
+SELF + MAX: Ave-Gap = 0.198267, Ave-Residual = 5.701267, Mosek = 5.761532, Max-Cone-Size = 35
+SELF + MF: Ave-Gap = 13.769697, Ave-Residual = 6.367410, Mosek = 1.672475, Max-Cone-Size = 9
+
+
+PushT: 
+
+Ite: 1, Initial State: 1.9775 0.1473 0.2967
+SELF + NON (2025-01-31_23-33-04): Gap = 0.987551, Residual = 4.932981, Mosek = 42.029158
+SELF + MAX (2025-01-31_23-44-30): Gap = 6.906687, Residual = 5.638691, Mosek = 21.781790
+SELF + MF (2025-01-31_23-51-17): Gap = 27.043172, Residual = 5.652795, Mosek = 4.741927
+
+Ite: 2, Initial State: 2.5497 0.3912 0.1107
+SELF + NON (2025-01-31_23-34-09): Gap = 12.360687, Residual = 5.224644, Mosek = 43.206097
+SELF + MAX (2025-01-31_23-45-03): Gap = 27.061138, Residual = 5.432638, Mosek = 23.893596
+SELF + MF (2025-01-31_23-51-33): Gap = 52.699251, Residual = 5.802865, Mosek = 4.441654
+
+Ite: 3, Initial State: -2.3437 0.3872 0.3547
+SELF + NON (2025-01-31_23-35-14): Gap = 3.096983, Residual = 4.637615, Mosek = 41.156315
+SELF + MAX (2025-01-31_23-45-38): Gap = 10.944251, Residual = 5.817239, Mosek = 22.601179
+SELF + MF (2025-01-31_23-51-49): Gap = 35.646808, Residual = 5.494598, Mosek = 6.387510
+
+Ite: 4, Initial State: 2.5973 0.2456 0.3802
+SELF + NON (2025-01-31_23-36-18): Gap = 14.262530, Residual = 5.619871, Mosek = 43.411855
+SELF + MAX (2025-01-31_23-46-12): Gap = 26.696642, Residual = 5.683818, Mosek = 74.182878
+SELF + MF (2025-01-31_23-52-07): Gap = 52.422801, Residual = 6.029062, Mosek = 5.507753
+
+Ite: 5, Initial State: 0.8316 0.3401 0.3036
+SELF + NON (2025-01-31_23-37-24): Gap = 1.804852, Residual = 5.703715, Mosek = 63.466231
+SELF + MAX (2025-01-31_23-47-38): Gap = 2.364022, Residual = 5.586526, Mosek = 24.911313
+SELF + MF (2025-01-31_23-52-25): Gap = 3.774963, Residual = 5.082763, Mosek = 4.330299
+
+Ite: 6, Initial State: -2.5287 0.1426 0.3273
+SELF + NON (2025-01-31_23-38-50): Gap = 4.231029, Residual = 5.993884, Mosek = 43.354426
+SELF + MAX (2025-01-31_23-48-14): Gap = 14.764587, Residual = 6.003837, Mosek = 28.280274
+SELF + MF (2025-01-31_23-52-40): Gap = 41.761361, Residual = 5.625241, Mosek = 5.192863
+
+Ite: 7, Initial State: -1.3917 0.2265 0.3229
+SELF + NON (2025-01-31_23-39-55): Gap = 13.308384, Residual = 5.297961, Mosek = 48.753502
+SELF + MAX (2025-01-31_23-48-54): Gap = 16.872496, Residual = 5.978174, Mosek = 23.244964
+SELF + MF (2025-01-31_23-52-57): Gap = 27.392982, Residual = 5.641119, Mosek = 4.100828
+
+Ite: 8, Initial State: 0.2946 0.3747 0.2177
+SELF + NON (2025-01-31_23-41-06): Gap = 0.088732, Residual = 6.020933, Mosek = 52.519987
+SELF + MAX (2025-01-31_23-49-28): Gap = 0.379649, Residual = 5.788667, Mosek = 24.379673
+SELF + MF (2025-01-31_23-53-13): Gap = 1.291978, Residual = 5.267484, Mosek = 5.184896
+
+Ite: 9, Initial State: 2.8746 0.3377 0.2966
+SELF + NON (2025-01-31_23-42-21): Gap = 26.184572, Residual = 5.046593, Mosek = 43.165113
+SELF + MAX (2025-01-31_23-50-04): Gap = 42.660356, Residual = 5.387775, Mosek = 23.272952
+SELF + MF (2025-01-31_23-53-30): Gap = 66.112251, Residual = 5.178241, Mosek = 5.031854
+
+Ite: 10, Initial State: 2.9210 0.3878 0.1514
+SELF + NON (2025-01-31_23-43-27): Gap = 2.001353, Residual = 4.534711, Mosek = 40.905433
+SELF + MAX (2025-01-31_23-50-39): Gap = 22.348385, Residual = 5.362014, Mosek = 26.976111
+SELF + MF (2025-01-31_23-53-47): Gap = 51.693365, Residual = 5.270704, Mosek = 5.013775
+
+
+Average: 
+SELF + NON: Ave-Gap = 7.832667, Ave-Residual = 5.301291, Mosek = 46.196812, Max-Cone-Size = 91
+SELF + MAX: Ave-Gap = 17.099821, Ave-Residual = 5.667938, Mosek = 29.352473, Max-Cone-Size = 59
+SELF + MF: Ave-Gap = 35.983893, Ave-Residual = 5.504487, Mosek = 4.993336, Max-Cone-Size = 13
+
+
+PushBoxTunnel2: 
+
+Ite: 1, Initial State: 1.9775 -0.4902 -0.2739
+SELF + NON (2025-01-29_19-52-53): Gap = 4.243327, Residual = 5.212681, Mosek = 335.526891
+SELF + MAX (2025-01-29_21-27-02): Gap = 4.600703, Residual = 5.335400, Mosek = 1364.699255
+SELF + MF (2025-01-29_23-11-59): Gap = 7.513026, Residual = 4.644855, Mosek = 42.115332
+
+Ite: 2, Initial State: 2.5497 -0.4722 0.3765
+SELF + NON (2025-01-29_20-00-00): Gap = 1.122239, Residual = 5.591373, Mosek = 495.411215
+SELF + MAX (2025-01-29_21-50-18): Gap = 1.384125, Residual = 5.411775, Mosek = 1135.876763
+SELF + MF (2025-01-29_23-13-10): Gap = 4.212157, Residual = 4.969337, Mosek = 53.700939
+
+Ite: 3, Initial State: -2.3437 -0.4453 0.3657
+SELF + NON (2025-01-29_20-09-43): Gap = 15.870986, Residual = 5.601014, Mosek = 815.026446
+SELF + MAX (2025-01-29_22-09-44): Gap = 16.724979, Residual = 5.368478, Mosek = 1340.376018
+SELF + MF (2025-01-29_23-14-33): Gap = 20.324744, Residual = 5.367940, Mosek = 45.223518
+
+Ite: 4, Initial State: 2.5973 -0.4042 -0.0117
+SELF + NON (2025-01-29_20-24-46): Gap = 1.675627, Residual = 5.618747, Mosek = 1515.813444
+SELF + MAX (2025-01-29_22-32-35): Gap = 1.756465, Residual = 5.482978, Mosek = 1270.535359
+SELF + MF (2025-01-29_23-15-47): Gap = 5.605013, Residual = 5.253111, Mosek = 61.316591
+
+Ite: 5, Initial State: 0.8316 -0.4035 0.2402
+SELF + NON (2025-01-29_20-51-30): Gap = 1.546672, Residual = 5.558041, Mosek = 2041.193864
+SELF + MAX (2025-01-29_22-54-17): Gap = 1.641571, Residual = 5.129914, Mosek = 1031.813689
+SELF + MF (2025-01-29_23-17-17): Gap = 3.349245, Residual = 4.948501, Mosek = 52.302657
+
+
+Average: 
+SELF + NON: Ave-Gap = 4.891770, Ave-Residual = 5.516371, Mosek = 1040.594372, Max-Cone-Size = 165
+SELF + MAX: Ave-Gap = 5.221569, Ave-Residual = 5.345709, Mosek = 1228.660217, Max-Cone-Size = 12
+SELF + MF: Ave-Gap = 8.200837, Ave-Residual = 5.036749, Mosek = 50.931807, Max-Cone-Size = 13
+
+
+PlanarHand: 
+
+Ite: 1, Initial State: 0.0579
+SELF + NON (2025-01-30_10-15-01): Gap = 23.550333, Residual = 5.124289, Mosek = 337.984289
+SELF + MAX (2025-01-30_10-48-55): Gap = 25.143324, Residual = 5.355023, Mosek = 132.272552
+SELF + MF (2025-01-30_11-07-28): Gap = 26.766744, Residual = 3.960120, Mosek = 58.814464
+
+Ite: 2, Initial State: 0.0687
+SELF + NON (2025-01-30_10-21-47): Gap = 30.694431, Residual = 4.820764, Mosek = 348.352055
+SELF + MAX (2025-01-30_10-51-39): Gap = 32.506838, Residual = 5.495278, Mosek = 380.436862
+SELF + MF (2025-01-30_11-09-00): Gap = 34.220578, Residual = 4.188732, Mosek = 52.178602
+
+Ite: 3, Initial State: 0.0779
+SELF + NON (2025-01-30_10-28-43): Gap = 25.861938, Residual = 4.774152, Mosek = 322.336425
+SELF + MAX (2025-01-30_10-58-31): Gap = 28.090198, Residual = 4.945117, Mosek = 145.157998
+SELF + MF (2025-01-30_11-10-26): Gap = 30.042303, Residual = 3.684852, Mosek = 163.779304
+
+Ite: 4, Initial State: 0.0251
+SELF + NON (2025-01-30_10-35-12): Gap = 7.069617, Residual = 5.082464, Mosek = 331.977101
+SELF + MAX (2025-01-30_11-01-28): Gap = 8.233263, Residual = 4.664716, Mosek = 140.644394
+SELF + MF (2025-01-30_11-13-43): Gap = 9.489521, Residual = 3.734486, Mosek = 51.923400
+
+Ite: 5, Initial State: 0.0632
+SELF + NON (2025-01-30_10-41-52): Gap = 24.134600, Residual = 5.192431, Mosek = 355.050974
+SELF + MAX (2025-01-30_11-04-20): Gap = 25.857350, Residual = 5.298696, Mosek = 155.598706
+SELF + MF (2025-01-30_11-15-08): Gap = 27.552031, Residual = 4.144803, Mosek = 53.090582
+
+
+Average: 
+SELF + NON: Ave-Gap = 22.262184, Ave-Residual = 4.998820, Mosek = 339.140169, Max-Cone-Size = 120
+SELF + MAX: Ave-Gap = 23.966195, Ave-Residual = 5.151766, Mosek = 190.822102, Max-Cone-Size = 15
+SELF + MF: Ave-Gap = 25.614235, Ave-Residual = 3.942599, Mosek = 75.957270, Max-Cone-Size = 13

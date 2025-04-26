@@ -1,0 +1,74 @@
+PushBot    TS=block, CS=MF, result=0.6496255507701528, operation = 22.56, mosek = 18.24     
+PushBot    TS=MF, CS=MF, result=0.19380259354523593, operation = 20.12, mosek = 5.17    
+PushBot    TS=MD, CS=MF, result=0.1938027246706226, operation = 24.922, mosek = 5.34
+PushBot    TS=block, CS=MD, result=0.6496255507701528, operation = 21.74, mosek = 18.25
+PushBot    TS=MF, CS=MD, result=0.19380259354523593, operation = 21.24, mosek = 5.34
+PushBot    TS=MD, CS=MD, result=0.1938027246706226, operation = 22.02, mosek = 5.11
+
+PushBox    TS=block, CS=MF, result=0.7335620959509782, operation = 9.36, mosek = 4.80
+PushBox    TS=MF, CS=MF, result=0.24969161988130623, operation = 9.77, mosek = 0.94
+PushBox    TS=MD, CS=MF, result=0.24969161988232993, operation = 11.06, mosek = 0.94
+PushBox    TS=MAX, CS=MD, result=0.2496916186199942, operation = 13.67, mosek = 1.01
+PushBox    TS=MF, CS=MD, result=0.24969161861955957, operation = 10.61, mosek = 1.01
+PushBox    TS=MD, CS=MD, result=0.2496916186199942, operation = 9.94, mosek = 1.02
+
+PushT    TS=block, CS=MF, result=0.12366733123396192, operation = 33.93, mosek = 24.05
+PushT    TS=MF, CS=MF, result=0.049227139927417576, operation = 46.64, mosek = 3.78
+PushT    TS=MD, CS=MF, result=0.049232236328924255, operation = 47。13, mosek = 3.72
+PushT    TS=block, CS=MD, result=0.12452163559613987, operation = 42.22, mosek = 29.09
+PushT    TS=MF, CS=MD, result=0.049228934499165856, operation = 48.18, mosek = 4.96
+PushT    TS=MD, CS=MD, result=0.04922746592606018, operation = 50.25, mosek = 5.23
+
+PushBoxTunnel2    TS=block, CS=MF, result=0.7278809970997552, operation = 241.92, mosek = 151.55
+PushBoxTunnel2    TS=MF, CS=MF, result=0.5925150718211729, operation = 201.65, mosek = 20.58
+PushBoxTunnel2    TS=MD, CS=MF, result=0.5939273249462793, operation = 205.50, mosek = 20.95
+PushBoxTunnel2    TS=block, CS=MD, result=0.73431915954931, operation = 269.82, mosek = 186.35
+PushBoxTunnel2    TS=MF, CS=MD, result=0.5925084790512808, operation = 206.41, mosek = 28.29
+PushBoxTunnel2    TS=MD, CS=MD, result=0.5938077839564598, operation = 219.15, mosek = 32.82
+
+
+
+PushBot    TS=block, CS=MF, result=0.6496255507701528, operation = 22.56, mosek = 18.24   4.32
+PushBot    TS=MF, CS=MF, result=0.1938025935423593, operation = 20.12, mosek = 5.17     14.95
+PushBot    TS=MD, CS=MF, result=0.1938027246760226, operation = 24.92, mosek = 5.34     19.58
+PushBot    TS=block, CS=MF, result=0.6496255507701528, operation = 21.74, mosek = 18.25  3.49
+PushBot    TS=MF, CS=MF, result=0.1938025935423593, operation = 21.24, mosek = 5.34     15.90
+PushBot    TS=MD, CS=MF, result=0.1938027246760226, operation = 22.02, mosek = 5.11     16.91
+
+PushBox    TS=block, CS=MF, result=0.7335620959509782, operation = 9.36, mosek = 4.80    4.56
+PushBox    TS=MF, CS=MF, result=0.24969161988130623, operation = 9.77, mosek = 0.94      8.83
+PushBox    TS=MD, CS=MF, result=0.2496916188232993, operation = 11.06, mosek = 0.94     10.12
+PushBox    TS=block, CS=MD, result=0.7334275248101892, operation = 9.01, mosek = 5.07   3.94
+PushBox    TS=MF, CS=MD, result=0.24969161861955957, operation = 10.61, mosek = 1.01     9.60
+PushBox    TS=MD, CS=MD, result=0.2496916186199942, operation = 9.94, mosek = 1.02       8.92
+
+PushT      TS=block, CS=MF, result=0.12366733123396192, operation = 33.93, mosek = 24.05   9.88
+PushT      TS=MF, CS=MF, result=0.049227139927417576, operation = 46.64, mosek = 3.78     42.86
+PushT      TS=MD, CS=MF, result=0.04922332889242455, operation = 47.13, mosek = 3.72      43.41
+PushT      TS=block, CS=MD, result=0.12361263555989387, operation = 42.22, mosek = 29.09  13.13
+PushT      TS=MF, CS=MD, result=0.049228934499165856, operation = 48.18, mosek = 4.96     43.22
+PushT      TS=MD, CS=MD, result=0.04922746592606018, operation = 50.25, mosek = 5.23     45.02
+
+PushBoxTunnel2 TS=block, CS=MF, result=0.7278889979977552, operation = 241.92, mosek = 151.55   90.37
+PushBoxTunnel2 TS=MF, CS=MF, result=0.5925150718211729, operation = 201.65, mosek = 20.58      181.07
+PushBoxTunnel2    TS=MD, CS=MF, result=0.4678285269552964, operation = 137.37, mosek = 25.17    112.20
+PushBoxTunnel2 TS=block, CS=MD, result=0.734139159459431, operation = 269.82, mosek = 186.35    83.47
+PushBoxTunnel2 TS=MF, CS=MD, result=0.5925084799512808, operation = 206.41, mosek = 28.29     178.12
+
+
+PushBot    TS=block, CS=MF, result=0.6496255507701528, operation = , mosek = 
+PushBox    TS=block, CS=MD, result=0.7334275248101892, operation = , mosek = 
+PushBox    TS=MF, CS=MD, result=0.24969161861955957, operation = , mosek = 
+PushBox    TS=MD, CS=MF, result=0.24969161988232993, operation = , mosek = 
+
+PushBoxTunnel2    TS=MF, CS=MF, result=0.46695088922453976, operation = 194.31, mosek = 24.90
+PushBoxTunnel2    TS=MF, CS=MF, result=0.46695088922453976, operation = 133.96, mosek = 24.71   109.25
+PushBoxTunnel2    TS=MF, CS=MD, result=0.46491938945635314, operation = 148.28, mosek = 19.11   129.17
+PushBoxTunnel2    TS=MD, CS=MD, result=0.4657496190806007, operation = , mosek = 
+PushBoxTunnel2    TS=MD, CS=MD, result=0.4657496190806007, operation = 157.17, mosek = 31.54    125.63
+PushBoxTunnel2    TS=block, CS=MF, result=0.5523171812488312, operation = , mosek = 
+PushBoxTunnel2    TS=block, CS=MF, result=0.5523171812488312, operation = , mosek = 
+PushT    TS=block, CS=MF, result=0.12366733123396192, operation = , mosek = 
+PushT    TS=block, CS=MF, result=0.12366733123396192, operation = , mosek = 
+PushT    TS=MF, CS=MF, result=0.049227139927417576, operation = , mosek = 
+PushT    TS=MF, CS=MF, result=0.049227139927417576, operation = , mosek = 

@@ -1,0 +1,716 @@
+PushBot  N=30, Relax=SOS, TS=MAX, CS=MF, result=, operation=2.57528
+PushBot  N=30, Relax=SOS, TS=MF, CS=MF, result=, operation=3.06753
+PushBot  N=30, Relax=SOS, TS=MD, CS=MF, result=, operation=2.59347
+
+PushBot  N=30, Relax=MOMENT, TS=MAX, CS=MF, result=, operation=2.48804
+PushBot  N=30, Relax=MOMENT, TS=MF, CS=MF, result=, operation=2.89425
+PushBot  N=30, Relax=MOMENT, TS=MD, CS=MF, result=, operation=2.43999
+
+PushBot  N=30, Relax=SOS, TS=MAX, CS=MD, result=, operation=2.19049
+PushBot  N=30, Relax=SOS, TS=MF, CS=MD, result=, operation=2.68573
+PushBot  N=30, Relax=SOS, TS=MD, CS=MD, result=, operation=2.23162
+
+PushBot  N=30, Relax=MOMENT, TS=MAX, CS=MD, result=, operation=2.14414
+PushBot  N=30, Relax=MOMENT, TS=MF, CS=MD, result=, operation=2.53118
+PushBot  N=30, Relax=MOMENT, TS=MD, CS=MD, result=, operation=2.08793
+
+
+
+PushBox  N=30, Relax=SOS, TS=MAX, CS=MF, result=, operation=1.63598
+PushBox  N=30, Relax=SOS, TS=MF, CS=MF, result=, operation=1.64667
+PushBox  N=30, Relax=SOS, TS=MD, CS=MF, result=, operation=1.56986
+
+PushBox  N=30, Relax=SOS, TS=MAX, CS=MD, result=, operation=1.36823
+PushBox  N=30, Relax=SOS, TS=MF, CS=MD, result=, operation=1.37150
+PushBox  N=30, Relax=SOS, TS=MD, CS=MD, result=, operation=1.29683
+
+PushBox  N=30, Relax=MOMENT, TS=MAX, CS=MF, result=, operation=1.67868
+PushBox  N=30, Relax=MOMENT, TS=MF, CS=MF, result=, operation=1.58489
+PushBox  N=30, Relax=MOMENT, TS=MD, CS=MF, result=, operation=1.51643
+
+PushBox  N=30, Relax=MOMENT, TS=MAX, CS=MD, result=, operation=1.39441
+PushBox  N=30, Relax=MOMENT, TS=MF, CS=MD, result=, operation=1.31149
+PushBox  N=30, Relax=MOMENT, TS=MD, CS=MD, result=, operation=1.24223
+
+
+
+PushBot  N=30, Relax=SOS, TS=MAX, CS=MF, result=, operation=2.39302
+PushBot  N=30, Relax=SOS, TS=MF, CS=MF, result=, operation=2.42796
+PushBot  N=30, Relax=SOS, TS=MD, CS=MF, result=, operation=2.25544
+
+PushBot  N=30, Relax=SOS, TS=MAX, CS=MD, result=, operation=2.09321
+PushBot  N=30, Relax=SOS, TS=MF, CS=MD, result=, operation=2.13472
+PushBot  N=30, Relax=SOS, TS=MD, CS=MD, result=, operation=1.96558
+
+PushBot  N=30, Relax=MOMENT, TS=MAX, CS=MF, result=, operation=2.32853
+PushBot  N=30, Relax=MOMENT, TS=MF, CS=MF, result=, operation=2.28781
+PushBot  N=30, Relax=MOMENT, TS=MD, CS=MF, result=, operation=2.13151
+
+PushBot  N=30, Relax=MOMENT, TS=MAX, CS=MD, result=, operation=2.02851
+PushBot  N=30, Relax=MOMENT, TS=MF, CS=MD, result=, operation=1.98516
+PushBot  N=30, Relax=MOMENT, TS=MD, CS=MD, result=, operation=1.82242
+
+
+
+PushT  N=30, Relax=SOS, TS=MAX, CS=MF, result=, operation=3.69872
+PushT  N=30, Relax=SOS, TS=MF, CS=MF, result=, operation=3.76563
+PushT  N=30, Relax=SOS, TS=MD, CS=MF, result=, operation=3.47461
+
+PushT  N=30, Relax=SOS, TS=MAX, CS=MD, result=, operation=4.05721
+PushT  N=30, Relax=SOS, TS=MF, CS=MD, result=, operation=4.16056
+PushT  N=30, Relax=SOS, TS=MD, CS=MD, result=, operation=3.67468
+
+PushT  N=30, Relax=MOMENT, TS=MAX, CS=MF, result=, operation=3.67419
+PushT  N=30, Relax=MOMENT, TS=MF, CS=MF, result=, operation=3.58231
+PushT  N=30, Relax=MOMENT, TS=MD, CS=MF, result=, operation=3.28899
+
+PushT  N=30, Relax=MOMENT, TS=MAX, CS=MD, result=, operation=4.01037
+PushT  N=30, Relax=MOMENT, TS=MF, CS=MD, result=, operation=3.95312
+PushT  N=30, Relax=MOMENT, TS=MD, CS=MD, result=, operation=3.47645
+
+
+
+
+
+PushBoxTunnel2  N=30, Relax=SOS, TS=MAX, CS=MF, result=0.73717721009838743651, operation=20.60992
+
+PushBoxTunnel2  N=30, Relax=SOS, TS=MAX, CS=MF, result=, operation=20.54725
+PushBoxTunnel2  N=30, Relax=SOS, TS=MF, CS=MF, result=, operation=18.62184
+PushBoxTunnel2  N=30, Relax=SOS, TS=MD, CS=MF, result=, operation=16.80699
+
+PushBoxTunnel2  N=30, Relax=SOS, TS=MAX, CS=MD, result=, operation=22.75687
+PushBoxTunnel2  N=30, Relax=SOS, TS=MF, CS=MD, result=, operation=20.80590
+PushBoxTunnel2  N=30, Relax=SOS, TS=MD, CS=MD, result=, operation=18.63132
+
+PushBoxTunnel2  N=30, Relax=MOMENT, TS=MAX, CS=MF, result=, operation=21.18739
+PushBoxTunnel2  N=30, Relax=MOMENT, TS=MF, CS=MF, result=, operation=18.02734
+PushBoxTunnel2  N=30, Relax=MOMENT, TS=MD, CS=MF, result=, operation=16.18538
+
+PushBoxTunnel2  N=30, Relax=MOMENT, TS=MF, CS=MD, result=, operation=19.77613
+PushBoxTunnel2  N=30, Relax=MOMENT, TS=MF, CS=MD, result=, operation=19.79291
+PushBoxTunnel2  N=30, Relax=MOMENT, TS=MD, CS=MD, result=, operation=17.69391
+
+
+参考数据
+PlanarHand  N=30, Relax=SOS, TS=MAX, CS=SELF, result=13.44853910080349734812, operation=16.66545 714.97 42 3e-6 3e-8
+
+PlanarHand  N=30, Relax=SOS, TS=NON, CS=SELF, result=19.27970303578462818450, operation=19.45250 2429.1 39 3e-6 3.2e-9
+
+
+测试
+PushBot  N=30, Relax=SOS, TS=MAX, CS=MF, result=0.69387999352529583508, operation=2.49116
+PushBot  CS=MF, TS=MAX, prefix=./data/PushBot_MATLAB/2025-01-29_13-02-18/data_ordered_YULIN/data.mat
+PushBot  CS=MF, TS=MAX, prefix=./data/PushBot_MATLAB/2025-01-29_13-02-54/data_ordered_YULIN/data.mat
+PushBot  CS=MF, TS=NON, prefix=./data/PushBot_MATLAB/2025-01-29_13-16-55/data_ordered_YULIN/data.mat
+PushBot  CS=MF, TS=MAX, prefix=./data/PushBot_MATLAB/2025-01-29_13-17-50/data_ordered_YULIN/data.mat
+PushBot  CS=MF, TS=MF, prefix=./data/PushBot_MATLAB/2025-01-29_13-18-24/data_ordered_YULIN/data.mat
+PushBot  CS=MF, TS=NON, result=0.62206, operation=42.06878, mosek=2.84681, prefix=./data/PushBot_MATLAB/2025-01-29_13-23-24/data_ordered_YULIN/data.mat
+PushBot  CS=MF, TS=MAX, result=267211784869192000.00000, operation=28.18388, mosek=2.55631, prefix=./data/PushBot_MATLAB/2025-01-29_13-24-18/data_ordered_YULIN/data.mat
+PushBot  CS=MF, TS=MF, result=3880303747972.95020, operation=5.02117, mosek=2.57671, prefix=./data/PushBot_MATLAB/2025-01-29_13-24-52/data_ordered_YULIN/data.mat
+PushBot  CS=MF, TS=NON, result=0.62206, operation=48.88315, mosek=2.91349, prefix=./data/PushBot_MATLAB/2025-01-29_13-25-53/data_ordered_YULIN/data.mat
+PushBot  CS=MF, TS=MAX, result=0.63222, operation=32.38755, mosek=2.52891, prefix=./data/PushBot_MATLAB/2025-01-29_13-26-54/data_ordered_YULIN/data.mat
+PushBot  CS=MF, TS=MF, result=4088771256317.67334, operation=4.04339, mosek=2.51411, prefix=./data/PushBot_MATLAB/2025-01-29_13-27-32/data_ordered_YULIN/data.mat
+PushBot  N=30, Relax=SOS, TS=MF, CS=MF, result=, operation=2.50056
+PushBot  N=30, Relax=SOS, TS=MF, CS=MF, result=0.25341544772598167956, operation=2.50273
+PushBot  CS=MF, TS=NON, result=0.86357, operation=117.43022, mosek=2.81209, prefix=./data/PushBot_MATLAB/2025-01-29_13-31-29/data_ordered_YULIN/data.mat
+PushBot  CS=MF, TS=MAX, result=0.69388, operation=45.51092, mosek=2.50054, prefix=./data/PushBot_MATLAB/2025-01-29_13-33-38/data_ordered_YULIN/data.mat
+PushBot  CS=MF, TS=MF, result=0.25342, operation=8.97006, mosek=2.51697, prefix=./data/PushBot_MATLAB/2025-01-29_13-34-29/data_ordered_YULIN/data.mat
+PushBot  N=30, Relax=SOS, TS=NON, CS=MF, result=0.86357028144561331917, operation=2.81628
+PushBox  CS=MF, TS=NON, result=0.75447, operation=29.42025, mosek=1.96920, prefix=./data/PushBox_MATLAB/2025-01-29_13-45-22/data_ordered_YULIN/data.mat
+PushBox  CS=MF, TS=MAX, result=0.74966, operation=17.51088, mosek=1.82478, prefix=./data/PushBox_MATLAB/2025-01-29_13-46-04/data_ordered_YULIN/data.mat
+PushBox  CS=MF, TS=MF, result=0.25610, operation=2.83990, mosek=1.70931, prefix=./data/PushBox_MATLAB/2025-01-29_13-46-29/data_ordered_YULIN/data.mat
+PushT  CS=MF, TS=NON, result=0.37898, operation=27.27928, mosek=0.51074, prefix=./data/PushT_MATLAB/2025-01-29_13-58-28/data_ordered_YULIN/data.mat
+PushT  CS=MF, TS=MAX, result=0.31453, operation=13.04998, mosek=0.44118, prefix=./data/PushT_MATLAB/2025-01-29_13-58-59/data_ordered_YULIN/data.mat
+PushT  CS=MF, TS=MF, result=0.11607, operation=1.14032, mosek=0.44804, prefix=./data/PushT_MATLAB/2025-01-29_13-59-15/data_ordered_YULIN/data.mat
+PushT  CS=MF, TS=NON, result=0.18787, operation=235.52081, mosek=4.52334, prefix=./data/PushT_MATLAB/2025-01-29_14-03-27/data_ordered_YULIN/data.mat
+PushT  CS=MF, TS=MAX, result=0.14153, operation=100.23372, mosek=3.81605, prefix=./data/PushT_MATLAB/2025-01-29_14-07-46/data_ordered_YULIN/data.mat
+PushT  CS=MF, TS=MF, result=0.05934, operation=11.59866, mosek=3.90078, prefix=./data/PushT_MATLAB/2025-01-29_14-09-38/data_ordered_YULIN/data.mat
+PushT  CS=MF, TS=MAX, result=0.26141, operation=38.90921, mosek=0.96966, prefix=./data/PushT_MATLAB/2025-01-29_14-16-36/data_ordered_YULIN/data.mat
+PushT  CS=MF, TS=MF, result=0.12463, operation=1.97542, mosek=0.99068, prefix=./data/PushT_MATLAB/2025-01-29_14-17-19/data_ordered_YULIN/data.mat
+
+
+
+PushBoxTunnel2  CS=SELF, TS=NON, result=3.04279, operation=472.37610, mosek=4.94174, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-29_14-47-52/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=NON, result=7.98579, operation=401.26624, mosek=2.34520, prefix=./data/PlanarHand_MATLAB/2025-01-29_15-02-19/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=NON, result=7.99050, operation=546.98955, mosek=2.37176, prefix=./data/PlanarHand_MATLAB/2025-01-29_15-13-38/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=NON, result=7.95862, operation=403.10007, mosek=2.39153, prefix=./data/PlanarHand_MATLAB/2025-01-29_15-22-56/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MAX, result=7.85585, operation=108.40637, mosek=2.04490, prefix=./data/PlanarHand_MATLAB/2025-01-29_15-29-50/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MAX, result=7.66985, operation=145.00299, mosek=2.01733, prefix=./data/PlanarHand_MATLAB/2025-01-29_15-31-43/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MF, result=7.36917, operation=8.22246, mosek=2.27555, prefix=./data/PlanarHand_MATLAB/2025-01-29_15-34-13/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MF, result=6.81264, operation=8.75356, mosek=2.26757, prefix=./data/PlanarHand_MATLAB/2025-01-29_15-34-27/data_ordered_YULIN/data.mat
+
+
+
+正式测试：
+
+PlanarHand Test----------------------------------------------------------------------------------------------------------------------------------------------------
+
+PlanarHand  CS=SELF, TS=NON, result=4.12552, operation=347.18753, mosek=18.03897, prefix=./data/PlanarHand_MATLAB/2025-01-29_15-51-35/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=NON, result=4.55509, operation=352.53342, mosek=17.99132, prefix=./data/PlanarHand_MATLAB/2025-01-29_15-58-31/data_ordered_YULIN/data.mat 
+
+PlanarHand  CS=SELF, TS=NON, result=2.22636, operation=354.88562, mosek=17.98902, prefix=./data/PlanarHand_MATLAB/2025-01-29_16-05-31/data_ordered_YULIN/data.mat 1
+
+PlanarHand  CS=SELF, TS=NON, result=4.58908, operation=448.60802, mosek=17.97397, prefix=./data/PlanarHand_MATLAB/2025-01-29_16-12-34/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=NON, result=3.41890, operation=1832.00018, mosek=18.12797, prefix=./data/PlanarHand_MATLAB/2025-01-29_16-21-11/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MAX, result=3.33380, operation=563.31828, mosek=15.78637, prefix=./data/PlanarHand_MATLAB/2025-01-29_16-52-51/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MAX, result=3.64237, operation=637.98991, mosek=15.71506, prefix=./data/PlanarHand_MATLAB/2025-01-29_17-02-47/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MAX, result=1.79847, operation=656.69313, mosek=15.71669, prefix=./data/PlanarHand_MATLAB/2025-01-29_17-13-57/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MAX, result=3.67061, operation=536.88724, mosek=15.72339, prefix=./data/PlanarHand_MATLAB/2025-01-29_17-25-26/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MAX, result=2.80468, operation=625.81352, mosek=15.71749, prefix=./data/PlanarHand_MATLAB/2025-01-29_17-34-55/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MF, result=2.57198, operation=87.81603, mosek=17.15297, prefix=./data/PlanarHand_MATLAB/2025-01-29_17-45-53/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MF, result=2.81973, operation=84.46873, mosek=17.15048, prefix=./data/PlanarHand_MATLAB/2025-01-29_17-47-54/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MF, result=1.41402, operation=99.96205, mosek=17.13735, prefix=./data/PlanarHand_MATLAB/2025-01-29_17-49-53/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MF, result=2.84137, operation=98.99529, mosek=17.13606, prefix=./data/PlanarHand_MATLAB/2025-01-29_17-52-07/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MF, result=2.14241, operation=90.99013, mosek=17.15132, prefix=./data/PlanarHand_MATLAB/2025-01-29_17-54-20/data_ordered_YULIN/data.mat
+
+
+
+
+PushBot Test-----------------------------------------------------------------------------------------------------------------------------------------------
+
+PushBot  CS=MF, TS=NON, result=1.00254, operation=24.88499, mosek=2.71192, prefix=./data/PushBot_MATLAB/2025-01-29_19-04-21/data_ordered_YULIN/data.mat 1 奇异点
+
+PushBot  CS=MF, TS=NON, result=0.99412, operation=18.04688, mosek=2.69687, prefix=./data/PushBot_MATLAB/2025-01-29_19-04-58/data_ordered_YULIN/data.mat 1
+
+PushBot  CS=MF, TS=NON, result=0.97376, operation=25.91850, mosek=2.68779, prefix=./data/PushBot_MATLAB/2025-01-29_19-05-28/data_ordered_YULIN/data.mat 1
+
+PushBot  CS=MF, TS=NON, result=0.51389, operation=14.87699, mosek=2.71470, prefix=./data/PushBot_MATLAB/2025-01-29_19-06-05/data_ordered_YULIN/data.mat 1
+
+PushBot  CS=MF, TS=NON, result=1.07706, operation=26.03649, mosek=2.72688, prefix=./data/PushBot_MATLAB/2025-01-29_19-06-32/data_ordered_YULIN/data.mat 1
+
+PushBot  CS=MF, TS=NON, result=0.99183, operation=28.74967, mosek=2.68335, prefix=./data/PushBot_MATLAB/2025-01-29_19-07-10/data_ordered_YULIN/data.mat 1
+
+PushBot  CS=MF, TS=NON, result=1.01894, operation=22.45142, mosek=2.67369, prefix=./data/PushBot_MATLAB/2025-01-29_19-07-50/data_ordered_YULIN/data.mat 1
+
+PushBot  CS=MF, TS=NON, result=0.91241, operation=22.92304, mosek=2.68017, prefix=./data/PushBot_MATLAB/2025-01-29_19-08-24/data_ordered_YULIN/data.mat 1
+
+PushBot  CS=MF, TS=NON, result=0.78585, operation=18.20688, mosek=2.71486, prefix=./data/PushBot_MATLAB/2025-01-29_19-08-59/data_ordered_YULIN/data.mat 1
+
+PushBot  CS=MF, TS=NON, result=1.04129, operation=18.59644, mosek=2.72352, prefix=./data/PushBot_MATLAB/2025-01-29_19-09-29/data_ordered_YULIN/data.mat 1
+
+PushBot  CS=MF, TS=MAX, result=0.64380, operation=12.88751, mosek=2.40367, prefix=./data/PushBot_MATLAB/2025-01-29_19-09-59/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MAX, result=0.74995, operation=12.67033, mosek=2.38685, prefix=./data/PushBot_MATLAB/2025-01-29_19-10-17/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MAX, result=0.69276, operation=14.32506, mosek=2.37939, prefix=./data/PushBot_MATLAB/2025-01-29_19-10-35/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MAX, result=0.51515, operation=15.33537, mosek=2.38856, prefix=./data/PushBot_MATLAB/2025-01-29_19-10-54/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MAX, result=0.73197, operation=14.36956, mosek=2.38389, prefix=./data/PushBot_MATLAB/2025-01-29_19-11-14/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MAX, result=0.64038, operation=13.82446, mosek=2.39975, prefix=./data/PushBot_MATLAB/2025-01-29_19-11-34/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MAX, result=0.64533, operation=13.69253, mosek=2.38415, prefix=./data/PushBot_MATLAB/2025-01-29_19-11-53/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MAX, result=0.70507, operation=14.18121, mosek=2.38126, prefix=./data/PushBot_MATLAB/2025-01-29_19-12-12/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MAX, result=0.69375, operation=14.09165, mosek=2.38364, prefix=./data/PushBot_MATLAB/2025-01-29_19-12-31/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MAX, result=0.78492, operation=14.73724, mosek=2.38042, prefix=./data/PushBot_MATLAB/2025-01-29_19-12-50/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MF, result=0.22724, operation=5.10270, mosek=2.40727, prefix=./data/PushBot_MATLAB/2025-01-29_19-13-10/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MF, result=0.23342, operation=6.65360, mosek=2.40577, prefix=./data/PushBot_MATLAB/2025-01-29_19-13-20/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MF, result=0.20637, operation=5.03777, mosek=2.41399, prefix=./data/PushBot_MATLAB/2025-01-29_19-13-32/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MF, result=0.22797, operation=4.54889, mosek=2.40848, prefix=./data/PushBot_MATLAB/2025-01-29_19-13-42/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MF, result=0.23398, operation=5.26833, mosek=2.41802, prefix=./data/PushBot_MATLAB/2025-01-29_19-13-52/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MF, result=0.19255, operation=6.35199, mosek=2.41939, prefix=./data/PushBot_MATLAB/2025-01-29_19-14-03/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MF, result=0.20018, operation=4.90376, mosek=2.42164, prefix=./data/PushBot_MATLAB/2025-01-29_19-14-14/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MF, result=0.22711, operation=4.88822, mosek=2.41821, prefix=./data/PushBot_MATLAB/2025-01-29_19-14-24/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MF, result=0.23041, operation=4.52448, mosek=2.41470, prefix=./data/PushBot_MATLAB/2025-01-29_19-14-34/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MF, result=0.25175, operation=4.81225, mosek=2.41918, prefix=./data/PushBot_MATLAB/2025-01-29_19-14-44/data_ordered_YULIN/data.mat
+
+
+
+
+PushBox Test--------------------------------------------------------------------------------------------------------------------------------------------
+
+PushBox  CS=MF, TS=NON, result=0.39902, operation=3.01898, mosek=1.81696, prefix=./data/PushBox_MATLAB/2025-01-29_19-15-54/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=NON, result=0.43525, operation=4.53154, mosek=1.80892, prefix=./data/PushBox_MATLAB/2025-01-29_19-16-09/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=NON, result=0.42545, operation=4.74576, mosek=1.80654, prefix=./data/PushBox_MATLAB/2025-01-29_19-16-24/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=NON, result=0.41101, operation=3.47182, mosek=1.80821, prefix=./data/PushBox_MATLAB/2025-01-29_19-16-40/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=NON, result=0.42658, operation=3.98199, mosek=1.80109, prefix=./data/PushBox_MATLAB/2025-01-29_19-16-55/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=NON, result=0.43858, operation=3.78423, mosek=1.80429, prefix=./data/PushBox_MATLAB/2025-01-29_19-17-10/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=NON, result=0.38355, operation=3.32598, mosek=1.81136, prefix=./data/PushBox_MATLAB/2025-01-29_19-17-25/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=NON, result=0.19262, operation=4.51640, mosek=1.79936, prefix=./data/PushBox_MATLAB/2025-01-29_19-17-40/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=NON, result=0.15149, operation=4.88340, mosek=1.80471, prefix=./data/PushBox_MATLAB/2025-01-29_19-17-55/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=NON, result=0.11795, operation=6.27366, mosek=1.80453, prefix=./data/PushBox_MATLAB/2025-01-29_19-18-11/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.40920, operation=2.54052, mosek=1.61088, prefix=./data/PushBox_MATLAB/2025-01-29_19-18-29/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.48186, operation=2.09941, mosek=1.61767, prefix=./data/PushBox_MATLAB/2025-01-29_19-18-38/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.43745, operation=2.25685, mosek=1.61463, prefix=./data/PushBox_MATLAB/2025-01-29_19-18-48/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.45961, operation=2.44396, mosek=1.61898, prefix=./data/PushBox_MATLAB/2025-01-29_19-18-57/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.43912, operation=2.41581, mosek=1.62023, prefix=./data/PushBox_MATLAB/2025-01-29_19-19-07/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.48390, operation=3.44729, mosek=1.61495, prefix=./data/PushBox_MATLAB/2025-01-29_19-19-17/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.39436, operation=2.23431, mosek=1.61923, prefix=./data/PushBox_MATLAB/2025-01-29_19-19-28/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.22532, operation=2.19363, mosek=1.61870, prefix=./data/PushBox_MATLAB/2025-01-29_19-19-37/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.19482, operation=3.40635, mosek=1.62948, prefix=./data/PushBox_MATLAB/2025-01-29_19-19-47/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.14740, operation=3.45962, mosek=1.62428, prefix=./data/PushBox_MATLAB/2025-01-29_19-19-57/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=1.00000, operation=0.08590, mosek=1.62322, prefix=./data/PushBox_MATLAB/2025-01-29_19-20-08/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=1.00000, operation=0.08431, mosek=1.62511, prefix=./data/PushBox_MATLAB/2025-01-29_19-20-16/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=1.00000, operation=0.08401, mosek=1.62742, prefix=./data/PushBox_MATLAB/2025-01-29_19-20-23/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=1.00000, operation=0.15400, mosek=1.62542, prefix=./data/PushBox_MATLAB/2025-01-29_19-20-31/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=1.00000, operation=0.08507, mosek=1.62308, prefix=./data/PushBox_MATLAB/2025-01-29_19-20-38/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=1.00000, operation=0.15366, mosek=1.62280, prefix=./data/PushBox_MATLAB/2025-01-29_19-20-46/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=1.00000, operation=0.15430, mosek=1.62525, prefix=./data/PushBox_MATLAB/2025-01-29_19-20-53/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=1.00000, operation=0.15458, mosek=1.62565, prefix=./data/PushBox_MATLAB/2025-01-29_19-21-01/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=1.00000, operation=0.15441, mosek=1.62430, prefix=./data/PushBox_MATLAB/2025-01-29_19-21-08/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=1.00000, operation=0.15479, mosek=1.62665, prefix=./data/PushBox_MATLAB/2025-01-29_19-21-16/data_ordered_YULIN/data.mat
+
+
+
+
+
+PushT Test--------------------------------------------------------------------------------------------------------------------------------------------
+
+PushT  CS=MF, TS=NON, result=1.18646, operation=19.48414, mosek=1.07323, prefix=./data/PushT_MATLAB/2025-01-29_19-24-28/data_ordered_YULIN/data.mat 1
+
+PushT  CS=MF, TS=NON, result=2.48545, operation=26.17787, mosek=1.06708, prefix=./data/PushT_MATLAB/2025-01-29_19-24-55/data_ordered_YULIN/data.mat 1
+
+PushT  CS=MF, TS=NON, result=1.80319, operation=12.86165, mosek=1.06611, prefix=./data/PushT_MATLAB/2025-01-29_19-25-28/data_ordered_YULIN/data.mat 1
+
+PushT  CS=MF, TS=NON, result=2.37268, operation=16.95750, mosek=1.05297, prefix=./data/PushT_MATLAB/2025-01-29_19-25-48/data_ordered_YULIN/data.mat 1
+
+PushT  CS=MF, TS=NON, result=0.19699, operation=14.94749, mosek=1.07069, prefix=./data/PushT_MATLAB/2025-01-29_19-26-12/data_ordered_YULIN/data.mat 1
+
+PushT  CS=MF, TS=NON, result=2.04472, operation=17.54226, mosek=1.06407, prefix=./data/PushT_MATLAB/2025-01-29_19-26-34/data_ordered_YULIN/data.mat 1
+
+PushT  CS=MF, TS=NON, result=0.63264, operation=14.02520, mosek=1.04798, prefix=./data/PushT_MATLAB/2025-01-29_19-26-59/data_ordered_YULIN/data.mat 1 奇异点
+
+PushT  CS=MF, TS=NON, result=0.12828, operation=15.43663, mosek=1.05104, prefix=./data/PushT_MATLAB/2025-01-29_19-27-20/data_ordered_YULIN/data.mat 1
+
+PushT  CS=MF, TS=NON, result=3.02778, operation=20.41432, mosek=1.05546, prefix=./data/PushT_MATLAB/2025-01-29_19-27-42/data_ordered_YULIN/data.mat 1
+
+PushT  CS=MF, TS=NON, result=3.17576, operation=22.50588, mosek=1.04720, prefix=./data/PushT_MATLAB/2025-01-29_19-28-10/data_ordered_YULIN/data.mat 1
+
+PushT  CS=MF, TS=MAX, result=0.94458, operation=26.33910, mosek=0.90792, prefix=./data/PushT_MATLAB/2025-01-29_19-28-39/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MAX, result=1.61787, operation=7.47534, mosek=0.92356, prefix=./data/PushT_MATLAB/2025-01-29_19-29-09/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MAX, result=1.39658, operation=21.31240, mosek=0.92468, prefix=./data/PushT_MATLAB/2025-01-29_19-29-20/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MAX, result=1.64963, operation=7.77673, mosek=0.92336, prefix=./data/PushT_MATLAB/2025-01-29_19-29-45/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MAX, result=0.18727, operation=8.24062, mosek=0.90823, prefix=./data/PushT_MATLAB/2025-01-29_19-29-56/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MAX, result=1.48276, operation=9.34272, mosek=0.91339, prefix=./data/PushT_MATLAB/2025-01-29_19-30-08/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MAX, result=0.52331, operation=7.85594, mosek=0.90938, prefix=./data/PushT_MATLAB/2025-01-29_19-30-21/data_ordered_YULIN/data.mat 奇异点
+
+PushT  CS=MF, TS=MAX, result=0.12255, operation=8.14058, mosek=0.91558, prefix=./data/PushT_MATLAB/2025-01-29_19-30-32/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MAX, result=1.92017, operation=9.94234, mosek=0.91406, prefix=./data/PushT_MATLAB/2025-01-29_19-30-44/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MAX, result=1.93619, operation=7.35414, mosek=0.91801, prefix=./data/PushT_MATLAB/2025-01-29_19-30-57/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MF, result=0.27493, operation=2.18384, mosek=0.94786, prefix=./data/PushT_MATLAB/2025-01-29_19-31-08/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MF, result=0.35888, operation=2.25450, mosek=0.94464, prefix=./data/PushT_MATLAB/2025-01-29_19-31-14/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MF, result=0.38181, operation=1.97579, mosek=0.94255, prefix=./data/PushT_MATLAB/2025-01-29_19-31-20/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MF, result=0.37270, operation=2.38946, mosek=0.93941, prefix=./data/PushT_MATLAB/2025-01-29_19-31-25/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MF, result=0.15415, operation=1.51941, mosek=0.94024, prefix=./data/PushT_MATLAB/2025-01-29_19-31-31/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MF, result=0.33209, operation=1.44902, mosek=0.94441, prefix=./data/PushT_MATLAB/2025-01-29_19-31-36/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MF, result=0.21916, operation=1.88186, mosek=0.94059, prefix=./data/PushT_MATLAB/2025-01-29_19-31-41/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MF, result=0.10181, operation=2.66059, mosek=0.94392, prefix=./data/PushT_MATLAB/2025-01-29_19-31-47/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MF, result=0.39839, operation=1.99552, mosek=0.94490, prefix=./data/PushT_MATLAB/2025-01-29_19-31-53/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MF, result=0.38697, operation=1.56159, mosek=0.93873, prefix=./data/PushT_MATLAB/2025-01-29_19-31-58/data_ordered_YULIN/data.mat
+
+
+
+
+PushBoxTunnel2 Test-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+PushBoxTunnel2  CS=SELF, TS=NON, result=0.73279, operation=335.52689, mosek=30.04431, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-29_19-52-53/data_ordered_YULIN/data.mat 1
+
+PushBoxTunnel2  CS=SELF, TS=NON, result=0.81803, operation=495.41122, mosek=30.00674, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-29_20-00-00/data_ordered_YULIN/data.mat 1
+
+PushBoxTunnel2  CS=SELF, TS=NON, result=0.98136, operation=815.02645, mosek=29.96264, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-29_20-09-43/data_ordered_YULIN/data.mat 1
+
+PushBoxTunnel2  CS=SELF, TS=NON, result=0.55879, operation=1515.81344, mosek=30.25624, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-29_20-24-46/data_ordered_YULIN/data.mat 1
+
+PushBoxTunnel2  CS=SELF, TS=NON, result=0.55462, operation=2041.19386, mosek=30.72631, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-29_20-51-30/data_ordered_YULIN/data.mat 1
+
+PushBoxTunnel2  CS=SELF, TS=MAX, result=0.72399, operation=1364.69925, mosek=22.66503, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-29_21-27-02/data_ordered_YULIN/data.mat
+
+PushBoxTunnel2  CS=SELF, TS=MAX, result=0.81114, operation=1135.87676, mosek=22.25064, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-29_21-50-18/data_ordered_YULIN/data.mat
+
+PushBoxTunnel2  CS=SELF, TS=MAX, result=0.95560, operation=1340.37602, mosek=22.28255, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-29_22-09-44/data_ordered_YULIN/data.mat
+
+PushBoxTunnel2  CS=SELF, TS=MAX, result=0.55708, operation=1270.53536, mosek=22.30087, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-29_22-32-35/data_ordered_YULIN/data.mat
+
+PushBoxTunnel2  CS=SELF, TS=MAX, result=0.55262, operation=1031.81369, mosek=22.28868, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-29_22-54-17/data_ordered_YULIN/data.mat
+
+PushBoxTunnel2  CS=SELF, TS=MF, result=0.65448, operation=42.11533, mosek=20.10965, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-29_23-11-59/data_ordered_YULIN/data.mat
+
+PushBoxTunnel2  CS=SELF, TS=MF, result=0.73898, operation=53.70094, mosek=20.13857, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-29_23-13-10/data_ordered_YULIN/data.mat
+
+PushBoxTunnel2  CS=SELF, TS=MF, result=0.85101, operation=45.22352, mosek=20.12343, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-29_23-14-33/data_ordered_YULIN/data.mat
+
+PushBoxTunnel2  CS=SELF, TS=MF, result=0.47865, operation=61.31659, mosek=20.11500, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-29_23-15-47/data_ordered_YULIN/data.mat
+
+PushBoxTunnel2  CS=SELF, TS=MF, result=0.51726, operation=52.30266, mosek=20.11651, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-29_23-17-17/data_ordered_YULIN/data.mat
+
+
+
+正式测试结束--------------------------------------------------------------------------------------------
+
+
+
+
+
+PushBot  N=30, Relax=SOS, TS=MF, CS=MF, result=0.25341544772598167956, operation=2.41080
+
+PushBox  N=30, Relax=SOS, TS=MF, CS=MF, result=0.25610223571167933798, operation=1.62275
+
+PushBox  N=30, Relax=SOS, TS=MAX, CS=MF, result=0.74965523525476507327, operation=1.61354
+
+PushBoxTunnel2  N=30, Relax=SOS, TS=MF, CS=SELF, result=0.54506735022616237263, operation=20.07620
+
+PushBoxTunnel2  N=30, Relax=SOS, TS=MF, CS=SELF, result=0.51723014275176026899, operation=20.03926
+
+PushBoxTunnel2  N=30, Relax=SOS, TS=NON, CS=SELF, result=0.55455902236282572648, operation=29.85317
+
+PushBoxTunnel2  N=30, Relax=SOS, TS=MAX, CS=SELF, result=0.55259107391736117521, operation=22.07834
+
+PushBox  N=30, Relax=SOS, TS=NON, CS=MF, result=0.30727046248140255091, operation=1.81046
+
+PushBox  CS=MF, TS=NON, result=0.59443, operation=8.58500, mosek=1.81156, prefix=./data/PushBox_MATLAB/2025-01-30_08-48-44/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=NON, result=0.20898, operation=10.15447, mosek=1.81632, prefix=./data/PushBox_MATLAB/2025-01-30_08-49-04/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.59416, operation=5.50820, mosek=1.63082, prefix=./data/PushBox_MATLAB/2025-01-30_08-49-26/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.20654, operation=5.04786, mosek=1.63112, prefix=./data/PushBox_MATLAB/2025-01-30_08-49-39/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=0.18102, operation=1.13502, mosek=1.64872, prefix=./data/PushBox_MATLAB/2025-01-30_08-49-51/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=0.15410, operation=1.46070, mosek=1.63921, prefix=./data/PushBox_MATLAB/2025-01-30_08-50-00/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=NON, result=0.06629, operation=544.46722, mosek=18.17145, prefix=./data/PlanarHand_MATLAB/2025-01-30_08-51-40/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MAX, result=0.05211, operation=179.84154, mosek=15.74908, prefix=./data/PlanarHand_MATLAB/2025-01-30_09-01-55/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MF, result=0.04099, operation=55.31046, mosek=17.07879, prefix=./data/PlanarHand_MATLAB/2025-01-30_09-05-26/data_ordered_YULIN/data.mat
+
+PushBox  N=30, Relax=SOS, TS=NON, CS=MF, result=0.30727046248140255091, operation=1.83972
+
+
+
+
+PlanarHand 第二次测试---------------------------------------------------------------------------------------------------------------------------------------------
+
+PlanarHand  CS=SELF, TS=NON, result=0.10654, operation=337.98429, mosek=17.99464, prefix=./data/PlanarHand_MATLAB/2025-01-30_10-15-01/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=NON, result=0.12476, operation=348.35206, mosek=18.00685, prefix=./data/PlanarHand_MATLAB/2025-01-30_10-21-47/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=NON, result=0.14416, operation=322.33643, mosek=17.97859, prefix=./data/PlanarHand_MATLAB/2025-01-30_10-28-43/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=NON, result=0.07107, operation=331.97710, mosek=18.00631, prefix=./data/PlanarHand_MATLAB/2025-01-30_10-35-12/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=NON, result=0.11493, operation=355.05097, mosek=18.01911, prefix=./data/PlanarHand_MATLAB/2025-01-30_10-41-52/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MAX, result=0.08634, operation=132.27255, mosek=15.51693, prefix=./data/PlanarHand_MATLAB/2025-01-30_10-48-55/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MAX, result=0.10010, operation=380.43686, mosek=15.57499, prefix=./data/PlanarHand_MATLAB/2025-01-30_10-51-39/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MAX, result=0.11393, operation=145.15800, mosek=15.54277, prefix=./data/PlanarHand_MATLAB/2025-01-30_10-58-31/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MAX, result=0.05785, operation=140.64439, mosek=15.55418, prefix=./data/PlanarHand_MATLAB/2025-01-30_11-01-28/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MAX, result=0.09274, operation=155.59871, mosek=15.51821, prefix=./data/PlanarHand_MATLAB/2025-01-30_11-04-20/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MF, result=0.06628, operation=58.81446, mosek=16.98627, prefix=./data/PlanarHand_MATLAB/2025-01-30_11-07-28/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MF, result=0.07740, operation=52.17860, mosek=16.98725, prefix=./data/PlanarHand_MATLAB/2025-01-30_11-09-00/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MF, result=0.08830, operation=163.77930, mosek=16.99635, prefix=./data/PlanarHand_MATLAB/2025-01-30_11-10-26/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MF, result=0.04390, operation=51.92340, mosek=17.01897, prefix=./data/PlanarHand_MATLAB/2025-01-30_11-13-43/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=MF, result=0.07150, operation=53.09058, mosek=17.04534, prefix=./data/PlanarHand_MATLAB/2025-01-30_11-15-08/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=NON, result=0.12213, operation=441.00954, mosek=18.19723, prefix=./data/PlanarHand_MATLAB/2025-01-30_12-03-24/data_ordered_YULIN/data.mat
+
+
+
+
+
+PushBox 第二次测试---------------------------------------------------------------------------------------------------------------------------------------
+
+PushBox  CS=MF, TS=NON, result=0.30726, operation=8.87612, mosek=1.82653, prefix=./data/PushBox_MATLAB/2025-01-30_12-16-07/data_ordered_YULIN/data.mat 1
+
+PushBox  CS=MF, TS=NON, result=0.52816, operation=7.86622, mosek=1.82198, prefix=./data/PushBox_MATLAB/2025-01-30_12-16-28/data_ordered_YULIN/data.mat 1
+
+PushBox  CS=MF, TS=NON, result=0.46440, operation=7.85858, mosek=1.81210, prefix=./data/PushBox_MATLAB/2025-01-30_12-16-47/data_ordered_YULIN/data.mat 1
+
+PushBox  CS=MF, TS=NON, result=0.56484, operation=8.76943, mosek=1.81485, prefix=./data/PushBox_MATLAB/2025-01-30_12-17-06/data_ordered_YULIN/data.mat 1
+
+PushBox  CS=MF, TS=NON, result=0.10638, operation=6.44473, mosek=1.81204, prefix=./data/PushBox_MATLAB/2025-01-30_12-17-26/data_ordered_YULIN/data.mat 1
+
+PushBox  CS=MF, TS=NON, result=0.48646, operation=8.19983, mosek=1.80438, prefix=./data/PushBox_MATLAB/2025-01-30_12-17-44/data_ordered_YULIN/data.mat 1
+
+PushBox  CS=MF, TS=NON, result=0.19808, operation=8.73789, mosek=1.80885, prefix=./data/PushBox_MATLAB/2025-01-30_12-18-03/data_ordered_YULIN/data.mat 1
+
+PushBox  CS=MF, TS=NON, result=0.09036, operation=9.74127, mosek=1.82892, prefix=./data/PushBox_MATLAB/2025-01-30_12-18-23/data_ordered_YULIN/data.mat 1
+
+PushBox  CS=MF, TS=NON, result=0.67336, operation=9.46795, mosek=1.80649, prefix=./data/PushBox_MATLAB/2025-01-30_12-18-44/data_ordered_YULIN/data.mat 1
+
+PushBox  CS=MF, TS=NON, result=0.67362, operation=13.07683, mosek=1.80550, prefix=./data/PushBox_MATLAB/2025-01-30_12-19-04/data_ordered_YULIN/data.mat 1
+
+PushBox  CS=MF, TS=MAX, result=0.30495, operation=6.77500, mosek=1.62447, prefix=./data/PushBox_MATLAB/2025-01-30_12-19-29/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.52814, operation=5.13039, mosek=1.62604, prefix=./data/PushBox_MATLAB/2025-01-30_12-19-43/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.46399, operation=4.97222, mosek=1.63005, prefix=./data/PushBox_MATLAB/2025-01-30_12-19-55/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.56121, operation=7.00686, mosek=1.63369, prefix=./data/PushBox_MATLAB/2025-01-30_12-20-08/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.10636, operation=4.97179, mosek=1.63108, prefix=./data/PushBox_MATLAB/2025-01-30_12-20-22/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.48628, operation=6.74162, mosek=1.63056, prefix=./data/PushBox_MATLAB/2025-01-30_12-20-34/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.19802, operation=4.95615, mosek=1.63036, prefix=./data/PushBox_MATLAB/2025-01-30_12-20-48/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.09031, operation=5.26312, mosek=1.63165, prefix=./data/PushBox_MATLAB/2025-01-30_12-21-01/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.67182, operation=5.57175, mosek=1.63002, prefix=./data/PushBox_MATLAB/2025-01-30_12-21-13/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MAX, result=0.67237, operation=6.22641, mosek=1.64075, prefix=./data/PushBox_MATLAB/2025-01-30_12-21-26/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=0.15358, operation=1.64793, mosek=1.64137, prefix=./data/PushBox_MATLAB/2025-01-30_12-21-40/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=0.20289, operation=1.57787, mosek=1.63774, prefix=./data/PushBox_MATLAB/2025-01-30_12-21-49/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=0.22093, operation=2.21190, mosek=1.64101, prefix=./data/PushBox_MATLAB/2025-01-30_12-21-58/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=0.21597, operation=2.92603, mosek=1.64260, prefix=./data/PushBox_MATLAB/2025-01-30_12-22-08/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=0.09626, operation=1.68449, mosek=1.66357, prefix=./data/PushBox_MATLAB/2025-01-30_12-22-18/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=0.18176, operation=1.24131, mosek=1.66781, prefix=./data/PushBox_MATLAB/2025-01-30_12-22-28/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=0.13214, operation=1.14147, mosek=1.67168, prefix=./data/PushBox_MATLAB/2025-01-30_12-22-36/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=0.07480, operation=1.23929, mosek=1.66642, prefix=./data/PushBox_MATLAB/2025-01-30_12-22-45/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=0.22915, operation=1.41630, mosek=1.66470, prefix=./data/PushBox_MATLAB/2025-01-30_12-22-54/data_ordered_YULIN/data.mat
+
+PushBox  CS=MF, TS=MF, result=0.21693, operation=1.63816, mosek=1.66606, prefix=./data/PushBox_MATLAB/2025-01-30_12-23-03/data_ordered_YULIN/data.mat
+
+测试MOSEK时间部分-----------------------------------------------------------------------------------------------------------------------------------------
+
+PushBot  CS=MF, TS=NON, result=0.52049, operation=15.30633, mosek=2.69308, prefix=./data/PushBot_MATLAB/2025-01-30_12-58-05/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=NON, result=1.15766, operation=32.70922, mosek=2.67887, prefix=./data/PushBot_MATLAB/2025-01-30_12-58-32/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=NON, result=0.90306, operation=26.12491, mosek=2.66608, prefix=./data/PushBot_MATLAB/2025-01-30_12-59-17/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MAX, result=0.52050, operation=14.06641, mosek=2.38471, prefix=./data/PushBot_MATLAB/2025-01-30_12-59-54/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MAX, result=0.75893, operation=14.41012, mosek=2.37892, prefix=./data/PushBot_MATLAB/2025-01-30_13-00-14/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MAX, result=0.56579, operation=13.02420, mosek=2.38047, prefix=./data/PushBot_MATLAB/2025-01-30_13-00-33/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MF, result=0.25343, operation=5.14604, mosek=2.40497, prefix=./data/PushBot_MATLAB/2025-01-30_13-00-51/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MF, result=0.25129, operation=5.56313, mosek=2.41445, prefix=./data/PushBot_MATLAB/2025-01-30_13-01-02/data_ordered_YULIN/data.mat
+
+PushBot  CS=MF, TS=MF, result=0.16842, operation=4.70086, mosek=2.40767, prefix=./data/PushBot_MATLAB/2025-01-30_13-01-12/data_ordered_YULIN/data.mat
+
+PushBoxTunnel2  CS=SELF, TS=NON, result=0.64702, operation=271.40817, mosek=30.05059, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-30_13-02-36/data_ordered_YULIN/data.mat
+
+PushBoxTunnel2  CS=SELF, TS=NON, result=0.68667, operation=420.00540, mosek=29.71134, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-30_13-08-37/data_ordered_YULIN/data.mat
+
+PushBoxTunnel2  CS=SELF, TS=MAX, result=0.64518, operation=246.91489, mosek=21.93461, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-30_13-17-07/data_ordered_YULIN/data.mat
+
+PushBoxTunnel2  CS=SELF, TS=MAX, result=0.68203, operation=285.43750, mosek=21.96192, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-30_13-21-44/data_ordered_YULIN/data.mat
+
+PushBoxTunnel2  CS=SELF, TS=MF, result=0.57444, operation=27.85588, mosek=19.96946, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-30_13-26-59/data_ordered_YULIN/data.mat
+
+PushBoxTunnel2  CS=SELF, TS=MF, result=0.63092, operation=29.94987, mosek=20.01508, prefix=./data/PushBoxTunnel2_MATLAB/2025-01-30_13-27-56/data_ordered_YULIN/data.mat
+
+PushBoxTunnel2  N=30, Relax=SOS, TS=MF, CS=SELF, result=0.51723014275176026899, operation=20.03795
+
+PushT  N=30, Relax=SOS, TS=MF, CS=MF, result=0.06390344680993551019, operation time=3.71836, mosek time=6.67351,PlanarHand  CS=SELF, TS=NON, result=0.19365, operation=344.12664, mosek=18.05417, prefix=./data/PlanarHand_MATLAB/2025-01-31_02-44-13/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=NON, result=0.19948, operation=293.30047, mosek=18.04063, prefix=./data/PlanarHand_MATLAB/2025-01-31_02-51-05/data_ordered_YULIN/data.mat
+
+PlanarHand  CS=SELF, TS=NON, result=0.15539, operation=375.68938, mosek=18.00964, prefix=./data/PlanarHand_MATLAB/2025-01-31_02-57-06/data_ordered_YULIN/data.mat
+
+PlanarHand  N=1, Relax=SOS, TS=NON, CS=SELF, result=, operation=0.52855
+
+PushT  CS=MF, TS=NON, result=0.59414, operation=42.02916, mosek=4.22717, prefix=./data/PushT_MATLAB/2025-01-31_23-33-04/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=NON, result=1.22152, operation=43.20610, mosek=4.21808, prefix=./data/PushT_MATLAB/2025-01-31_23-34-09/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=NON, result=0.87747, operation=41.15631, mosek=4.21872, prefix=./data/PushT_MATLAB/2025-01-31_23-35-14/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=NON, result=1.16052, operation=43.41186, mosek=4.20579, prefix=./data/PushT_MATLAB/2025-01-31_23-36-18/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=NON, result=0.10206, operation=63.46623, mosek=4.16454, prefix=./data/PushT_MATLAB/2025-01-31_23-37-24/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=NON, result=0.99866, operation=43.35443, mosek=4.18483, prefix=./data/PushT_MATLAB/2025-01-31_23-38-50/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=NON, result=0.32185, operation=48.75350, mosek=4.18035, prefix=./data/PushT_MATLAB/2025-01-31_23-39-55/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=NON, result=0.06526, operation=52.51999, mosek=4.18561, prefix=./data/PushT_MATLAB/2025-01-31_23-41-06/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=NON, result=1.51824, operation=43.16511, mosek=4.17411, prefix=./data/PushT_MATLAB/2025-01-31_23-42-21/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=NON, result=1.60598, operation=40.90543, mosek=4.17151, prefix=./data/PushT_MATLAB/2025-01-31_23-43-27/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MAX, result=0.47178, operation=21.78179, mosek=3.65733, prefix=./data/PushT_MATLAB/2025-01-31_23-44-30/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MAX, result=0.76699, operation=23.89360, mosek=3.65383, prefix=./data/PushT_MATLAB/2025-01-31_23-45-03/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MAX, result=0.67638, operation=22.60118, mosek=3.68226, prefix=./data/PushT_MATLAB/2025-01-31_23-45-38/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MAX, result=0.78037, operation=74.18288, mosek=3.68698, prefix=./data/PushT_MATLAB/2025-01-31_23-46-12/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MAX, result=0.09537, operation=24.91131, mosek=3.67958, prefix=./data/PushT_MATLAB/2025-01-31_23-47-38/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MAX, result=0.71140, operation=28.28027, mosek=3.68415, prefix=./data/PushT_MATLAB/2025-01-31_23-48-14/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MAX, result=0.26403, operation=23.24496, mosek=3.68046, prefix=./data/PushT_MATLAB/2025-01-31_23-48-54/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MAX, result=0.06198, operation=24.37967, mosek=3.68674, prefix=./data/PushT_MATLAB/2025-01-31_23-49-28/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MAX, result=0.88671, operation=23.27295, mosek=3.68664, prefix=./data/PushT_MATLAB/2025-01-31_23-50-04/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MAX, result=0.89121, operation=26.97611, mosek=3.68286, prefix=./data/PushT_MATLAB/2025-01-31_23-50-39/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MF, result=0.14087, operation=4.74193, mosek=3.74516, prefix=./data/PushT_MATLAB/2025-01-31_23-51-17/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MF, result=0.18369, operation=4.44165, mosek=3.76696, prefix=./data/PushT_MATLAB/2025-01-31_23-51-33/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MF, result=0.19526, operation=6.38751, mosek=3.76337, prefix=./data/PushT_MATLAB/2025-01-31_23-51-49/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MF, result=0.19076, operation=5.50775, mosek=3.76570, prefix=./data/PushT_MATLAB/2025-01-31_23-52-07/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MF, result=0.07878, operation=4.33030, mosek=3.76189, prefix=./data/PushT_MATLAB/2025-01-31_23-52-25/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MF, result=0.17008, operation=5.19286, mosek=3.76441, prefix=./data/PushT_MATLAB/2025-01-31_23-52-40/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MF, result=0.11223, operation=4.10083, mosek=3.76623, prefix=./data/PushT_MATLAB/2025-01-31_23-52-57/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MF, result=0.05182, operation=5.18490, mosek=3.76845, prefix=./data/PushT_MATLAB/2025-01-31_23-53-13/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MF, result=0.20384, operation=5.03185, mosek=3.76911, prefix=./data/PushT_MATLAB/2025-01-31_23-53-30/data_ordered_YULIN/data.mat
+
+PushT  CS=MF, TS=MF, result=0.19804, operation=5.01377, mosek=3.76379, prefix=./data/PushT_MATLAB/2025-01-31_23-53-47/data_ordered_YULIN/data.mat
+
+PlanarHand  N=30, Relax=SOS, TS=MAX, CS=MF, result=, operation=88.59923
+
+PlanarHand  N=30, Relax=SOS, TS=MF, CS=MF, result=, operation=91.34902
+
+PlanarHand  N=30, Relax=SOS, TS=MD, CS=MF, result=, operation=80.70079
+
+PlanarHand  N=30, Relax=SOS, TS=MAX, CS=MD, result=, operation=80.69775
+
+PlanarHand  N=30, Relax=SOS, TS=MF, CS=MD, result=, operation=83.14361
+
+PlanarHand  N=30, Relax=SOS, TS=MD, CS=MD, result=, operation=70.74729
+
+PlanarHand  N=30, Relax=MOMENT, TS=MAX, CS=MF, result=, operation=74.34652
+
+PlanarHand  N=30, Relax=MOMENT, TS=MF, CS=MF, result=, operation=75.59597
+
+PlanarHand  N=30, Relax=MOMENT, TS=MD, CS=MF, result=, operation=64.98413
+
+PlanarHand  N=30, Relax=MOMENT, TS=MD, CS=MF, result=, operation=64.62882
+
+PlanarHand  N=30, Relax=MOMENT, TS=MF, CS=MD, result=, operation=68.31320
+
+PlanarHand  N=30, Relax=MOMENT, TS=MD, CS=MD, result=, operation=55.96687
+
+PushT  N=10, Relax=SOS, TS=MF, CS=MF, result=0.12462575862439884133, operation time=0.96285, mosek time=2.14576,PlanarHand  N=30, Relax=SOS, TS=NON, CS=SELF, result=19.27970303578462818450, operation=18.23477
+
+PushBot  N=30, Relax=SOS, TS=NON, CS=SELF, result=0.87780690909697056679, operation=3.10262
+
+PushBot  N=30, Relax=SOS, TS=MD, CS=MD, result=, operation=3.10257
+
+PushBot  N=30, Relax=SOS, TS=MD, CS=MD, result=0.25342470011303336319, operation=2.64847
+
+PushBot  N=30, Relax=SOS, TS=NON, CS=MF, result=0.86233811584994779498, operation=3.67984
+
+PlanarHand  N=30, Relax=SOS, TS=NON, CS=SELF, result=, operation=24.32888
+
+PlanarHand  N=30, Relax=SOS, TS=NON, CS=SELF, result=19.26099234932904735729, operation=24.34006
+
+PushBot  N=30, Relax=SOS, TS=NON, CS=SELF, result=0.87792684622862593447, operation=4.18610
+
+PushBot  N=30, Relax=SOS, TS=NON, CS=MF, result=0.86233811584994779498, operation=3.70128
+
+PushBot  N=30, Relax=SOS, TS=NON, CS=MF, result=0.86233811584994779498, operation=3.61187
+
+PushT  N=10, Relax=SOS, TS=MF, CS=MF, result=0.12462564879145512919, operation time=1.37324, mosek time=1.92552,PushT  N=10, Relax=SOS, TS=MF, CS=MF, result=0.12462564879145512919, operation time=1.29953, mosek time=1.83603,PushT  N=10, Relax=SOS, TS=MF, CS=MF, result=0.12462564879145512919, operation time=1.29718, mosek time=1.82224,PushT  N=10, Relax=SOS, TS=MF, CS=MF, result=0.12462564879145512919, operation time=1.30779, mosek time=1.79343,PushT  N=10, Relax=SOS, TS=MF, CS=MF, result=0.12462564879145512919, operation time=1.29446, mosek time=1.80373,PushT  N=10, Relax=SOS, TS=MF, CS=MF, result=0.12462564879145512919, operation time=1.37592, mosek time=1.86551,PushT  N=10, Relax=SOS, TS=MF, CS=MF, result=0.12462564879145512919, operation time=1.32281, mosek time=1.92718,PushT  N=10, Relax=SOS, TS=MF, CS=MF, result=0.12462564879145512919, operation time=1.53841, mosek time=1.84289,PushT  N=10, Relax=SOS, TS=NON, CS=MF, result=0.30439386614833929823, operation time=1.46896, mosek time=20.67278,PushT  N=10, Relax=SOS, TS=NON, CS=MF, result=0.30439386614833929823, operation time=1.49803, mosek time=21.20661,PlanarHand  N=3, Relax=SOS, TS=NON, CS=SELF, result=4.00000020981137272003, operation=2.19021
+
+PushBot  N=30, Relax=SOS, TS=NON, CS=MF, result=0.86233811584994779498, operation=3.58456
+
+PushBox  N=5, Relax=SOS, TS=NON, CS=MF, result=0.68168476380568343576, operation=0.27999
+
+PushT  N=10, Relax=SOS, TS=NON, CS=MF, result=0.30439386614833929823, operation time=1.44695, mosek time=20.87815,PushT  N=10, Relax=SOS, TS=MF, CS=MF, result=0.12462564879145512919, operation time=1.30695, mosek time=1.94632,PushBoxTunnel2  N=3, Relax=SOS, TS=MF, CS=SELF, result=2.22310643270396912641, operation=2.82954
+

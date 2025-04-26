@@ -1,0 +1,13 @@
+SOS_examples/
+data/
+figs/
+logs/
+markdown/
+papers/
+build/
+.vscode/
+CMakeFiles/
+__pycache__
+
+*.asv
+final.mat
