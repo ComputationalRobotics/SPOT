@@ -130,6 +130,17 @@ $$
 x_1^2 + x_2^2 = 1, \ x_2^2 + x_3^2 = 1, \ x_2 = 0.5
 $$
 
+## 4. Citing Our Work
+If you use **SPOT** in your research, please consider citing our work:
+```bibtex
+@article{kang2025global,
+  title={Global Contact-Rich Planning with Sparsity-Rich Semidefinite Relaxations},
+  author={Kang, Shucheng and Liu, Guorui and Yang, Heng},
+  journal={arXiv preprint arXiv:2502.02829},
+  year={2025}
+}
+```
+
 
 
 
