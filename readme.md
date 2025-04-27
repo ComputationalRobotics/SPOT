@@ -13,6 +13,7 @@
 ## Features
 
 **SPOT** tries to solve the following polynomial optimization with sparse Moment-SOS Hierarchy:
+
 $$
 \min_{\mathbf{x}} f(\mathbf{x})
 $$
