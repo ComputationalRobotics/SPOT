@@ -14,12 +14,18 @@ SPOT is a lightweight, high-performance, sparse Moment-SOS Hierarchy conversion 
 
 SPOT tries to solve the following polynomial optimization with sparse Moment-SOS Hierarchy:
 
+$$
+\min_{\mathbf{x}} f(\mathbf{x})
+$$
 
 $$
-\min_{\mathbf{x}} & f(\mathbf{x}) \\
-\text{subject to } & g_i(\mathbf{x}) \ge 0, \ i \in \mathcal{I} \\
-& h_j(\mathbf{x}) = 0, \ j \in \mathcal{E}
+\text{subject to } g_i(\mathbf{x}) \ge 0, \ i \in \mathcal{I}
 $$
+
+$$
+h_j(\mathbf{x}) = 0, \ j \in \mathcal{E}
+$$
+
 where $f, g_i, h_j$ are all polynomials. Options in SPOT interface: 
 
 - `relax_mode`: 
