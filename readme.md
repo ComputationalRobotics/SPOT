@@ -67,10 +67,17 @@ pathinfo("spot") = "~/ksc/my-packages/SPOT/SPOT/MATLAB";
 
 Then, in the `./MATLAB_examples` folder, you can find numerous examples for sparse polynomial optimization arising from contact-rich planning. A toy example is shown in `./MATLAB_examples/test_CSTSS_MATLAB.m`, where the following polynomial optimization is solved and the minimizer is extracted:
 $$
-\min & x_1 + x_2 + x_3 \\
-\text{subject to } & 2 - x_i \ge 0, \ i = 1, 2, 3 \\
-& x_1^2 + x_2^2 = 1, \ x_2^2 + x_3^2 = 1, \ x_2 = 0.5
+\min x_1 + x_2 + x_3
 $$
+
+$$
+\text{subject to } 2 - x_i \ge 0, \ i = 1, 2, 3 
+$$
+
+$$
+x_1^2 + x_2^2 = 1, \ x_2^2 + x_3^2 = 1, \ x_2 = 0.5
+$$
+
 Five contact-rich planning problems in the paper can be found in: 
 
 - Push Bot: `./MATLAB_examples/PushBot_MATLAB.m`
