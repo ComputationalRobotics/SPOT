@@ -13,6 +13,8 @@ SPOT is a lightweight, high-performance, sparse Moment-SOS Hierarchy conversion 
 ## Features
 
 SPOT tries to solve the following polynomial optimization with sparse Moment-SOS Hierarchy:
+
+
 $$
 \min_{\mathbf{x}} & f(\mathbf{x}) \\
 \text{subject to } & g_i(\mathbf{x}) \ge 0, \ i \in \mathcal{I} \\
@@ -66,6 +68,8 @@ pathinfo("spot") = "~/ksc/my-packages/SPOT/SPOT/MATLAB";
 ```
 
 Then, in the `./MATLAB_examples` folder, you can find numerous examples for sparse polynomial optimization arising from contact-rich planning. A toy example is shown in `./MATLAB_examples/test_CSTSS_MATLAB.m`, where the following polynomial optimization is solved and the minimizer is extracted:
+
+
 $$
 \min x_1 + x_2 + x_3
 $$
