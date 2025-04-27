@@ -4,7 +4,7 @@
 
 ## About
 
-SPOT is a lightweight, high-performance, sparse Moment-SOS Hierarchy conversion package written in C++, with MATLAB and Python interfaces. SPOT is highly inspired by the Julia package [TSSOS](https://github.com/wangjie212/TSSOS).
+**SPOT** is a lightweight, high-performance, sparse Moment-SOS Hierarchy conversion package written in C++, with MATLAB and Python interfaces. SPOT is highly inspired by the Julia package [TSSOS](https://github.com/wangjie212/TSSOS).
 
 ## News
 
@@ -12,8 +12,7 @@ SPOT is a lightweight, high-performance, sparse Moment-SOS Hierarchy conversion 
 
 ## Features
 
-SPOT tries to solve the following polynomial optimization with sparse Moment-SOS Hierarchy:
-
+**SPOT** tries to solve the following polynomial optimization with sparse Moment-SOS Hierarchy:
 $$
 \min_{\mathbf{x}} f(\mathbf{x})
 $$
@@ -52,7 +51,7 @@ where $f, g_i, h_j$ are all polynomials. Options in SPOT interface:
   - `true`: Solve the SDP
   - `false`: Only conversion, do not solve the SDP
 
-## MATLAB Installation
+## MATLAB Installation and Usage
 
 Please first install [Mosek](https://docs.mosek.com/latest/toolbox/install-interface.html) and [msspoly](https://github.com/spot-toolbox/spotless/tree/master) in MATLAB. Mex file compilation: 
 
@@ -97,11 +96,39 @@ Five contact-rich planning problems in the paper can be found in:
 
 If you want to reproduce the statistics in the paper, please run `./MATLAB_examples/Test_Gap.m` (It may take a very long time!). The plotting and rendering codes can be found in `./MATLAB_examples/*_goodplot.m` and `./MATLAB_examples/*_visualize.m`, respectively (''*'' represents five dyanamical systems' names).
 
- 
+ ## Python Installation and Usage
 
- 
+Create a new conda environment:
 
+```
+conda create -n spot python=3.10 numpy scipy -y
+conda activate spot
+conda install -c mosek mosek=10.0 -y
+```
 
+Pybind compilation:
+
+```
+cd ./SPOT/PYTHON 
+mkdir build 
+cd build 
+cmake ..
+make 
+```
+
+Then, in the `./Python_examples` folder, you can find examples for sparse polynomial optimization arising from contact-rich planning (currently, only Push T task is translated to Python). A toy example is shown in `./Python_examples/test_CSTSS_Python.m`, where the following polynomial optimization is solved and the minimizer is extracted:
+
+$$
+\min x_1 + x_2 + x_3
+$$
+
+$$
+\text{subject to } 2 - x_i \ge 0, \ i = 1, 2, 3 
+$$
+
+$$
+x_1^2 + x_2^2 = 1, \ x_2^2 + x_3^2 = 1, \ x_2 = 0.5
+$$
 
 
 
