@@ -134,11 +134,17 @@ $$
 ## 4. Citing Our Work
 If you use **SPOT** in your research, please consider citing our work:
 ```bibtex
-@article{kang2025global,
-  title={Global Contact-Rich Planning with Sparsity-Rich Semidefinite Relaxations},
+@inproceedings{kang2025global,
+  title={Global contact-Rich planning with sparsity-rich semidefinite relaxations},
   author={Kang, Shucheng and Liu, Guorui and Yang, Heng},
-  journal={arXiv preprint arXiv:2502.02829},
+  journal={Robotics: Science and Systems},
   year={2025}
+}
+@inproceedings{kang2024fast,
+  title={Fast and certifiable trajectory optimization},
+  author={Kang, Shucheng and Xu, Xiaoyang and Sarva, Jay and Liang, Ling and Yang, Heng},
+  journal={International Workshop on the Algorithmic Foundations of Robotics},
+  year={2024}
 }
 ```
 
