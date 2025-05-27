@@ -64,22 +64,17 @@ function [mom_sub, Ks, var_id] = generate_Ks(X, rpt, total_var_num)
         end
     end
     
-    sub_size = 0;
-    for i = 1: size(rpt, 1)
-        if nnz(rpt(i, :)) == 1 || nnz(rpt(i, :)) == 0
-            sub_size = sub_size + 1;
-        end
-    end
+    sub_size = nchoosek(n+kappa-1, kappa-1);
     mom_sub = X(1:sub_size, 1:sub_size);
     rpt_sub_short = rpt_short(1:sub_size, :);
     M1_sub = repmat(rpt_sub_short, sub_size, 1);
     M2_sub = kron(rpt_sub_short, ones(sub_size, 1));
     Mv_sub = [M1_sub, M2_sub];
     Mv_sub = sort(Mv_sub, 2);
-    Mv_sub_short = Mv_sub(:, kappa+1: end);
+    Mv_sub_short = Mv_sub;
     
-    Ks = cell(sub_size-1, 1);
-    for i = 1: sub_size-1
+    Ks = cell(n, 1);
+    for i = 1: n
         rpt_short_single = rpt_sub_short(i+1, :);
         rpt_short_single = repmat(rpt_short_single, sub_size^2, 1);
         Kv = sort([rpt_short_single, Mv_sub_short], 2);
@@ -94,7 +89,7 @@ function [mom_sub, Ks, var_id] = generate_Ks(X, rpt, total_var_num)
         Ks{i} = K;
     end
 
-    var_id = rpt(2: sub_size, end);
+    var_id = rpt(2: n+1, end);
 end
 
 function [xi_recover, output_info] = extraction_robust(input_info)
