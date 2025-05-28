@@ -1,4 +1,5 @@
 import numpy as np
+from math import comb  
 
 from SPOT.PYTHON.get_key import get_key 
 from SPOT.PYTHON.sorteig import sorteig
@@ -87,113 +88,81 @@ def extraction_robust(input_info):
     }
     return xi_recover, output_info
 
-# -----------------------------------------------------------------------------
 def generate_Ks(X, rpt, total_var_num):
     """
-    Equivalent to the MATLAB function:
-      function [mom_sub, Ks, var_id] = generate_Ks(X, rpt, total_var_num)
-
-    - X should be the entire moment matrix (2D numpy array).
-    - rpt is the "exponent pattern" array (size s x (2*kappa)) from MATLAB, where
-      the second half of columns is `rpt_short`.
-    - total_var_num is the dimension 'n' of the polynomial variables.
-
-    Returns:
-      - mom_sub: sub-block of X,
-      - Ks: list of localizing matrices,
-      - var_id: array of indices for variables (translated from rpt(2:sub_size, end))
+    Minimal-change, MATLAB-faithful rewrite of your old version.
     """
-    s = rpt.shape[0]
-    # In MATLAB: kappa = size(rpt,2)/2
-    # We'll compute that:
-    kappa = rpt.shape[1] // 2
-    n = total_var_num
+    s      = rpt.shape[0]
+    kappa  = rpt.shape[1] // 2
+    n_total = total_var_num
 
-    # -------------------------------------------------------------------------
-    # Build a dictionary C that maps exponent pattern -> X(i,j)
-    # Mv = [M1, M2], where M1 = repmat(rpt_short, s, 1), M2 = kron(rpt_short, ones(s, 1))
-    rpt_short = rpt[:, kappa:]  # second half of columns
-    M1 = np.repeat(rpt_short, s, axis=0)          # shape (s*s, kappa)
-    M2 = np.tile(rpt_short, (s, 1))               # same shape (s*s, kappa)
-    Mv = np.hstack([M1, M2])                      # shape (s*s, 2*kappa)
-    # sort(Mv, 2) -> sort each row
-    # We'll sort in ascending order across axis=1
-    # If these are exponents, that's typically how you'd do it
-    Mv = np.sort(Mv, axis=1)
-
-    # Generate keys for each row
-    keys = get_key(Mv, n)
-
-    # Dictionary from keys -> X(i,j)
-    C = {}
-    idx = 0
-    for i in range(s):
-        for j in range(s):
-            key = keys[idx]
-            C[key] = X[i, j]
-            idx += 1
-
-    # -------------------------------------------------------------------------
-    # sub_size = # of rows of rpt with 0 or 1 nonzero
-    # MATLAB: if nnz(rpt(i,:)) == 1 || nnz(rpt(i,:)) == 0
-    sub_size = 0
+    # MATLAB: if nnz(rpt(i,:)) == 1 
+    n_clique = 0
     nonzero_counts = np.count_nonzero(rpt, axis=1)
     for count in nonzero_counts:
-        if count == 0 or count == 1:
-            sub_size += 1
+        if count == 1:
+            n_clique += 1
 
-    # Build mom_sub = X(1:sub_size, 1:sub_size) in MATLAB (1-based)
-    # In Python, that is X[:sub_size, :sub_size] (0-based)
-    mom_sub = X[:sub_size, :sub_size]
+    # ------------------------------------------------------------------
+    # Build M1, M2 exactly as MATLAB does:
+    #   M1 = repmat(rpt_short, s, 1)
+    #   M2 = kron(rpt_short, ones(s,1))
+    # ------------------------------------------------------------------
+    rpt_short = rpt[:, kappa:]                      # second half of columns
+    M1 = np.tile   (rpt_short, (s, 1))              # ### CHANGE ###
+    M2 = np.repeat (rpt_short,  s, axis=0)          # ### CHANGE ###
+    Mv = np.sort(np.hstack([M1, M2]), axis=1)
 
-    # Build sub-block versions of Mv. We only want the first sub_size rows of rpt_short
-    rpt_sub_short = rpt_short[:sub_size, :]
-    M1_sub = np.repeat(rpt_sub_short, sub_size, axis=0)
-    M2_sub = np.tile(rpt_sub_short, (sub_size, 1))
-    Mv_sub = np.hstack([M1_sub, M2_sub])
-    Mv_sub = np.sort(Mv_sub, axis=1)
-    # Mv_sub_short = Mv_sub(:, kappa+1:end) in MATLAB is the *second half* again?
-    # Actually, we should mirror the same logic: Mv_sub_short is the second half
-    # after re-sorting. But let's keep it consistent with the code:
-    # Mv_sub_short = Mv_sub(:, kappa+1:end) in 1-based indexing
-    # => in 0-based, that's Mv_sub[:, kappa:]
-    Mv_sub_short = Mv_sub[:, kappa:]
+    # Dictionary  key → X(i,j)
+    keys = get_key(Mv, n_total)
+    C    = {}
+    idx  = 0
+    for i in range(s):
+        for j in range(s):
+            C[keys[idx]] = X[i, j]
+            idx += 1
 
-    # -------------------------------------------------------------------------
-    # Now build Ks. sub_size-1 localizing matrices:
+    # ------------------------------------------------------------------
+    # Sub-matrix size: nchoosek(n+kappa-1, kappa-1) in MATLAB
+    # ------------------------------------------------------------------
+    sub_size = comb(n_clique + kappa - 1, kappa - 1)       # ### CHANGE ###
+
+    mom_sub        = X[:sub_size, :sub_size]
+    rpt_sub_short  = rpt_short[:sub_size, :]
+
+    M1_sub = np.tile   (rpt_sub_short, (sub_size, 1))
+    M2_sub = np.repeat (rpt_sub_short,  sub_size, axis=0)
+    Mv_sub = np.sort(np.hstack([M1_sub, M2_sub]), axis=1)
+    Mv_sub_short = Mv_sub                           # ### CHANGE ###
+
+    # ------------------------------------------------------------------
+    # Localising matrices: MATLAB builds *n* of them
+    # ------------------------------------------------------------------
     Ks = []
-    for i in range(sub_size - 1):
-        # rpt_short_single = rpt_sub_short(i+1, :) in MATLAB (1-based)
-        # => Python: rpt_sub_short[i+1, :]
-        rpt_short_single = rpt_sub_short[i + 1, :]
-        rpt_short_single = np.repeat(rpt_short_single[np.newaxis, :], sub_size**2, axis=0)
+    for i in range(n_clique):                              # ### CHANGE ###
+        base_row = rpt_sub_short[i + 1, :]          # row i+1 in MATLAB
+        rpt_short_single = np.repeat(base_row[np.newaxis, :],
+                                     sub_size**2, axis=0)
 
-        # Kv = sort([rpt_short_single, Mv_sub_short], 2)
-        Kv = np.hstack([rpt_short_single, Mv_sub_short])
-        Kv = np.sort(Kv, axis=1)
-        # get keys for each row
-        id_list = get_key(Kv, n)
+        Kv      = np.sort(np.hstack([rpt_short_single, Mv_sub_short]), axis=1)
+        id_list = get_key(Kv, n_total)
 
-        # Build the localizing matrix K
         K = np.zeros_like(mom_sub)
         idx_k = 0
         for j1 in range(sub_size):
             for j2 in range(sub_size):
-                key_ij = id_list[idx_k]
+                K[j1, j2] = C[id_list[idx_k]]
                 idx_k += 1
-                K[j1, j2] = C[key_ij] if key_ij in C else 0.0
         Ks.append(K)
 
-    # -------------------------------------------------------------------------
-    # var_id = rpt(2:sub_size, end) in MATLAB
-    # i.e., from the 2nd row up to sub_size (inclusive).
-    # In Python, that means rows [1:sub_size], column [-1]
-    # (since Python is 0-based and the slice stop is exclusive).
-    var_id = rpt[1:sub_size, -1].astype(int)
+    # ------------------------------------------------------------------
+    # Variable indices: rows 2 … n+1 in MATLAB, last column
+    # ------------------------------------------------------------------
+    var_id = rpt[1 : n_clique + 1, -1].astype(int)         # ### CHANGE ###
 
     return mom_sub, Ks, var_id
 
-# -----------------------------------------------------------------------------
+
 def robust_extract_CS(Xs, mom_mat_rpt, total_var_num, eps_val):
     """
     Equivalent to the MATLAB:
@@ -263,8 +232,6 @@ def robust_extract_CS(Xs, mom_mat_rpt, total_var_num, eps_val):
     }
 
     return sol, output_info
-
-import numpy as np
 
 def ordered_extract_CS(Xs, mom_mat_rpt, total_var_num, eps_val, cliques_rank):
     """

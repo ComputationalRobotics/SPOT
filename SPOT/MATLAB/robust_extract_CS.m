@@ -48,7 +48,15 @@ function [mom_sub, Ks, var_id] = generate_Ks(X, rpt, total_var_num)
     % X should be an entire moment matrix
     s = size(rpt, 1);
     kappa = size(rpt, 2) / 2;
-    n = total_var_num;
+    n_total = total_var_num;
+
+    n_clique = 0;
+    for i = 1: size(rpt, 1)
+        if nnz(rpt(i,:)) == 1
+            n_clique = n_clique + 1;
+        end
+    end
+
     rpt_short = rpt(:, kappa+1: end);
     M1 = repmat(rpt_short, s, 1);
     M2 = kron(rpt_short, ones(s, 1));
@@ -56,7 +64,7 @@ function [mom_sub, Ks, var_id] = generate_Ks(X, rpt, total_var_num)
     Mv = sort(Mv, 2);
     
     C = containers.Map('KeyType', 'uint64', 'ValueType', 'any');
-    keys = get_key(Mv, n);
+    keys = get_key(Mv, n_total);
     for i = 1: s
         for j = 1: s
             id = (i-1) * s + j;
@@ -64,7 +72,7 @@ function [mom_sub, Ks, var_id] = generate_Ks(X, rpt, total_var_num)
         end
     end
     
-    sub_size = nchoosek(n+kappa-1, kappa-1);
+    sub_size = nchoosek(n_clique+kappa-1, kappa-1);
     mom_sub = X(1:sub_size, 1:sub_size);
     rpt_sub_short = rpt_short(1:sub_size, :);
     M1_sub = repmat(rpt_sub_short, sub_size, 1);
@@ -73,12 +81,12 @@ function [mom_sub, Ks, var_id] = generate_Ks(X, rpt, total_var_num)
     Mv_sub = sort(Mv_sub, 2);
     Mv_sub_short = Mv_sub;
     
-    Ks = cell(n, 1);
-    for i = 1: n
+    Ks = cell(n_clique, 1);
+    for i = 1: n_clique
         rpt_short_single = rpt_sub_short(i+1, :);
         rpt_short_single = repmat(rpt_short_single, sub_size^2, 1);
         Kv = sort([rpt_short_single, Mv_sub_short], 2);
-        id = get_key(Kv, n);
+        id = get_key(Kv, n_total);
         K = zeros(size(mom_sub));
         for j1 = 1: sub_size
             for j2 = 1: sub_size
@@ -89,7 +97,7 @@ function [mom_sub, Ks, var_id] = generate_Ks(X, rpt, total_var_num)
         Ks{i} = K;
     end
 
-    var_id = rpt(2: n+1, end);
+    var_id = rpt(2: n_clique+1, end);
 end
 
 function [xi_recover, output_info] = extraction_robust(input_info)
