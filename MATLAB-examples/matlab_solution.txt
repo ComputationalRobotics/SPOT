@@ -714,3 +714,4 @@ PushBox  N=5, Relax=SOS, TS=NON, CS=MF, result=0.68168476380568343576, operation
 
 PushT  N=10, Relax=SOS, TS=NON, CS=MF, result=0.30439386614833929823, operation time=1.44695, mosek time=20.87815,PushT  N=10, Relax=SOS, TS=MF, CS=MF, result=0.12462564879145512919, operation time=1.30695, mosek time=1.94632,PushBoxTunnel2  N=3, Relax=SOS, TS=MF, CS=SELF, result=2.22310643270396912641, operation=2.82954
 
+PushT  N=30, Relax=SOS, TS=MF, CS=MF, result=0.06389994700288259555, operation time=5.08994, mosek time=3.92430,

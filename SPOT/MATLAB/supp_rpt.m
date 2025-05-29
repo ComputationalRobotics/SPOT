@@ -49,4 +49,6 @@ function [seqs, coeff] = supp_rpt(f, x, d)
         % 右对齐填充
         seqs(i, d-length(current_seq)+1:d) = current_seq;
     end
+
+    % seqs = sort(seqs, 2); 
 end

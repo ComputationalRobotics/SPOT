@@ -119,11 +119,11 @@ Polys& Polys::operator=(const Polys& other) {
 void Polys::Assign_Constraints() {
 
     //inequality constraints
-    int max_size = 10 * m_ineq; // assume max ten times
-    std::vector<Eigen::MatrixXi> supp_g_re(max_size);
-    std::vector<Eigen::VectorXd> coeff_g_re(max_size);
-    std::vector<int> dj_g_re(max_size);
-    std::vector<int> c_g_re(max_size);
+    // int max_size = std::max(10 * m_ineq, 10000); // assume max ten times
+    std::vector<Eigen::MatrixXi> supp_g_re;
+    std::vector<Eigen::VectorXd> coeff_g_re;
+    std::vector<int> dj_g_re;
+    std::vector<int> c_g_re;
     int m_ineq_re = 0;
 
 
@@ -136,6 +136,7 @@ void Polys::Assign_Constraints() {
                 }
             }
         }
+        
 
         for (size_t j = 0; j < cI.size(); ++j) {
             bool is_subset = true;
@@ -145,35 +146,32 @@ void Polys::Assign_Constraints() {
                     break;
                 }
             }
+            
 
             if (is_subset) {
-                supp_g_re[m_ineq_re] = supp_g[i];
-                coeff_g_re[m_ineq_re] = coeff_g[i];
-                dj_g_re[m_ineq_re] = dj_g[i];
-                c_g_re[m_ineq_re] = j;
+                supp_g_re.push_back(supp_g[i]);
+                coeff_g_re.push_back(coeff_g[i]);
+                dj_g_re.push_back(dj_g[i]);
+                c_g_re.push_back(j);
                 m_ineq_re++;
             }
         }
     }
-
-    supp_g_re.resize(m_ineq_re);
-    coeff_g_re.resize(m_ineq_re);
-    dj_g_re.resize(m_ineq_re);
-    c_g_re.resize(m_ineq_re);
 
     supp_g = supp_g_re;
     coeff_g = coeff_g_re;
     dj_g = dj_g_re;
     m_ineq = m_ineq_re;
     c_g = c_g_re;
+    
 
     // equality constraints
-    max_size = 10 * m_eq; 
-    std::vector<Eigen::MatrixXi> supp_h_re(max_size);
-    std::vector<Eigen::VectorXd> coeff_h_re(max_size);
-    std::vector<int> dj_h_re(max_size);
-    std::vector<int> c_h_re(max_size);
+    std::vector<Eigen::MatrixXi> supp_h_re;
+    std::vector<Eigen::VectorXd> coeff_h_re;
+    std::vector<int> dj_h_re;
+    std::vector<int> c_h_re;
     int m_eq_re = 0;
+    
 
     for (int i = 0; i < m_eq; ++i) {
         std::vector<int> nz_h;
@@ -184,6 +182,7 @@ void Polys::Assign_Constraints() {
                 }
             }
         }
+        
 
         for (size_t j = 0; j < cI.size(); ++j) {
             bool is_subset = true;
@@ -193,22 +192,18 @@ void Polys::Assign_Constraints() {
                     break;
                 }
             }
+            
 
             if (is_subset) {
-                supp_h_re[m_eq_re] = supp_h[i];
-                coeff_h_re[m_eq_re] = coeff_h[i];
-                dj_h_re[m_eq_re] = dj_h[i];
-                c_h_re[m_eq_re] = j;
+                supp_h_re.push_back(supp_h[i]);
+                coeff_h_re.push_back(coeff_h[i]);
+                dj_h_re.push_back(dj_h[i]);
+                c_h_re.push_back(j);
                 m_eq_re++;
             }
+            
         }
     }
-
-
-    supp_h_re.resize(m_eq_re);
-    coeff_h_re.resize(m_eq_re);
-    dj_h_re.resize(m_eq_re);
-    c_h_re.resize(m_eq_re);
 
     supp_h = supp_h_re;
     coeff_h = coeff_h_re;
@@ -284,6 +279,7 @@ void Polys::Gen_tI(const std::string& ts_mode, const std::string& ts_mom_mode) {
 
     // 初始化 B_mom，B_ineq，B_eq
     std::vector<Eigen::MatrixXi> B_mom(n_cI), B_ineq(m_ineq), B_eq(m_eq);
+    
 
 
     // Process support extension
@@ -296,6 +292,7 @@ void Polys::Gen_tI(const std::string& ts_mode, const std::string& ts_mom_mode) {
     for (int i = 0; i < m_eq; ++i) {
         B_eq[i] = hs_support_extension_rpt(mon_h, C, supp_h[i], i, 2);
     }
+    
 
     tI.resize(n_cI + m_ineq + m_eq);
 
@@ -353,6 +350,7 @@ void Polys::Gen_tI(const std::string& ts_mode, const std::string& ts_mom_mode) {
             tI[n_cI + itr].push_back(full_block);
         }
     }
+    
 
     // Add moment matrix
     if (ts_mom_mode == "USE") {
@@ -367,12 +365,14 @@ void Polys::Gen_tI(const std::string& ts_mode, const std::string& ts_mom_mode) {
     for (int itr = 0; itr < n_cI + m_ineq; ++itr) {
         tI_num.push_back(tI[itr].size());
     }
+    
 
     // Compute total number of sub-blocks
     n_tI = 0;
     for (int size : tI_num) {
         n_tI += size;
     }
+    
 
     // Compute blocks size
     tI_size.resize(n_tI);
@@ -380,6 +380,7 @@ void Polys::Gen_tI(const std::string& ts_mode, const std::string& ts_mom_mode) {
         std::vector<int> itr_loca = find_loca_1(itr, tI_num);
         tI_size[itr] = tI[itr_loca[0]][itr_loca[1]].rows();
     }
+    
 
     // Record B_eq
     for (int itr = 0; itr < m_eq; ++itr) {
@@ -390,6 +391,7 @@ void Polys::Gen_tI(const std::string& ts_mode, const std::string& ts_mom_mode) {
         }
         tI[n_cI + m_ineq + itr].push_back(tI_tmp);
     }
+    
 
 }
 
@@ -656,6 +658,7 @@ void Polys::SOS_Conversion(const std::string& ts_eq_mode) {
     for (int i1 = 0; i1 < m_eq; ++i1) {
         max_A += tI[n_cI + m_ineq + i1][0].rows() * coeff_h[i1].size();
     }
+    
 
     Eigen::MatrixXd A = Eigen::MatrixXd::Zero(max_A, 5);
     Eigen::VectorXd b = Eigen::VectorXd::Zero(max_A);
@@ -877,14 +880,17 @@ void Polys::SOS_Conversion_Real(const std::string& ts_eq_mode) {
             max_A += tI[i1][i2].size() * tI[i1][i2].size();
         }
     }
+    
     for (int i1 = 0; i1 < m_ineq; ++i1) {
         for (size_t i2 = 0; i2 < tI[n_cI + i1].size(); ++i2) {
             max_A += tI[n_cI + i1][i2].size() * tI[n_cI + i1][i2].size() * (coeff_g[i1].size() + 1);
         }
     }
+    
     for (int i1 = 0; i1 < m_eq; ++i1) {
         max_A += tI[n_cI + m_ineq + i1][0].rows() * coeff_h[i1].size();
     }
+    
 
     Eigen::MatrixXd A = Eigen::MatrixXd::Zero(max_A, 5);
     Eigen::VectorXd b = Eigen::VectorXd::Zero(max_A);
@@ -904,6 +910,7 @@ void Polys::SOS_Conversion_Real(const std::string& ts_eq_mode) {
         index_f[f_key[i]] = coeff_f(i);
     }
     
+    
 
     // Step 2: Alpha = 0
     alpha_list[0] = index_A;
@@ -913,6 +920,7 @@ void Polys::SOS_Conversion_Real(const std::string& ts_eq_mode) {
         b(index_A) = 0;
     }
     ++index_A;
+    
 
     // Step 2: Alpha in moment constraints
     for (int i1 = 0; i1 < n_cI; ++i1) {
@@ -955,6 +963,7 @@ void Polys::SOS_Conversion_Real(const std::string& ts_eq_mode) {
         }
     }
     std::cout << index_A << "  " << itr_A << std::endl;
+    
     
     // Step 3: Alpha in inequality constraints
     for (int i1 = 0; i1 < m_ineq; ++i1) {
