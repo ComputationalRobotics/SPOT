@@ -70,32 +70,53 @@ def mosek_standard_sdp_test_2(A, prob_a, b, prob_c, s):
     #
     b = np.squeeze(b)
     m = len(b)  # Number of constraints
-    exprs = [Expr.constTerm(0.0) for _ in range(m)]
+    # exprs = [Expr.constTerm(0.0) for _ in range(m)]
 
-    # 3a) Add the linear part: prob_a has [rowIdx, colIdx, val].
-    #     For each row, the contribution is val * x[colIdx].
-    for (rowIdx, colIdx, val) in prob_a:
-        rowIdx  = int(rowIdx)   # ensure Python integer
+    row_terms = [[] for _ in range(m)]
+
+    for rowIdx, colIdx, val in prob_a:
+        rowIdx  = int(rowIdx)   
         colIdx  = int(colIdx)
-        exprs[rowIdx] = Expr.add(exprs[rowIdx],
-                                 Expr.mul(val, x.index(colIdx)))
+        row_terms[rowIdx].append(Expr.mul(val, x.index(int(colIdx))))
 
-    # 3b) Add the SDP (bar) part: A has [subi, subj, subl, subk, val].
-    #     We interpret 'subi' as the constraint index, 'subj' as which PSD block,
-    #     and (subk, subl) as the entry in that PSD block.  val is the coefficient.
-    #
-    #     In Fusion you do Xblocks[subj].index(subk, subl) to get that scalar variable.
-    #
-    for (subi, subj, subl, subk, val) in A:
+    for subi, subj, subl, subk, val in A:
         subi = int(subi)
         subj = int(subj)
         subl = int(subl)
         subk = int(subk)
-        exprs[subi] = Expr.add(exprs[subi],
-                               Expr.mul(val, Xblocks[subj].index(subk, subl)))
-        if subk != subl:
-            exprs[subi] = Expr.add(exprs[subi],
-                               Expr.mul(val, Xblocks[subj].index(subl, subk)))
+        t = Expr.mul(val, Xblocks[int(subj)].index(int(subk), int(subl)))
+        row_terms[int(subi)].append(t)
+        if subk != subl:                      # symmetric counterpart
+            t2 = Expr.mul(val, Xblocks[int(subj)].index(int(subl), int(subk)))
+            row_terms[int(subi)].append(t2)
+
+    exprs = [Expr.add(terms) if terms else Expr.constTerm(0.0)
+            for terms in row_terms]
+
+    # # 3a) Add the linear part: prob_a has [rowIdx, colIdx, val].
+    # #     For each row, the contribution is val * x[colIdx].
+    # for (rowIdx, colIdx, val) in prob_a:
+    #     rowIdx  = int(rowIdx)   # ensure Python integer
+    #     colIdx  = int(colIdx)
+    #     exprs[rowIdx] = Expr.add(exprs[rowIdx],
+    #                              Expr.mul(val, x.index(colIdx)))
+
+    # # 3b) Add the SDP (bar) part: A has [subi, subj, subl, subk, val].
+    # #     We interpret 'subi' as the constraint index, 'subj' as which PSD block,
+    # #     and (subk, subl) as the entry in that PSD block.  val is the coefficient.
+    # #
+    # #     In Fusion you do Xblocks[subj].index(subk, subl) to get that scalar variable.
+    # #
+    # for (subi, subj, subl, subk, val) in A:
+    #     subi = int(subi)
+    #     subj = int(subj)
+    #     subl = int(subl)
+    #     subk = int(subk)
+    #     exprs[subi] = Expr.add(exprs[subi],
+    #                            Expr.mul(val, Xblocks[subj].index(subk, subl)))
+    #     if subk != subl:
+    #         exprs[subi] = Expr.add(exprs[subi],
+    #                            Expr.mul(val, Xblocks[subj].index(subl, subk)))
 
     # 3c) Finally, add these expressions as constraints = b[row].
     constraints = []
@@ -106,6 +127,7 @@ def mosek_standard_sdp_test_2(A, prob_a, b, prob_c, s):
     #
     # 4) Objective: Maximize c^T x
     #
+    print("OOO")
     M.objective(ObjectiveSense.Maximize, Expr.dot(prob_c, x))
 
     #
