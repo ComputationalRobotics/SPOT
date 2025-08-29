@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(CSTSS_MATLAB_wrapper VERSION 0.1.0 LANGUAGES C CXX)
 
 # Force compilation for x86_64
-set(CMAKE_OSX_ARCHITECTURES "x86_64")
+# set(CMAKE_OSX_ARCHITECTURES "x86_64")
 
 find_package(Matlab REQUIRED)
 find_package(Eigen3 REQUIRED)
