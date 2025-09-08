@@ -113,6 +113,10 @@ for iter = 1: 100
     xfea = vfea(aux_info_pendulum.var_ids.vec_x_id);
     xfea = reshape(xfea, env.x_dim, []);
     xfea = xfea(:, 1: env.N);
+
+    %%% test open loop control %%%
+    [x_seq_opt, cost_opt] = open_loop_control(uopt, env, primal_info, dual_info, aux_info_pendulum);
+    [x_seq_fea, cost_fea] = open_loop_control(ufea, env, primal_info, dual_info, aux_info_pendulum);
     
     % since we are using Mosek, there is no need to use modified dual certificate
     subopt_gap = abs(objval - result) / (1 + abs(objval) + abs(result));
@@ -918,8 +922,13 @@ function [obj, obj_grad] = get_objective(v, env, var_ids)
     end
 end
 
-function [th_new, dth_new] = simulate(u, dt, env)
-    resolution = 1e-5;
+function [th_new, dth_new] = simulate(u, dt, env, resolution)
+    if nargin == 4
+        resolution = resolution;
+    else
+        resolution = 1e-5;
+    end
+
     step = round(dt / resolution);
     th = env.th_init;
     dth = env.dth_init;
@@ -939,6 +948,50 @@ function [th_new, dth_new] = simulate(u, dt, env)
     end
     th_new = th;
     dth_new = dth;
+end
+
+function x_kp1 = P_one_poly_step(u_k, x_k, env, var_ids)
+    opts = optimoptions(@fsolve, 'Algorithm', 'levenberg-marquardt', 'Display', 'none');
+    x_kp1_0 = x_k; % initial guess
+    func = @(x_kp1) one_step_simulate(x_kp1, x_k, u_k, env, var_ids);
+    x_kp1 = fsolve(func, x_kp1_0, opts);
+end
+
+
+function F = one_step_simulate(x_kp1, x_k, u_k, env, var_ids)
+    rc_k = x_k(var_ids.rc_xid); rs_k = x_k(var_ids.rs_xid);
+    fc_k = x_k(var_ids.fc_xid); fs_k = x_k(var_ids.fs_xid);
+    rc_kp1 = x_kp1(var_ids.rc_xid); rs_kp1 = x_kp1(var_ids.rs_xid);
+    fc_kp1 = x_kp1(var_ids.fc_xid); fs_kp1 = x_kp1(var_ids.fs_xid);
+    
+    F = zeros(5, 1);
+    dt = env.dt; m = env.m; b = env.b; l = env.l; g = env.g;
+    F(1) = 1/dt * m*l^2 * (fs_kp1 - fs_k) + dt * m*g*l * rs_kp1 + b * fs_kp1 - dt * u_k * env.umax;
+    F(2) = rc_kp1 - (rc_k * fc_k - rs_k * fs_k);
+    F(3) = rs_kp1 - (rs_k * fc_k + rc_k * fs_k);
+    F(4) = rc_kp1^2 + rs_kp1^2 - 1;
+    F(5) = fc_kp1^2 + fs_kp1^2 - 1;
+end
+
+function [x_seq, cost] = open_loop_control(u_seq, env, primal_info, dual_info, aux_info)
+    x_seq = [cos(env.th_init); sin(env.th_init); cos(env.dt * env.dth_init); sin(env.dt * env.dth_init)];
+    x = x_seq;
+    assert(length(u_seq) == env.N, "env.N should be equal to length(u_seq)! \n");
+
+    for k = 1: env.N
+        u = u_seq(k);
+        u = u / env.umax; % rescale back u!
+        x_new = P_one_poly_step(u, x, env, aux_info.var_ids);
+        x_seq = [x_seq, x_new];
+        x = x_new;
+    end
+
+    x_seq_vec = x_seq(:);
+    v_seq = zeros(size(dual_info.x));
+    v_seq(aux_info.var_ids.vec_u_id) = u_seq / env.umax;
+    v_seq(aux_info.var_ids.vec_x_id) = x_seq_vec;
+    
+    cost = double( subs(dual_info.f(1), dual_info.x, v_seq) );
 end
 
 
