@@ -67,7 +67,7 @@ def qofR(R):
 
 # generate a random Wahba problem
 N = 100
-outlier_ratio = 0.6
+outlier_ratio = 0.8
 wahba = generate_random_wahba_problem(N=N, noise_std=0.02, outlier_ratio=outlier_ratio)
 # Extract unit vectors a and b
 a = wahba['a']
@@ -115,7 +115,8 @@ input_info['cliques'] = [] # let cs_mode decide the cliques
 input_info['ts_mom_mode'] = 'NON'
 input_info['ts_eq_mode'] = 'NON'
 input_info['if_solve'] = True
-relaxtion_order = 2 # relaxation order: 2 or 3 are both good choices,we choose 3 to be tighter
+# relaxation order: 2 or 3 are both good choices, 2 is faster but 3 is tighter, especially for large N and high outlier ratio
+relaxtion_order = 3 
 result, res, coeff_info, aux_info = CSTSS_pybind(f, g, h, relaxtion_order, v, input_info)
 
 # extract the moment matrix
