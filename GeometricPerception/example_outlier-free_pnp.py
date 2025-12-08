@@ -24,6 +24,7 @@ bearing_vecs /= np.linalg.norm(bearing_vecs, axis=1, keepdims=True)
 x = sp.symbols('x0:12')
 R = sp.Matrix(3, 3, x[:9])
 t = sp.Matrix(x[9:12])
+print("x: ", x)
 
 # define objective function
 objective = 0

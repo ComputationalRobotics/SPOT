@@ -146,6 +146,45 @@ def rotation_error_degrees(R1: np.ndarray, R2: np.ndarray) -> float:
     return np.rad2deg(rotation_error(R1, R2))
 
 
+def solve_wahba_svd(a: np.ndarray, b: np.ndarray, weights: np.ndarray = None) -> np.ndarray:
+    """
+    Solve Wahba's problem using SVD to find rotation R that best aligns a to b.
+    
+    Finds R that minimizes: J(R) = (1/2) Σ w_k ||b_k - R @ a_k||^2
+    
+    Based on the SVD solution from:
+    https://en.wikipedia.org/wiki/Wahba%27s_problem
+    
+    Args:
+        a: Nx3 array of source vectors
+        b: Nx3 array of target vectors (b ≈ R @ a)
+        weights: Optional N-element array of weights (default: uniform weights)
+        
+    Returns:
+        R: 3x3 rotation matrix in SO(3) such that b ≈ R @ a
+    """
+    N = a.shape[0]
+    
+    if weights is None:
+        weights = np.ones(N)
+    
+    # Step 1: Compute matrix B = Σ w_i * b_i * a_i^T
+    # Vectorized: B = b.T @ diag(weights) @ a = (b * weights[:, None]).T @ a
+    B = (b * weights[:, None]).T @ a
+    
+    # Step 2: SVD of B
+    U, S, Vt = np.linalg.svd(B)
+    
+    # Step 3: Compute R = U @ M @ V^T where M = diag([1, 1, det(U)*det(V)])
+    # This ensures det(R) = +1 (proper rotation, not reflection)
+    d = np.linalg.det(U) * np.linalg.det(Vt)
+    M = np.diag([1.0, 1.0, d])
+    
+    R = U @ M @ Vt
+    
+    return R
+
+
 def generate_random_pnp_problem(
     N: int,
     fov_degrees: float = 120.0,
@@ -236,6 +275,74 @@ def generate_random_pnp_problem(
     }
 
 
+def generate_random_wahba_problem(
+    N: int,
+    noise_std: float = 0.01,
+    outlier_ratio: float = 0.0
+) -> dict:
+    """
+    Generate a random outlier-robust Wahba problem.
+    
+    The Wahba problem is to find rotation R such that b_i ≈ R @ a_i for corresponding
+    unit vectors a_i and b_i.
+    
+    Args:
+        N: Number of vector correspondences to generate
+        noise_std: Standard deviation of Gaussian noise added to rotated vectors (default 0.01)
+        outlier_ratio: Fraction of correspondences to replace with random outliers (default 0.0)
+                       Must be in [0, 1)
+        
+    Returns:
+        dict containing:
+            - 'a': Nx3 array of unit vectors in the source frame
+            - 'b': Nx3 array of unit vectors in the target frame (with noise and outliers)
+            - 'b_clean': Nx3 array of clean unit vectors (rotated without noise, for reference)
+            - 'R_gt': 3x3 ground truth rotation matrix such that b ≈ R_gt @ a
+            - 'outlier_mask': N-element boolean array (True for outliers)
+            - 'inlier_mask': N-element boolean array (True for inliers)
+    """
+    # Generate N random unit vectors for a
+    a = np.random.randn(N, 3)
+    a = a / np.linalg.norm(a, axis=1, keepdims=True)
+    
+    # Generate random ground truth rotation
+    R_gt = random_rotation_matrix()
+    
+    # Rotate a by R_gt to get clean b
+    b_clean = (R_gt @ a.T).T
+    
+    # Add Gaussian noise and re-normalize
+    noise = np.random.normal(0, noise_std, b_clean.shape)
+    b = b_clean + noise
+    b = b / np.linalg.norm(b, axis=1, keepdims=True)
+    
+    # Determine number of outliers
+    num_outliers = int(np.floor(outlier_ratio * N))
+    
+    # Create outlier mask
+    outlier_mask = np.zeros(N, dtype=bool)
+    if num_outliers > 0:
+        # Randomly select indices to be outliers
+        outlier_indices = np.random.choice(N, size=num_outliers, replace=False)
+        outlier_mask[outlier_indices] = True
+        
+        # Replace outlier b vectors with random unit vectors
+        random_outliers = np.random.randn(num_outliers, 3)
+        random_outliers = random_outliers / np.linalg.norm(random_outliers, axis=1, keepdims=True)
+        b[outlier_indices] = random_outliers
+    
+    inlier_mask = ~outlier_mask
+    
+    return {
+        'a': a,
+        'b': b,
+        'b_clean': b_clean,
+        'R_gt': R_gt,
+        'outlier_mask': outlier_mask,
+        'inlier_mask': inlier_mask
+    }
+
+
 if __name__ == "__main__":
     # Demo rotation functions
     R1 = random_rotation_matrix()
@@ -281,4 +388,29 @@ if __name__ == "__main__":
     proj_reconstructed = points_cam_reconstructed[:, :2] / points_cam_reconstructed[:, 2:3]
     
     print(f"\nVerification - max projection error (clean): {np.max(np.abs(proj_reconstructed - pnp['points_2d_clean'])):.2e}")
+    
+    # Demo Wahba problem generation
+    print("\n" + "=" * 60)
+    print("Wahba Problem Generation Demo")
+    print("=" * 60)
+    
+    wahba = generate_random_wahba_problem(N=20, noise_std=0.02, outlier_ratio=0.2)
+    
+    print(f"\nGenerated Wahba problem with {len(wahba['a'])} correspondences")
+    print(f"Number of outliers: {np.sum(wahba['outlier_mask'])} ({100*np.mean(wahba['outlier_mask']):.1f}%)")
+    
+    print(f"\nGroundtruth rotation R_gt:")
+    print(wahba['R_gt'])
+    
+    print(f"\nSource vectors a (first 3):")
+    print(wahba['a'][:3])
+    
+    print(f"\nTarget vectors b (first 3):")
+    print(wahba['b'][:3])
+    
+    # Verify inliers: check that R_gt @ a ≈ b for inliers
+    inlier_idx = wahba['inlier_mask']
+    b_reconstructed = (wahba['R_gt'] @ wahba['a'][inlier_idx].T).T
+    angular_errors = np.arccos(np.clip(np.sum(b_reconstructed * wahba['b'][inlier_idx], axis=1), -1, 1))
+    print(f"\nInlier angular errors (rad): mean={np.mean(angular_errors):.4f}, max={np.max(angular_errors):.4f}")
 
