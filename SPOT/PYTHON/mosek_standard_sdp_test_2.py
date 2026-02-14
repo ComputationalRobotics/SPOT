@@ -2,177 +2,181 @@ import time
 import numpy as np
 import mosek
 import sys
-from mosek.fusion import Model, Domain, Expr, ObjectiveSense
+
 
 def mosek_standard_sdp_test_2(A, prob_a, b, prob_c, s):
     """
-    A        : numpy array of shape (numBarCoeff, 5).
-               Each row [i, j, l, k, val] indicates that the entry (k,l)
-               of the j-th PSD block is multiplied by 'val' in the i-th constraint.
-               NOTE: In MATLAB, these are typically 1-based indices. You may need
-               to subtract 1 if the data is coming directly from MATLAB.
+    Fully batched version using MOSEK low-level API with batch operations.
 
-    prob_a   : numpy array of shape (nnzLin, 3).
-               Each row [rowIdx, colIdx, val] indicates that x[colIdx] is
-               multiplied by 'val' in the rowIdx-th linear constraint.
-               Again, watch out for 1-based vs. 0-based indexing.
+    This version eliminates Python loops by using batch APIs:
+    - putvarboundslice for variable bounds
+    - putaijlist for linear constraint coefficients
+    - appendbarvars for all PSD variables at once
+    - putbarablocktriplet for SDP constraint coefficients
 
-    b        : 1D array-like of right-hand side values, length = number of constraints.
+    Parameters
+    ----------
+    A : numpy array of shape (numBarCoeff, 5)
+        Each row [i, j, l, k, val] indicates that the entry (k,l)
+        of the j-th PSD block is multiplied by 'val' in the i-th constraint.
 
-    prob_c   : 1D array-like of length = number of linear variables, i.e. the
-               objective coefficient vector c.
+    prob_a : numpy array of shape (nnzLin, 3)
+        Each row [rowIdx, colIdx, val] indicates that x[colIdx] is
+        multiplied by 'val' in the rowIdx-th linear constraint.
 
-    s        : array-like of block dimensions for the PSD variables.
-               Example: s = [3, 5] means you have two PSD blocks X0 in S^3, X1 in S^5.
+    b : 1D array-like
+        Right-hand side values, length = number of constraints.
+
+    prob_c : 1D array-like
+        Objective coefficient vector c, length = number of linear variables.
+
+    s : array-like
+        Block dimensions for the PSD variables.
+        Example: s = [3, 5] means two PSD blocks X0 in S^3, X1 in S^5.
 
     Returns
     -------
-    M                : The Fusion Model object (holding the solution).
-    mosek_time       : The elapsed time for M.solve().
-    iter             : Number of interior-point iterations (if available).
-    pfeas, dfeas     : Approximate primal/dual feasibility (if available).
-    max_residual     : A placeholder for a "residual measure" (Fusion does not
-                       provide exactly the same info as 'get_mosek_gap' in the
-                       MATLAB low-level API).  You can retrieve other residual
-                       data via M.getSolverDoubleInfo(...).
+    obj_val : float
+        Optimal objective value.
+    res : dict
+        Dictionary containing solution: {'Xopt': ..., 'yopt': ..., 'Sopt': ...}
+    mosek_time : float
+        Total elapsed time for problem setup and solve.
     """
 
     start_time = time.time()
-    # Create the model
-    M = Model("mosek_standard_sdp_test_2")
 
-    # (Optional) Turn on detailed logging
-    M.setSolverParam("log", 1)
-    
-    # Send log output to stdout
-    M.setLogHandler(sys.stdout)
+    with mosek.Env() as env:
+        with env.Task(0, 0) as task:
+            # Set task name to match Fusion API output
+            task.puttaskname("mosek_standard_sdp_test_2")
 
-    #
-    # 1) Create linear variables, x in R^{len(prob_c)}.
-    #
-    prob_c = prob_c.astype(float)
-    n = len(prob_c)
-    x = M.variable("x", n, Domain.unbounded())
+            # Send log output to stdout
+            task.set_Stream(mosek.streamtype.log, sys.stdout.write)
 
-    #
-    # 2) Create PSD (bar) variables according to dimensions in s.
-    #    If s = [s1, s2, ...], we create a list of PSD blocks X[0], X[1], etc.
-    #
-    Xblocks = []
-    for idx, dim in enumerate(s):
-        Xblocks.append(M.variable(f"X_{idx}", [dim, dim], Domain.inPSDCone()))
+            #
+            # Problem dimensions
+            #
+            b = np.squeeze(b)
+            m = len(b)
+            prob_c = prob_c.astype(float)
+            n = len(prob_c)
+            numbarvar = len(s)
 
-    #
-    # 3) Build up the linear constraints:  A*x + sum of PSD-terms == b
-    #
-    #    We'll accumulate an expression for each constraint row in a list,
-    #    then constrain it to equal b[row].
-    #
-    b = np.squeeze(b)
-    m = len(b)  # Number of constraints
-    # exprs = [Expr.constTerm(0.0) for _ in range(m)]
+            #
+            # 1) Add constraints and variables
+            #
+            task.appendcons(m)
+            task.appendvars(n)
 
-    row_terms = [[] for _ in range(m)]
+            #
+            # 2) Set constraint bounds: A*x + <SDP terms> == b
+            #
+            task.putconboundslice(0, m,
+                                 [mosek.boundkey.fx] * m,
+                                 b.tolist(),
+                                 b.tolist())
 
-    for rowIdx, colIdx, val in prob_a:
-        rowIdx  = int(rowIdx)   
-        colIdx  = int(colIdx)
-        row_terms[rowIdx].append(Expr.mul(val, x.index(int(colIdx))))
+            #
+            # 3) Set variable bounds: all variables are unbounded
+            #
+            task.putvarboundslice(0, n,
+                                 [mosek.boundkey.fr] * n,
+                                 [-np.inf] * n,
+                                 [np.inf] * n)
 
-    for subi, subj, subl, subk, val in A:
-        subi = int(subi)
-        subj = int(subj)
-        subl = int(subl)
-        subk = int(subk)
-        t = Expr.mul(val, Xblocks[int(subj)].index(int(subk), int(subl)))
-        row_terms[int(subi)].append(t)
-        if subk != subl:                      # symmetric counterpart
-            t2 = Expr.mul(val, Xblocks[int(subj)].index(int(subl), int(subk)))
-            row_terms[int(subi)].append(t2)
+            #
+            # 4) Set objective: Maximize c^T x
+            #
+            task.putclist(list(range(n)), prob_c.tolist())
+            task.putobjsense(mosek.objsense.maximize)
 
-    exprs = [Expr.add(terms) if terms else Expr.constTerm(0.0)
-            for terms in row_terms]
+            #
+            # 5) Add linear constraint coefficients
+            #
+            if len(prob_a) > 0:
+                # prob_a format: [rowIdx, colIdx, val]
+                row_indices = prob_a[:, 0].astype(np.int32).tolist()
+                col_indices = prob_a[:, 1].astype(np.int32).tolist()
+                values = prob_a[:, 2].tolist()
 
-    # # 3a) Add the linear part: prob_a has [rowIdx, colIdx, val].
-    # #     For each row, the contribution is val * x[colIdx].
-    # for (rowIdx, colIdx, val) in prob_a:
-    #     rowIdx  = int(rowIdx)   # ensure Python integer
-    #     colIdx  = int(colIdx)
-    #     exprs[rowIdx] = Expr.add(exprs[rowIdx],
-    #                              Expr.mul(val, x.index(colIdx)))
+                # Batch operation: add all linear coefficients at once
+                task.putaijlist(row_indices, col_indices, values)
 
-    # # 3b) Add the SDP (bar) part: A has [subi, subj, subl, subk, val].
-    # #     We interpret 'subi' as the constraint index, 'subj' as which PSD block,
-    # #     and (subk, subl) as the entry in that PSD block.  val is the coefficient.
-    # #
-    # #     In Fusion you do Xblocks[subj].index(subk, subl) to get that scalar variable.
-    # #
-    # for (subi, subj, subl, subk, val) in A:
-    #     subi = int(subi)
-    #     subj = int(subj)
-    #     subl = int(subl)
-    #     subk = int(subk)
-    #     exprs[subi] = Expr.add(exprs[subi],
-    #                            Expr.mul(val, Xblocks[subj].index(subk, subl)))
-    #     if subk != subl:
-    #         exprs[subi] = Expr.add(exprs[subi],
-    #                            Expr.mul(val, Xblocks[subj].index(subl, subk)))
+            #
+            # 6) Add PSD (bar) variables according to dimensions in s
+            #
+            s_int = [int(si) for si in s]
+            task.appendbarvars(s_int)
 
-    # 3c) Finally, add these expressions as constraints = b[row].
-    constraints = []
-    for row in range(m):
-        con = M.constraint(exprs[row], Domain.equalsTo(b[row]))
-        constraints.append(con)
+            #
+            # 7) Add SDP constraint coefficients
+            #
+            if len(A) > 0:
+                # A format: [subi, subj, subl, subk, val]
+                # subi: constraint index
+                # subj: PSD block index
+                # (subk, subl): entry in that PSD block
+                # val: coefficient
+                subi = A[:, 0].astype(np.int32).tolist()
+                subj = A[:, 1].astype(np.int32).tolist()
+                subl = A[:, 2].astype(np.int32).tolist()
+                subk = A[:, 3].astype(np.int32).tolist()
+                val = A[:, 4].astype(np.float64).tolist()
 
-    #
-    # 4) Objective: Maximize c^T x
-    #
-    print("OOO")
-    M.objective(ObjectiveSense.Maximize, Expr.dot(prob_c, x))
+                # Batch operation: add all SDP coefficients at once
+                task.putbarablocktriplet(subi, subj, subk, subl, val)
 
-    #
-    # 5) Solver parameters
-    #
-    # e.g., set a limit on the number of interior-point iterations
-    M.setSolverParam("intpntMaxIterations", 100)
-    # M.setSolverParam("optimizerMaxTime", 1800.0)  # If you want a time limit.
+            #
+            # 8) Solver parameters
+            #
+            task.putintparam(mosek.iparam.intpnt_max_iterations, 100)
 
-    #
-    # 6) Solve and extract information
-    #
-    try:
-        M.solve()
-        # Mosek Fusion may provide these solver info items:
-        iter      = M.getSolverIntInfo("intpntIter")
-        pfeas     = M.getSolverDoubleInfo("intpntPrimalFeas")
-        dfeas     = M.getSolverDoubleInfo("intpntDualFeas")
-        # Fusion does not offer a direct "get_mosek_gap()" equivalent.
-        # You can query some residuals if desired:
-        #   M.getSolverDoubleInfo("intpntRdinf") etc.
-        max_residual = None  # or 0.0, or any other measure you wish
-    except:
-        # If the solver fails, you might store sentinel values
-        iter         = -1
-        pfeas        = -1
-        dfeas        = -1
-        max_residual = -1
+            #
+            # 9) Solve
+            #
+            task.optimize()
 
-    mosek_time = time.time() - start_time
+            # Print interior-point solution summary (matching Fusion API output)
+            task.solutionsummary(mosek.streamtype.log)
 
-    # Extract solution
-    Xopt = []
-    Sopt = []
-    yopt = np.asanyarray([con.dual() for con in constraints])
-    for i, dim in enumerate(s):
-        data = np.array(Xblocks[i].level()).reshape(dim, dim)
-        Xopt.append(data)
-        data_dual = np.array(Xblocks[i].dual()).reshape(dim, dim)
-        Sopt.append(data_dual)
-    res = dict()
-    res['Xopt'] = Xopt
-    res['yopt'] = yopt
-    res['Sopt'] = Sopt
-    res['M'] = M
-    obj_val = M.primalObjValue()
+            #
+            # 10) Extract solution
+            #
+            yopt = np.zeros(m)
+            task.gety(mosek.soltype.itr, yopt)
 
-    return obj_val, res, mosek_time
+            Xopt = []
+            Sopt = []
+            for j in range(numbarvar):
+                dim = int(s[j])
+                lenbarvar = int(dim * (dim + 1) / 2)
+
+                # Extract primal PSD variable
+                barxj = np.zeros(lenbarvar)
+                task.getbarxj(mosek.soltype.itr, j, barxj)
+                Xj = np.zeros((dim, dim))
+                idx = 0
+                for row in range(dim):
+                    for col in range(row, dim):
+                        Xj[row, col] = Xj[col, row] = barxj[idx]
+                        idx += 1
+                Xopt.append(Xj)
+
+                # Extract dual PSD variable
+                barsj = np.zeros(lenbarvar)
+                task.getbarsj(mosek.soltype.itr, j, barsj)
+                Sj = np.zeros((dim, dim))
+                idx = 0
+                for row in range(dim):
+                    for col in range(row, dim):
+                        Sj[row, col] = Sj[col, row] = barsj[idx]
+                        idx += 1
+                Sopt.append(Sj)
+
+            obj_val = task.getprimalobj(mosek.soltype.itr)
+
+            res = {'Xopt': Xopt, 'yopt': yopt, 'Sopt': Sopt}
+            mosek_time = time.time() - start_time
+
+            return obj_val, res, mosek_time

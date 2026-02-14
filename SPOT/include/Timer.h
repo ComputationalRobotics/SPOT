@@ -9,15 +9,15 @@
 
 class Timer {
 public:
-    // 启动计时
+    // Start timer
     void start() {
         start_time = std::chrono::high_resolution_clock::now();
     }
 
-    // 停止计时并记录时间
+    // Stop timer and record elapsed time
     void stop(const std::string& label) {
         auto end_time = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double> elapsed = end_time - start_time; // 默认以秒为单位
+        std::chrono::duration<double> elapsed = end_time - start_time; // Default unit: seconds
         std::cout << label << " execution time: " << elapsed.count() << " s" << std::endl;
     }
 

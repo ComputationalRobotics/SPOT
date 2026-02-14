@@ -1,13 +1,13 @@
-% % 初始化哈希表
+% % Initialize hash table
 % hashTable = containers.Map('KeyType', 'uint64', 'ValueType', 'any');
-% n = 724;  % 变量范围 [0:n]
+% n = 724;  % Variable range [0:n]
 
-% % 存储四元组
+% % Store quadruple
 % a = 1; b = 2; c = 3; d = 4;
 % key = uint64(a + n * b + n^2 * c + n^3 * d);
 % hashTable(key) = "Example Value";
 
-% % 检查四元组是否存在
+% % Check if quadruple exists
 % if isKey(hashTable, key)
 %     disp(['Value for key ', num2str(key), ': ', hashTable(key)]);
 % else
@@ -15,13 +15,13 @@
 % end
 
 % input monomials' representation, output its key
-% 先默认d = 2
+% Default d = 2
 % function key = get_key(rpt, n)
 %     [~, d] = size(rpt); 
-%     % 计算 (n+1) 的幂次 [d-1, d-2, ..., 0]
+%     % Compute powers of (n+1): [d-1, d-2, ..., 0]
 %     powers = (n + 1) .^ (d - 1:-1:0);  
-%     % 向量化计算
-%     key = rpt * powers';  % 将 rpt 的每行与 powers 对应元素相乘后求和
+%     % Vectorized computation
+%     key = rpt * powers';  % Multiply each row of rpt with corresponding powers and sum
 % end
 
 function key = get_key(rpt, n)

@@ -4,6 +4,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(CSTSS_Python_wrapper VERSION 0.1.0 LANGUAGES C CXX)
 
+# Build with O3 optimization
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release)
+endif()
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
+
 # Force compilation for x86_64
 # set(CMAKE_OSX_ARCHITECTURES "x86_64")
 
