@@ -7,9 +7,9 @@
 % output: the order in cone
 
 function index = find_loca(order, sizes, mode)
-    % 直接传入sizes = cellfun(@numel, I)更高效
+    % Passing sizes = cellfun(@numel, I) directly is more efficient
     
-    if mode == 1  % 总序号转为[cell序号, 局部序号]
+    if mode == 1  % Convert global index to [cell index, local index]
         cellIdx = 1;
         while order > sizes(cellIdx)
             order = order - sizes(cellIdx);
@@ -17,7 +17,7 @@ function index = find_loca(order, sizes, mode)
         end
         index = [cellIdx, order];
         
-    else  % [cell序号, 局部序号]转为总序号
+    else  % Convert [cell index, local index] to global index
         index = sum(sizes(1:order(1)-1)) + order(2);
     end
 end

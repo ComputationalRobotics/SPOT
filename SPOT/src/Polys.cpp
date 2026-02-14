@@ -218,17 +218,17 @@ void Polys::Record_monomials() {
     mon_g.resize(m_ineq);
     mon_h.resize(m_eq);
 
-    // 处理 mon
+    // Process mon
     for (int i = 0; i < n_cI; ++i) {
         mon[i] = build_union_vector(cI[i].size(), d, cI[i]);
     }
 
-    // 处理 mon_g
+    // Process mon_g
     for (int i = 0; i < m_ineq; ++i) {
         mon_g[i] = build_union_vector(cI[c_g[i]].size(), d - dj_g[i], cI[c_g[i]]);
     }
 
-    // 处理 mon_h
+    // Process mon_h
     for (int i = 0; i < m_eq; ++i) {
         mon_h[i] = build_union_vector(cI[c_h[i]].size(), 2 * d - dj_h[i], cI[c_h[i]]);
     }
@@ -277,7 +277,7 @@ void Polys::Construct_C() {
 // Term Sparsity
 void Polys::Gen_tI(const std::string& ts_mode, const std::string& ts_mom_mode) {
 
-    // 初始化 B_mom，B_ineq，B_eq
+    // Initialize B_mom, B_ineq, B_eq
     std::vector<Eigen::MatrixXi> B_mom(n_cI), B_ineq(m_ineq), B_eq(m_eq);
     
 
@@ -1135,27 +1135,27 @@ std::vector<Eigen::VectorXi> Polys::find_max_cliques(const Eigen::MatrixXi& G, c
         // for maximal chordal extension
         find_blocks(G);
     } else if (mode == 2) {
-        // Step 1: 构造每个顶点的临时 clique
+        // Step 1: Construct temporary clique for each vertex
         std::vector<Eigen::VectorXi> tmp_cliques(n);
         for (int i = 0; i < n; ++i) {
             int v = i;
             std::vector<int> clique;
 
-            // 当前顶点及其满足条件的邻居加入 clique
-            clique.push_back(v + 1);  // MATLAB 索引从 1 开始
+            // Add current vertex and its qualifying neighbors to the clique
+            clique.push_back(v + 1);  // MATLAB indexing starts from 1
             for (int j = 0; j < n; ++j) {
                 if (G(v, j) == 1 && order[j] > order[v]) {
                     clique.push_back(j + 1);
                 }
             }
 
-            // 排序并存储为 Eigen::VectorXi
+            // Sort and store as Eigen::VectorXi
             std::sort(clique.begin(), clique.end());
             Eigen::VectorXi clique_vec = Eigen::VectorXi::Map(clique.data(), clique.size());
             tmp_cliques[i] = clique_vec;
         }
 
-        // Step 2: 按 clique 大小降序排序
+        // Step 2: Sort cliques by size in descending order
         std::vector<int> clique_sizes(n);
         for (int i = 0; i < n; ++i) {
             clique_sizes[i] = tmp_cliques[i].size();
@@ -1171,15 +1171,15 @@ std::vector<Eigen::VectorXi> Polys::find_max_cliques(const Eigen::MatrixXi& G, c
             sorted_cliques[i] = tmp_cliques[sorted_indices[i]];
         }
 
-        // Step 3: 构造 maximal_cliques
+        // Step 3: Construct maximal_cliques
         std::vector<Eigen::VectorXi> maximal_cliques;
-        maximal_cliques.push_back(sorted_cliques[0]);  // 第一个 clique 一定是极大 clique
+        maximal_cliques.push_back(sorted_cliques[0]);  // The first clique is always a maximal clique
 
         for (int i = 1; i < n; ++i) {
             const Eigen::VectorXi& current_clique = sorted_cliques[i];
             bool is_contained = false;
 
-            // 检查是否被已有的 maximal_cliques 包含
+            // Check if contained by existing maximal_cliques
             for (const auto& maximal_clique : maximal_cliques) {
                 if (std::includes(maximal_clique.data(), maximal_clique.data() + maximal_clique.size(),
                                   current_clique.data(), current_clique.data() + current_clique.size())) {
@@ -1188,7 +1188,7 @@ std::vector<Eigen::VectorXi> Polys::find_max_cliques(const Eigen::MatrixXi& G, c
                 }
             }
 
-            // 如果未被包含，加入 maximal_cliques
+            // If not contained, add to maximal_cliques
             if (!is_contained) {
                 maximal_cliques.push_back(current_clique);
             }
@@ -1202,11 +1202,11 @@ std::vector<Eigen::VectorXi> Polys::find_max_cliques(const Eigen::MatrixXi& G, c
 
 Eigen::MatrixXi Polys::greedy_chordal_extension(const Eigen::MatrixXi& G, std::vector<int>& order) {
     int n = G.rows();
-    Eigen::MatrixXi G_chordal = G; // 初始化 chordal 图
-    G_chordal.diagonal().setZero(); // 确保对角线为 0
-    Eigen::MatrixXi H = G; // 工作图 H
-    H.diagonal().setZero(); // 确保对角线为 0
-    order.resize(n, 0); // 存储每个点的消除顺序
+    Eigen::MatrixXi G_chordal = G; // Initialize chordal graph
+    G_chordal.diagonal().setZero(); // Ensure diagonal is 0
+    Eigen::MatrixXi H = G; // Working graph H
+    H.diagonal().setZero(); // Ensure diagonal is 0
+    order.resize(n, 0); // Store elimination order for each vertex
 
     Eigen::VectorXi degrees = H.rowwise().sum();
 
@@ -1326,13 +1326,13 @@ Eigen::MatrixXi Polys::greedy_chordal_extension(const Eigen::MatrixXi& G, std::v
 
 Eigen::MatrixXi Polys::minimal_fill_chordal_extension(const Eigen::MatrixXi& G, std::vector<int>& order) {
     int n = G.rows();
-    Eigen::MatrixXi G_chordal = G; // 输出的弦图扩展矩阵
+    Eigen::MatrixXi G_chordal = G; // Output chordal extension matrix
     G_chordal.diagonal().setZero();
     Eigen::MatrixXi H = G;
     H.diagonal().setZero();
-    order.resize(n, 0);           // 消除顺序
+    order.resize(n, 0);           // Elimination order
 
-    // 邻接表表示，用于快速操作图结构
+    // Adjacency list representation for fast graph operations
     std::vector<std::set<int>> adjList(n);
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
@@ -1343,16 +1343,16 @@ Eigen::MatrixXi Polys::minimal_fill_chordal_extension(const Eigen::MatrixXi& G, 
     }
 
     for (int i = 1; i <= n; ++i) {
-        // 记录填充边的数量
+        // Record the number of fill edges
         std::vector<int> fillCounts(n, std::numeric_limits<int>::max());
 
         for (int v = 0; v < n; ++v) {
-            if (order[v] > 0) continue; // 跳过已被选过的顶点
+            if (order[v] > 0) continue; // Skip already selected vertices
 
             const auto& neighbors = adjList[v];
             int fillCount = 0;
 
-            // 计算填充边数（缺失边数）
+            // Compute fill edge count (number of missing edges)
             for (auto it1 = neighbors.begin(); it1 != neighbors.end(); ++it1) {
                 auto it2 = it1;
                 ++it2;
@@ -1365,17 +1365,17 @@ Eigen::MatrixXi Polys::minimal_fill_chordal_extension(const Eigen::MatrixXi& G, 
             fillCounts[v] = fillCount;
         }
 
-        // 选择填充边数最小的顶点
+        // Select the vertex with minimum fill edges
         int v_idx = std::min_element(fillCounts.begin(), fillCounts.end()) - fillCounts.begin();
         order[v_idx] = i;
 
-        // 更新图 H 和 G_chordal
+        // Update graph H and G_chordal
         const auto& neighbors = adjList[v_idx];
         for (auto it1 = neighbors.begin(); it1 != neighbors.end(); ++it1) {
             auto it2 = it1;
             ++it2;
             for (; it2 != neighbors.end(); ++it2) {
-                // 在 H 和 G_chordal 中填充边
+                // Add fill edges in H and G_chordal
                 if (adjList[*it1].count(*it2) == 0) {
                     adjList[*it1].insert(*it2);
                     adjList[*it2].insert(*it1);
@@ -1385,7 +1385,7 @@ Eigen::MatrixXi Polys::minimal_fill_chordal_extension(const Eigen::MatrixXi& G, 
             }
         }
 
-        // 从邻接表中删除顶点 v_idx
+        // Remove vertex v_idx from adjacency list
         for (auto neighbor : neighbors) {
             adjList[neighbor].erase(v_idx);
         }
@@ -1399,7 +1399,7 @@ Eigen::MatrixXi Polys::minimal_fill_chordal_extension(const Eigen::MatrixXi& G, 
 Eigen::MatrixXi Polys::csp_construct() {
     Eigen::MatrixXi G = Eigen::MatrixXi::Zero(n, n);
 
-    // 缓存 supp_f 的非零索引
+    // Cache nonzero indices of supp_f
     std::vector<std::vector<int>> supp_f_indices(supp_f.rows());
     for (int i = 0; i < supp_f.rows(); ++i) {
         for (int j = 0; j < supp_f.cols(); ++j) {
@@ -1409,7 +1409,7 @@ Eigen::MatrixXi Polys::csp_construct() {
         }
     }
 
-    // 构造 G 矩阵
+    // Construct G matrix
     for (const auto& indices : supp_f_indices) {
         for (size_t j = 0; j < indices.size(); ++j) {
             for (size_t k = j + 1; k < indices.size(); ++k) {
@@ -1419,7 +1419,7 @@ Eigen::MatrixXi Polys::csp_construct() {
         }
     }
 
-    // constraints: g 和 h 的非零索引缓存
+    // Constraints: cache nonzero indices of g and h
     auto process_constraints = [&](const std::vector<Eigen::MatrixXi>& supp) {
         for (const auto& B : supp) {
             Eigen::VectorXi check = Eigen::VectorXi::Zero(n);
@@ -1443,7 +1443,7 @@ Eigen::MatrixXi Polys::csp_construct() {
         }
     };
 
-    // 处理 g 和 h
+    // Process g and h
     process_constraints(supp_g);
     process_constraints(supp_h);
 
@@ -1544,7 +1544,7 @@ Eigen::MatrixXi Polys::build_union_vector(int n, int d, const Eigen::VectorXi& x
 bool Polys::check_even(const Eigen::VectorXi& vec) {
     int m = vec.rows();
     for (int i = 0; i < m; ) {
-        if (vec[i] == 0) {  // 跳过 0 的处理
+        if (vec[i] == 0) {  // Skip zeros
             ++i;
             continue;
         }
@@ -1555,11 +1555,11 @@ bool Polys::check_even(const Eigen::VectorXi& vec) {
             ++i;
         }
 
-        if (count % 2 != 0) {  // 非零元素出现次数为奇数
+        if (count % 2 != 0) {  // Nonzero element appears odd number of times
             return false;
         }
 
-        ++i;  // 跳到下一个不同的元素
+        ++i;  // Move to the next distinct element
     }
     return true;
 }
