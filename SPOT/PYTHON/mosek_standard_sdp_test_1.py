@@ -1,103 +1,166 @@
-from collections import defaultdict
 import time
 import numpy as np
 import mosek
 import sys
-from mosek.fusion import Model, Domain, Expr, ObjectiveSense
 
-def reconstruct_sym_matrix(flat, n):
-    """
-    Given a flattened lower-triangular array 'flat' corresponding to an n-by-n symmetric matrix,
-    reconstruct the full symmetric matrix.
-    """
-    X_full = np.zeros((n, n))
-    idx = 0
-    for i in range(n):
-        for j in range(i+1):
-            X_full[i, j] = flat[idx]
-            X_full[j, i] = flat[idx]
-            idx += 1
-    return X_full
-
-# ------------------------------------------------------------------
-# helper: linear index of a lower-triangular entry (k ≥ l)
-# MOSEK packs (k, l)  →  k(k+1)/2 + l      with 0-based indices.
-# ------------------------------------------------------------------
-def pack_tril(k: int, l: int) -> int:
-    return k * (k + 1) // 2 + l
 
 def mosek_standard_sdp_test_1(A, C, b, s):
     """
-    Solve an SDP in Python using the Fusion API.
-    This replaces the old dictionary-based 'mosekopt' approach.
+
+    Solves a pure SDP (no linear variables):
+        min  sum_j <C_j, X_j>
+        s.t. sum_j <A_ij, X_j> = b_i,   i = 0, ..., m-1
+             X_j >= 0 (PSD)
+
+    This version eliminates Python loops by using batch APIs:
+    - appendbarvars for all PSD variables at once
+    - putbarcblocktriplet for objective SDP coefficients
+    - putbarablocktriplet for constraint SDP coefficients
+    - putconboundslice for constraint bounds
+
+    Parameters
+    ----------
+    A : numpy array of shape (numBarCoeff, 5)
+        Each row [i, j, l, k, val] indicates that the entry (k,l)
+        of the j-th PSD block has coefficient 'val' in the i-th constraint.
+
+    C : numpy array of shape (numObjCoeff, 4)
+        Each row [block_idx, col, row_idx, val] indicates that the entry
+        (row_idx, col) of the block_idx-th PSD block has coefficient 'val'
+        in the objective function.
+
+    b : 1D array-like
+        Right-hand side values, length = number of constraints.
+
+    s : array-like
+        Block dimensions for the PSD variables.
+        Example: s = [3, 5] means two PSD blocks X0 in S^3, X1 in S^5.
+
+    Returns
+    -------
+    obj_val : float
+        Optimal objective value.
+    res : dict
+        Dictionary containing solution: {'Xopt': ..., 'yopt': ..., 'Sopt': ...}
+    mosek_time : float
+        Total elapsed time for problem setup and solve.
     """
+
     start_time = time.time()
 
-    with Model("MySDP") as M:
-        # (Optional) Turn on detailed logging
-        M.setSolverParam("log", 1)
-        
-        # Send log output to stdout
-        M.setLogHandler(sys.stdout)
+    with mosek.Env() as env:
+        with env.Task(0, 0) as task:
+            # Set task name to match Fusion API output
+            task.puttaskname("MySDP")
 
-        # Create PSD block variables
-        Xvars = []
-        for i, dim in enumerate(s):
-            Xvars.append(M.variable(f"X_{i}", [dim, dim], Domain.inPSDCone()))
+            # Send log output to stdout
+            task.set_Stream(mosek.streamtype.log, sys.stdout.write)
 
-        # Build the objective from C
-        obj_expr = Expr.constTerm(0.0)
-        for row in C:
-            block_idx = int(row[0])
-            col       = int(row[1])
-            row_idx   = int(row[2])
-            val       = row[3]
-            obj_expr  = Expr.add(obj_expr, Expr.mul(val, Xvars[block_idx].index(row_idx, col)))
-            if row_idx != col:
-                obj_expr  = Expr.add(obj_expr, Expr.mul(val, Xvars[block_idx].index(col, row_idx)))
+            #
+            # Problem dimensions
+            #
+            b = np.squeeze(b)
+            m = len(b)
+            numbarvar = len(s)
 
-        M.objective("obj", ObjectiveSense.Minimize, obj_expr)
+            #
+            # 1) Add constraints (no linear variables in pure SDP)
+            #
+            task.appendcons(m)
 
-        # Build the constraints from A
-        constraints = []
-        for i_con, rhs_val in enumerate(b):
-            con_expr = Expr.constTerm(0.0)
-            # Gather rows in A with A[row,0] == i_con
-            matched_rows = np.where(A[:,0] == i_con)[0]
-            for r_idx in matched_rows:
-                block_idx = int(A[r_idx, 1])
-                col       = int(A[r_idx, 2])
-                row_idx   = int(A[r_idx, 3])
-                val       = A[r_idx, 4]
-                con_expr  = Expr.add(con_expr, Expr.mul(val, Xvars[block_idx].index(row_idx, col)))
-                if row_idx != col:
-                    con_expr  = Expr.add(con_expr, Expr.mul(val, Xvars[block_idx].index(col, row_idx)))
+            #
+            # 2) Set constraint bounds: <SDP terms> == b
+            #
+            task.putconboundslice(0, m,
+                                 [mosek.boundkey.fx] * m,
+                                 b.tolist(),
+                                 b.tolist())
 
-            con = M.constraint(f"con_{i_con}", con_expr, Domain.equalsTo(rhs_val))
-            constraints.append(con)
+            #
+            # 3) Add PSD (bar) variables according to dimensions in s
+            #
+            s_int = [int(si) for si in s]
+            task.appendbarvars(s_int)
 
-        # Solve
-        M.setSolverParam("intpntMaxIterations", 100)
-        M.solve()
-        solve_time = time.time() - start_time
+            #
+            # 4) Set objective: Minimize sum_j <C_j, X_j>
+            #
+            task.putobjsense(mosek.objsense.minimize)
 
-        # Extract solution
-        Xopt = []
-        Sopt = []
-        yopt = np.asanyarray([con.dual() for con in constraints])
-        for i, dim in enumerate(s):
-            data = np.array(Xvars[i].level()).reshape(dim, dim)
-            Xopt.append(data)
-            data_dual = np.array(Xvars[i].dual()).reshape(dim, dim)
-            Sopt.append(data_dual)
-        res = dict()
-        res['Xopt'] = Xopt
-        res['yopt'] = yopt
-        res['Sopt'] = Sopt
-        res['M'] = M
-        obj_val = M.primalObjValue()
+            if len(C) > 0:
+                # C format: [block_idx, col, row_idx, val]
+                obj_subj = C[:, 0].astype(np.int32).tolist()
+                obj_subl = C[:, 1].astype(np.int32).tolist()
+                obj_subk = C[:, 2].astype(np.int32).tolist()
+                obj_val_list = C[:, 3].astype(np.float64).tolist()
 
-    return obj_val, res, solve_time
+                # Batch operation: set all objective SDP coefficients at once
+                task.putbarcblocktriplet(obj_subj, obj_subk, obj_subl, obj_val_list)
 
+            #
+            # 5) Add SDP constraint coefficients
+            #
+            if len(A) > 0:
+                # A format: [subi, subj, subl, subk, val]
+                subi = A[:, 0].astype(np.int32).tolist()
+                subj = A[:, 1].astype(np.int32).tolist()
+                subl = A[:, 2].astype(np.int32).tolist()
+                subk = A[:, 3].astype(np.int32).tolist()
+                val = A[:, 4].astype(np.float64).tolist()
 
+                # Batch operation: add all SDP constraint coefficients at once
+                task.putbarablocktriplet(subi, subj, subk, subl, val)
 
+            #
+            # 6) Solver parameters
+            #
+            task.putintparam(mosek.iparam.intpnt_max_iterations, 100)
+
+            #
+            # 7) Solve
+            #
+            task.optimize()
+
+            # Print interior-point solution summary (matching Fusion API output)
+            task.solutionsummary(mosek.streamtype.log)
+
+            #
+            # 8) Extract solution
+            #
+            yopt = np.zeros(m)
+            task.gety(mosek.soltype.itr, yopt)
+
+            Xopt = []
+            Sopt = []
+            for j in range(numbarvar):
+                dim = int(s[j])
+                lenbarvar = int(dim * (dim + 1) / 2)
+
+                # Extract primal PSD variable
+                barxj = np.zeros(lenbarvar)
+                task.getbarxj(mosek.soltype.itr, j, barxj)
+                Xj = np.zeros((dim, dim))
+                idx = 0
+                for row in range(dim):
+                    for col in range(row, dim):
+                        Xj[row, col] = Xj[col, row] = barxj[idx]
+                        idx += 1
+                Xopt.append(Xj)
+
+                # Extract dual PSD variable
+                barsj = np.zeros(lenbarvar)
+                task.getbarsj(mosek.soltype.itr, j, barsj)
+                Sj = np.zeros((dim, dim))
+                idx = 0
+                for row in range(dim):
+                    for col in range(row, dim):
+                        Sj[row, col] = Sj[col, row] = barsj[idx]
+                        idx += 1
+                Sopt.append(Sj)
+
+            obj_val = task.getprimalobj(mosek.soltype.itr)
+
+            res = {'Xopt': Xopt, 'yopt': yopt, 'Sopt': Sopt}
+            mosek_time = time.time() - start_time
+
+            return obj_val, res, mosek_time

@@ -4,8 +4,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(CSTSS_MATLAB_wrapper VERSION 0.1.0 LANGUAGES C CXX)
 
+# Build with O2 optimization
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE RelWithDebInfo)
+endif()
+set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g -DNDEBUG")
+
 # Force compilation for x86_64
-# set(CMAKE_OSX_ARCHITECTURES "x86_64")
+set(CMAKE_OSX_ARCHITECTURES "x86_64")
 
 find_package(Matlab REQUIRED)
 find_package(Eigen3 REQUIRED)

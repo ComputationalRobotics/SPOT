@@ -1,19 +1,19 @@
-#include "gen_test.h"  // 包含 initializePolys 函数的头文件
-#include "Polys.h"     // 假设 Polys 类的声明和实现位于该头文件及其对应的 .cpp 文件中
+#include "gen_test.h"  // Header containing the initializePolys function
+#include "Polys.h"     // Polys class declaration and implementation
 #include "Timer.h"
 #include <iostream>
 
 int main() {
-    // 创建 Polys 对象
+    // Create Polys object
     Polys problem;
     Timer timer;
 
-    // 使用 initializePolys 函数初始化问题
+    // Initialize the problem using initializePolys
     initializePolys(problem);
     problem.printInfo();
 
 
-    // 计算问题的 correlative sparsity cliques (cI)
+    // Compute correlative sparsity cliques (cI)
     problem.Gen_cI("MD");
     
     //assign constraints

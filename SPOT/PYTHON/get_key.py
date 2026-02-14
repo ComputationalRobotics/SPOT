@@ -35,6 +35,6 @@ def get_key(rpt, n):
             # In MATLAB, exponent is (d - j), but indexing is 1-based;
             # in Python, j is 0-based, so exponent is (d - 1 - j).
             exponent = d - 1 - j
-            key_tmp += rpt[i, j] * (n + 1) ** exponent
-        keys.append(int(key_tmp))  # or just key_tmp if you prefer
+            key_tmp += int(rpt[i, j]) * (n + 1) ** exponent
+        keys.append(key_tmp)  # or just key_tmp if you prefer
     return keys

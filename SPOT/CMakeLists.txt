@@ -4,19 +4,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(cstss VERSION 0.1.0 LANGUAGES C CXX)
 
-# 设置头文件目录
+# Set include directories
 include_directories(include)
 
-# 指定源文件
+# Specify source files
 set(SOURCES
     src/main.cpp
     src/gen_test.cpp
     src/Polys.cpp
 )
 
-# 查找 Eigen
+# Find Eigen
 find_package(Eigen3 REQUIRED)
 
-# 创建可执行文件并链接源文件
+# Create executable and link source files
 add_executable(cstss ${SOURCES})
 target_link_libraries(cstss Eigen3::Eigen)
