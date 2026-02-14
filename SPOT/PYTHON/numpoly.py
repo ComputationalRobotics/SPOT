@@ -27,7 +27,7 @@ Usage:
 
 import numpy as np
 from typing import List, Tuple, Dict, Union, Optional
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 @dataclass
