@@ -272,7 +272,7 @@ def main():
     fc_final = np.cos(dt * dth_final)
     fs_final = np.sin(dt * dth_final)
 
-    obj_expr = NumPolyExpr.from_const(0)
+    obj_expr = 0
     for k in range(1, N + 1):
         if k < N:
             expr = (a_coeff * (v("a", k + 1) - a_final_scaled)**2 +

@@ -526,7 +526,7 @@ def main():
     rc_final = np.cos(th_final)
     rs_final = np.sin(th_final)
 
-    obj_expr = NumPolyExpr.from_const(0)
+    obj_expr = 0
     for k in range(1, N + 1):
         if k < N:
             if if_smart_loss:

@@ -592,7 +592,7 @@ def main():
     x_init_scaled = x_init / x_max
     y_init_scaled = y_init / y_max
 
-    obj_expr = NumPolyExpr.from_const(0)
+    obj_expr = 0
 
     # Tracking loss
     for k in range(1, N + 1):
