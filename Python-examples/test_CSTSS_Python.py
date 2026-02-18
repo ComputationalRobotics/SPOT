@@ -24,8 +24,6 @@ if __name__ == "__main__":
 
     # --- Step 3: Build polynomial expressions ---
     # Supports standard Python arithmetic: +, -, *, **.
-    # Use NumPolyExpr.from_const(c) to create a constant term c as a polynomial.
-    #
     # Objective: minimize f = x1 + x2 + x3
     f = x1 + x2 + x3
 
