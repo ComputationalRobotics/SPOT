@@ -1,16 +1,41 @@
-# Sparse Polynomial Optimization Toolbox (SPOT)
+<p align="center">
+  <h1 align="center">Sparse Polynomial Optimization Toolbox (SPOT)</h1>
+</p>
 
-## [Website](https://computationalrobotics.seas.harvard.edu/project-spot/)|[Arxiv](https://arxiv.org/abs/2502.02829)
+<p align="center">
+  <a href="https://shuchengkang.github.io/"><strong>Shucheng Kang</strong></a><sup>1</sup>
+  &nbsp;&nbsp;
+  <a href="https://www.linkedin.com/in/guorui-liu-gt/"><strong>Guorui Liu</strong></a><sup>2</sup>
+  &nbsp;&nbsp;
+  <a href="https://www.linkedin.com/in/haoran-sun-7516b6300/"><strong>Haoran Sun</strong></a><sup>3</sup>
+  &nbsp;&nbsp;
+  <a href="https://xyxu2033.github.io/"><strong>Xiaoyang Xu</strong></a><sup>4</sup>
+  &nbsp;&nbsp;
+  <a href="https://hankyang.seas.harvard.edu/"><strong>Heng Yang</strong></a><sup>1</sup>
+  <br>
+  <sup>1</sup>Harvard University &nbsp;&nbsp; <sup>2</sup>Georgia Tech &nbsp;&nbsp; <sup>3</sup>Fudan University &nbsp;&nbsp; <sup>4</sup>UC Santa Barbara
+</p>
 
-## About
+<p align="center">
+  <em>(Listed in alphabetical order by last name)</em>
+</p>
 
+<p align="center">
+  <a href="https://computationalrobotics.seas.harvard.edu/project-spot/"><img src="https://img.shields.io/badge/🌐-Website-blue" alt="Website"></a>
+  <a href="https://arxiv.org/abs/2502.02829"><img src="https://img.shields.io/badge/📄-Arxiv-red" alt="Arxiv"></a>
+</p>
+
+## 📖 About
+◊
 **SPOT** is a lightweight, high-performance, sparse Moment-SOS Hierarchy conversion package written in C++, with MATLAB and Python interfaces. SPOT is highly inspired by the Julia package [TSSOS](https://github.com/wangjie212/TSSOS).
 
-## News
+## 🔥 News
 
-- **SPOT** has been accepted by RSS 2025!
+- 🎉 **SPOT** has been accepted by RSS 2025!
+- 📦 Introduced **NumPoly** — a lightweight, SymPy-free polynomial builder for the Python interface. See [`Python-examples/test_CSTSS_Python.py`](Python-examples/test_CSTSS_Python.py) for a commented toy example.
+- 🚀 We have sped up the **SPOT** Python interface by **10x** on average with **NumPoly**!
 
-## Features
+## ✨ Features
 
 **SPOT** tries to solve the following polynomial optimization with sparse Moment-SOS Hierarchy:
 
@@ -52,16 +77,60 @@ where $f, g_i, h_j$ are all polynomials. Options in SPOT interface:
   - `true`: Solve the SDP
   - `false`: Only conversion, do not solve the SDP
 
-## MATLAB Installation and Usage
+## 🐍 Python Installation and Usage
 
-Please first install [Mosek](https://docs.mosek.com/latest/toolbox/install-interface.html) and [msspoly](https://github.com/spot-toolbox/spotless/tree/master) in MATLAB. Mex file compilation: 
+Create a new conda environment:
 
+```bash
+conda create -n spot python=3.10 numpy scipy -y
+conda activate spot
+conda install -c mosek mosek=10.0 -y
+conda install -c conda-forge pybind11 -y
+brew install eigen
 ```
-cd ./SPOT/MATLAB 
-mkdir build 
-cd build 
+
+Pybind compilation:
+
+```bash
+cd ./SPOT/PYTHON
+mkdir build
+cd build
+cmake .. -DPYTHON_EXECUTABLE=$(which python)
+make
+```
+
+Then, in the `./Python-examples` folder, you can find examples for sparse polynomial optimization arising from contact-rich planning. A toy example is shown in `./Python-examples/test_CSTSS_Python.py`, where the following polynomial optimization is solved and the minimizer is extracted:
+
+$$
+\min x_1 + x_2 + x_3
+$$
+
+$$
+\text{subject to } 2 - x_i \ge 0, \ i = 1, 2, 3
+$$
+
+$$
+x_1^2 + x_2^2 = 1, \ x_2^2 + x_3^2 = 1, \ x_2 = 0.5
+$$
+
+Five contact-rich planning problems in the paper can be found in:
+
+- Push Bot: `./Python-examples/pushBot_Python.py`
+- Push Box: `./Python-examples/pushBox_Python.py`
+- Push Box with Tunnel: `./Python-examples/pushBoxTunnel2_Python.py`
+- Push T: `./Python-examples/pushT_Python.py`
+- Planar Hand: `./Python-examples/planarHand_Python.py`
+
+## 🛠️ MATLAB Installation and Usage
+
+Please first install [Mosek](https://docs.mosek.com/latest/toolbox/install-interface.html) and [msspoly](https://github.com/spot-toolbox/spotless/tree/master) in MATLAB. Mex file compilation:
+
+```bash
+cd ./SPOT/MATLAB
+mkdir build
+cd build
 cmake ..
-make 
+make
 ```
 
 Then, change paths for Mosek, msspoly, and SPOT in `./SPOT/pathinfo/my_path.m`:
@@ -80,14 +149,14 @@ $$
 $$
 
 $$
-\text{subject to } 2 - x_i \ge 0, \ i = 1, 2, 3 
+\text{subject to } 2 - x_i \ge 0, \ i = 1, 2, 3
 $$
 
 $$
 x_1^2 + x_2^2 = 1, \ x_2^2 + x_3^2 = 1, \ x_2 = 0.5
 $$
 
-Five contact-rich planning problems in the paper can be found in: 
+Five contact-rich planning problems in the paper can be found in:
 
 - Push Bot: `./MATLAB_examples/PushBot_MATLAB.m`
 - Push Box: `./MATLAB_examples/PushBox_MATLAB.m`
@@ -97,42 +166,10 @@ Five contact-rich planning problems in the paper can be found in:
 
 If you want to reproduce the statistics in the paper, please run `./MATLAB_examples/Test_Gap.m` (It may take a very long time!). The plotting and rendering codes can be found in `./MATLAB_examples/*_goodplot.m` and `./MATLAB_examples/*_visualize.m`, respectively (''*'' represents five dyanamical systems' names).
 
- ## Python Installation and Usage
+## 📝 Citing Our Work
 
-Create a new conda environment:
-
-```
-conda create -n spot python=3.10 numpy scipy -y
-conda activate spot
-conda install -c mosek mosek=10.0 -y
-```
-
-Pybind compilation:
-
-```
-cd ./SPOT/PYTHON 
-mkdir build 
-cd build 
-cmake ..
-make 
-```
-
-Then, in the `./Python_examples` folder, you can find examples for sparse polynomial optimization arising from contact-rich planning (currently, only Push T task is translated to Python). A toy example is shown in `./Python_examples/test_CSTSS_Python.m`, where the following polynomial optimization is solved and the minimizer is extracted:
-
-$$
-\min x_1 + x_2 + x_3
-$$
-
-$$
-\text{subject to } 2 - x_i \ge 0, \ i = 1, 2, 3 
-$$
-
-$$
-x_1^2 + x_2^2 = 1, \ x_2^2 + x_3^2 = 1, \ x_2 = 0.5
-$$
-
-## 4. Citing Our Work
 If you use **SPOT** in your research, please consider citing our work:
+
 ```bibtex
 @inproceedings{kang2025global,
   title={Global contact-Rich planning with sparsity-rich semidefinite relaxations},
@@ -146,17 +183,3 @@ If you use **SPOT** in your research, please consider citing our work:
   journal={International Workshop on the Algorithmic Foundations of Robotics},
   year={2024}
 }
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
