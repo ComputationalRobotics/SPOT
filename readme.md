@@ -31,9 +31,9 @@
 
 ## 🔥 News
 
-- 🎉 **SPOT** has been accepted by RSS 2025!
-- 📦 Introduced **NumPoly** — a lightweight, SymPy-free polynomial builder for the Python interface. See [`Python-examples/test_CSTSS_Python.py`](Python-examples/test_CSTSS_Python.py) for a commented toy example.
-- 🚀 We have sped up the **SPOT** Python interface by **10x** on average with **NumPoly**!
+- **[02/18/26]** 🚀 We have sped up the **SPOT** Python interface by **10x** on average with **NumPoly**!
+- **[02/18/26]** 📦 Introduced **NumPoly** — a lightweight, SymPy-free polynomial builder for the Python interface. See [`Python-examples/test_CSTSS_Python.py`](Python-examples/test_CSTSS_Python.py) for a commented toy example.
+- **[02/15/25]** 🎉 **SPOT** has been accepted by RSS 2025!
 
 ## ✨ Features
 
