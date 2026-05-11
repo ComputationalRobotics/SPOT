@@ -501,7 +501,7 @@ def main():
             ps.add_ineq(ineq)
 
     # --- Objective ---
-    obj_expr = NumPolyExpr.from_const(0)
+    obj_expr = 0
     for k in range(1, N + 1):
         # k is 1-indexed in the loop, track_array is 0-indexed
         rc_track = track_array[k - 1, 0]

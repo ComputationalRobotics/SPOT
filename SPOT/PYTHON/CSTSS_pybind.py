@@ -1,6 +1,5 @@
 
 import time
-from sympy import symbols, total_degree, Poly
 import numpy as np
 
 from SPOT.PYTHON.mosek_standard_sdp_test_1 import mosek_standard_sdp_test_1
