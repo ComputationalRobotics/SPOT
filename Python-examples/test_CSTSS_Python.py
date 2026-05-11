@@ -6,7 +6,7 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from SPOT.PYTHON.CSTSS_pybind import CSTSS_pybind
-from SPOT.PYTHON.numpoly import NumPolySystem
+from SPOT.PYTHON.numpoly import NumPolySystem, NumPolyExpr
 from SPOT.PYTHON.naive_extract import naive_extract
 
 if __name__ == "__main__":
