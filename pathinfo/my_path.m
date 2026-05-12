@@ -1,8 +1,8 @@
 pathinfo = dictionary();
 
 % change the following three package paths to your own paths
-pathinfo("mosek") = "~/mosek/mosek/11.0/toolbox/r2019b";
-pathinfo("msspoly") = "~/matlab-install/spotless";
+pathinfo("mosek") = "~/mosek";
+pathinfo("msspoly") = "~/Documents/MATLAB/spotless";
 pathinfo("spot") = fullfile(fileparts(mfilename('fullpath')), '..', 'SPOT', 'MATLAB');
 
 keys = pathinfo.keys;
