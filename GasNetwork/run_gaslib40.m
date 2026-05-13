@@ -17,8 +17,10 @@ my_path;
 
 thisdir = fileparts(mfilename('fullpath'));
 net_file = fullfile(thisdir, 'data', 'GasLib-40-v1-20211130.net');
-scn_file = fullfile(thisdir, 'data', 'GasLib-40-v1-20211130.scn');
-scn_id = 'nomination_1';
+% scn_file = fullfile(thisdir, 'data', 'GasLib-40-v1-20211130.scn');
+scn_file = fullfile(thisdir, 'data', 'GasLib-40-gasmodels-ls-converted.scn');
+scn_id = 'gasmodels_ls_mgs_bounds';
+% scn_id = 'gasmodels_ls_fixed_nominal';
 
 opts = struct();
 opts.run_sdp = true;

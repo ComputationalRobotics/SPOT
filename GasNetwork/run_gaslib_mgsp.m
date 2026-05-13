@@ -1237,9 +1237,9 @@ function sdp = solve_gaslib_sdp(data, Aeq, beq, lb, ub, nlp_fval, opts)
     sdp.result = result;
     sdp.res = res;
     sdp.Xs = Xs;
-    sdp.lower_bound = obj(1);
+    sdp.lower_bound = obj(1) * obj_scale_factor;
     sdp.nlp_upper_bound = nlp_fval;
-    sdp.relative_gap = abs(nlp_fval - obj(1)) / (1 + abs(nlp_fval) + abs(obj(1)));
+    sdp.relative_gap = abs(nlp_fval - obj(1) * obj_scale_factor) / (1 + abs(nlp_fval) + abs(obj(1) * obj_scale_factor));
     sdp.v_opt_naive = v_opt_naive;
     sdp.output_info_naive = output_info_naive;
 
