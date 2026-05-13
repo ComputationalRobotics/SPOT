@@ -29,6 +29,7 @@ opts.cs_mode = 'MF';
 opts.report_pop_coeff_ranges = true;
 opts.pop_ball_constraints = true;
 opts.pop_ball_c_inf = 200;   % optional
+opts.verify_nlp_pop_hat = true;
 
 % Optional: override fmincon limits (otherwise run_gaslib_mgsp defaults apply,
 % including MaxFunctionEvaluations = 50000 when opts.fmincon_options is empty).

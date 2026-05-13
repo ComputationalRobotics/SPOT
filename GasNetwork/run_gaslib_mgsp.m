@@ -65,6 +65,13 @@ function out = run_gaslib_mgsp(net_file, scn_file, scn_id, opts)
 %   opts.refine_robust_extract     if true (default), after SDP robust_extract_CS,
 %                                  run hat-space fmincon from v_opt_robust (same
 %                                  stack as run_gaslib_mgsp: obj_hat, Aeq_hat, bounds_hat)
+%   opts.verify_nlp_pop_hat        if true (default false), sample random hat vectors
+%                                  near x0_hat and compare NLP (fmincon stack) vs
+%                                  gaslib_pop_numeric_fgh objective and equality stack
+%   opts.verify_nlp_pop_hat_samples   number of random hat samples (default 5)
+%   opts.verify_nlp_pop_hat_noise     std dev of Gaussian perturbation of x0_hat (default 0.05)
+%   opts.verify_nlp_pop_hat_tol       pass tolerance on |df|, |dh|, |dg| (default 1e-8)
+%   opts.verify_nlp_pop_hat_seed      RNG seed; empty (default) uses rng('shuffle')
 %   opts.verbose                   true/false (default true)
 %
 % Output:
@@ -73,6 +80,7 @@ function out = run_gaslib_mgsp(net_file, scn_file, scn_id, opts)
 %                 pop_x0, x_scale, x_hat (scaled NLP vars), and pop_coeff if
 %                 opts.report_pop_coeff_ranges is true; nlp.x is physical units.
 %                 pop_coeff.ball_c is per-var SOS radius c when pop_ball_constraints.
+%                 nlp.verify_nlp_pop_hat (if opts.verify_nlp_pop_hat) holds random-check results.
 %   out.sdp       SDP solution / diagnostics if opts.run_sdp (includes sdp.zopt,
 %                 sdp.robust_extract_nlp, and when opts.refine_robust_extract succeeds:
 %                 sdp.x_hat_refined, sdp.x_refined = x_hat.*x_scale, sdp.fval_refined,
@@ -117,6 +125,17 @@ function out = run_gaslib_mgsp(net_file, scn_file, scn_id, opts)
     nonlcon_hat = @(xh) gaslib_nonlcon(xh .* s, data);
 
     [f_pop0, g_pop0, h_pop0] = gaslib_pop_numeric_fgh(x0, data, Aeq, beq, lb, ub, opts);
+
+    verify_nlp_pop_hat = [];
+    if opts.verify_nlp_pop_hat
+        try
+            verify_nlp_pop_hat = gaslib_verify_nlp_pop_hat_suite( ...
+                x0_hat, lb_hat, ub_hat, data, Aeq, beq, lb, ub, opts, w_lin);
+        catch ME
+            warning('run_gaslib_mgsp:VerifyNlpPopHat', ...
+                'NLP vs POP hat-space verification failed: %s', ME.message);
+        end
+    end
 
     if isempty(opts.fmincon_options)
         fopts = optimoptions('fmincon', ...
@@ -170,6 +189,7 @@ function out = run_gaslib_mgsp(net_file, scn_file, scn_id, opts)
     nlp.qabs = x(data.var.i_qabs);
     nlp.x_scale = opts.x_scale;
     nlp.x_hat = x_hat;
+    nlp.verify_nlp_pop_hat = verify_nlp_pop_hat;
 
     nlp.pop_x0 = struct();
     nlp.pop_x0.f = f_pop0;
@@ -216,6 +236,19 @@ function out = run_gaslib_mgsp(net_file, scn_file, scn_id, opts)
         fprintf('POP init x0 (CSTSS f,g,h): f=%.9g  min(g)=%.3e  max|h|=%.3e  max(0,-g)=%.3e\n', ...
             nlp.pop_x0.f, nlp.pop_x0.min_g, nlp.pop_x0.max_abs_h, nlp.pop_x0.max_ineq_violation);
         fprintf('POP init x0 feasible (tol=%.1e on g,h): %d\n', nlp.pop_x0.tol, nlp.pop_x0.feasible);
+        if opts.verify_nlp_pop_hat && ~isempty(nlp.verify_nlp_pop_hat)
+            v = nlp.verify_nlp_pop_hat;
+            fprintf('\n--- NLP vs POP (random hat checks, tol=%.1e) ---\n', opts.verify_nlp_pop_hat_tol);
+            fprintf('samples=%d  max|f_nlp-f_pop|=%.3e  max|h_pop-h_nlp|_inf=%.3e\n', ...
+                v.n_samples, v.max_abs_df, v.max_dh_inf);
+            fprintf('max |g_box+comp_pop - rebuild|_inf = %.3e\n', v.max_dg_bc_inf);
+            if opts.pop_ball_constraints
+                fprintf('max |g_ball_pop - rebuild|_inf     = %.3e\n', v.max_dg_ball_inf);
+            end
+            fprintf('aggregate: max sample max(0,-c)=%.3e  max(0,-g_pop)=%.3e\n', ...
+                v.max_nlp_neg_c, v.max_pop_neg_g);
+            fprintf('check %s\n', ternary(v.pass, 'PASSED', 'FAILED (see per-sample in nlp.verify_nlp_pop_hat.samples)'));
+        end
         if opts.pop_ball_constraints
             fprintf('POP ball rows          : %d  (1 - (x_phys(i)/c_i)^2 >= 0; x_phys=s.*z, c_i=ub or pop_ball_c_inf)\n', data.var.nvar);
         end
@@ -909,6 +942,150 @@ function [f, g, h] = gaslib_pop_numeric_fgh(x, data, Aeq, beq, lb, ub, opts)
             g = [g; cball^2 - x(iv)^2]; %#ok<AGROW>
         end
     end
+end
+
+function xh = clip_xhat_to_bounds(xh, lb_hat, ub_hat)
+    xh = xh(:);
+    for i = 1:numel(xh)
+        if isfinite(lb_hat(i))
+            xh(i) = max(xh(i), lb_hat(i));
+        end
+        if isfinite(ub_hat(i))
+            xh(i) = min(xh(i), ub_hat(i));
+        end
+    end
+end
+
+function gbc = gaslib_pop_g_box_compressor_only_physical(x, data, lb, ub)
+    % Box + compressor g rows only (same as gaslib_pop_numeric_fgh), physical x.
+    pb = x(data.var.i_p2);
+    q = x(data.var.i_q);
+    gbc = [ ...
+        pb - lb(data.var.i_p2); ...
+        ub(data.var.i_p2) - pb; ...
+        q - lb(data.var.i_q); ...
+        ub(data.var.i_q) - q];
+    if ~isempty(data.var.i_qabs)
+        qa = x(data.var.i_qabs);
+        gbc = [gbc; qa; ub(data.var.i_qabs) - qa]; %#ok<AGROW>
+    end
+    if ~isempty(data.var.i_g)
+        gv = x(data.var.i_g);
+        gbc = [gbc; gv; ub(data.var.i_g) - gv]; %#ok<AGROW>
+    end
+    if ~isempty(data.var.i_shed)
+        sv = x(data.var.i_shed);
+        gbc = [gbc; sv; ub(data.var.i_shed) - sv]; %#ok<AGROW>
+    end
+    for k = 1:numel(data.comp_idx)
+        e = data.comp_idx(k);
+        i = data.from(e);
+        j = data.to(e);
+        gbc = [gbc; ...
+            pb(j)^2 - (data.crmin(e)^2) * pb(i)^2; ...
+            (data.crmax(e)^2) * pb(i)^2 - pb(j)^2]; %#ok<AGROW>
+    end
+end
+
+function gb = gaslib_pop_g_ball_only_physical(x, lb, ub, opts)
+    gb = zeros(0, 1);
+    if ~opts.pop_ball_constraints
+        return;
+    end
+    n = numel(x);
+    for iv = 1:n
+        if isfinite(ub(iv))
+            cball = ub(iv);
+        else
+            cball = opts.pop_ball_c_inf;
+        end
+        gb = [gb; cball^2 - x(iv)^2]; %#ok<AGROW>
+    end
+end
+
+function r = gaslib_verify_nlp_pop_hat_once(x_hat, data, Aeq, beq, lb, ub, opts, w_lin)
+    s = opts.x_scale(:);
+    x_hat = x_hat(:);
+    x_phys = x_hat .* s;
+    f_nlp = w_lin(:).' * x_hat;
+    [f_pop, g_pop, h_pop] = gaslib_pop_numeric_fgh(x_phys, data, Aeq, beq, lb, ub, opts);
+    r.df = f_nlp - f_pop;
+
+    [c, ceq] = gaslib_nonlcon(x_phys, data);
+    % gaslib_nonlcon stacks ceq as [Weymouth_1..np; qabs_eq_1..np; short_1..ns].
+    % gaslib_pop_numeric_fgh stacks h as [mass; W1,Q1,W2,Q2,...; short...].
+    np = numel(data.pipe_idx);
+    ns = numel(data.short_idx);
+    h_mass = Aeq * x_phys - beq;
+    if np > 0
+        W = ceq(1:np);
+        Q = ceq(np + 1:2 * np);
+        h_tail = zeros(2 * np + ns, 1);
+        for kk = 1:np
+            h_tail(2 * kk - 1) = W(kk);
+            h_tail(2 * kk) = Q(kk);
+        end
+        if ns > 0
+            h_tail(2 * np + 1:2 * np + ns) = ceq(2 * np + 1:2 * np + ns);
+        end
+        h_expected = [h_mass; h_tail];
+    else
+        h_expected = [h_mass; ceq(:)];
+    end
+    r.dh = h_pop(:) - h_expected(:);
+    r.dh_inf = norm(r.dh, inf);
+
+    N = data.N;
+    M = data.M;
+    Pq = numel(data.var.i_qabs);
+    Gn = numel(data.var.i_g);
+    Sn = numel(data.var.i_shed);
+    nc = numel(data.comp_idx);
+    n_bc = 2 * N + 2 * M + 2 * Pq + 2 * Gn + 2 * Sn + 2 * nc;
+    gbc = gaslib_pop_g_box_compressor_only_physical(x_phys, data, lb, ub);
+    r.dg_bc_inf = norm(g_pop(1:n_bc) - gbc, inf);
+
+    if opts.pop_ball_constraints
+        gb = gaslib_pop_g_ball_only_physical(x_phys, lb, ub, opts);
+        r.dg_ball_inf = norm(g_pop(n_bc + 1:end) - gb, inf);
+    else
+        r.dg_ball_inf = 0;
+    end
+
+    r.nlp_max_neg_c = max(max(-c(:), 0));
+    r.pop_max_neg_g = max(max(-g_pop(:), 0));
+end
+
+function rep = gaslib_verify_nlp_pop_hat_suite(x0_hat, lb_hat, ub_hat, data, Aeq, beq, lb, ub, opts, w_lin)
+    rep = struct();
+    rep.n_samples = opts.verify_nlp_pop_hat_samples;
+    if isempty(opts.verify_nlp_pop_hat_seed)
+        rng('shuffle');
+    else
+        rng(opts.verify_nlp_pop_hat_seed);
+    end
+    rep.samples = cell(rep.n_samples, 1);
+    rep.max_abs_df = 0;
+    rep.max_dh_inf = 0;
+    rep.max_dg_bc_inf = 0;
+    rep.max_dg_ball_inf = 0;
+    rep.max_nlp_neg_c = 0;
+    rep.max_pop_neg_g = 0;
+    noise = opts.verify_nlp_pop_hat_noise;
+    tol = opts.verify_nlp_pop_hat_tol;
+    for k = 1:rep.n_samples
+        xh = clip_xhat_to_bounds(x0_hat + noise * randn(data.var.nvar, 1), lb_hat, ub_hat);
+        r = gaslib_verify_nlp_pop_hat_once(xh, data, Aeq, beq, lb, ub, opts, w_lin);
+        rep.samples{k} = r;
+        rep.max_abs_df = max(rep.max_abs_df, abs(r.df));
+        rep.max_dh_inf = max(rep.max_dh_inf, r.dh_inf);
+        rep.max_dg_bc_inf = max(rep.max_dg_bc_inf, r.dg_bc_inf);
+        rep.max_dg_ball_inf = max(rep.max_dg_ball_inf, r.dg_ball_inf);
+        rep.max_nlp_neg_c = max(rep.max_nlp_neg_c, r.nlp_max_neg_c);
+        rep.max_pop_neg_g = max(rep.max_pop_neg_g, r.pop_max_neg_g);
+    end
+    rep.pass = (rep.max_abs_df <= tol) && (rep.max_dh_inf <= tol) && ...
+        (rep.max_dg_bc_inf <= tol) && (rep.max_dg_ball_inf <= tol);
 end
 
 function [z, objective, inequality, equality] = build_gaslib_pop_msspoly(data, Aeq, beq, lb, ub, opts)
@@ -1652,6 +1829,11 @@ function opts = set_default_opts(opts)
     opts = set_opt(opts, 'x_scale', []);
     opts = set_opt(opts, 'fmincon_options', []);
     opts = set_opt(opts, 'refine_robust_extract', true);
+    opts = set_opt(opts, 'verify_nlp_pop_hat', false);
+    opts = set_opt(opts, 'verify_nlp_pop_hat_samples', 5);
+    opts = set_opt(opts, 'verify_nlp_pop_hat_noise', 0.05);
+    opts = set_opt(opts, 'verify_nlp_pop_hat_tol', 1e-8);
+    opts = set_opt(opts, 'verify_nlp_pop_hat_seed', []);
     opts = set_opt(opts, 'verbose', true);
 end
 
