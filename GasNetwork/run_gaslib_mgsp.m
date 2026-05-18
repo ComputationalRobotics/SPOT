@@ -219,6 +219,9 @@ function out = run_gaslib_mgsp(net_file, scn_file, scn_id, opts)
         fprintf('Nodes    : %d\n', data.N);
         fprintf('Arcs     : %d  (pipes=%d, short=%d, comps=%d)\n', ...
             data.M, numel(data.pipe_idx), numel(data.short_idx), numel(data.comp_idx));
+        fprintf('POP vars : %d hat z  (p2=%d, q=%d, qabs=%d, g=%d, shed=%d)\n', ...
+            data.var.nvar, data.N, data.M, numel(data.var.i_qabs), ...
+            numel(data.var.i_g), numel(data.var.i_shed));
         fprintf('rho0     : %.6f kg/m^3\n', data.rho0);
         fprintf('T        : %.6f K\n', data.Tk);
         fprintf('M        : %.6f kg/mol\n', data.molar_mass_kg_per_mol);
@@ -1343,6 +1346,17 @@ function sdp = solve_gaslib_sdp(data, Aeq, beq, lb, ub, nlp_fval, opts)
 
     [z, objective, inequality, equality] = build_gaslib_pop_msspoly(data, Aeq, beq, lb, ub, opts);
 
+    n_p2 = data.N;
+    n_q = data.M;
+    n_qabs = numel(data.var.i_qabs);
+    n_g = numel(data.var.i_g);
+    n_shed = numel(data.var.i_shed);
+    fprintf(['POP decision variables (hat indeterminates z): %d total\n' ...
+        '  p2=%d  q=%d  qabs=%d  g=%d  shed=%d  (x_phys(i)=opts.x_scale(i)*z(i))\n'], ...
+        data.var.nvar, n_p2, n_q, n_qabs, n_g, n_shed);
+    fprintf('POP constraints (before msspoly_clean): %d equalities, %d inequalities\n', ...
+        numel(equality), numel(inequality));
+
     [equality, ~] = msspoly_clean(equality, z, 1e-14, true);
     [inequality, ~] = msspoly_clean(inequality, z, 1e-14, true);
     [objective, obj_scale_factor] = msspoly_clean(objective, z, 1e-14, true);
@@ -1410,6 +1424,8 @@ function sdp = solve_gaslib_sdp(data, Aeq, beq, lb, ub, nlp_fval, opts)
     % naive extraction
     [v_opt_naive, output_info_naive] = naive_extract(Xs, mom_mat_rpt, total_var_num);
 
+    aux_info.total_var_num = total_var_num;
+    sdp.relax_info = aux_info;
     sdp.status = 'solved';
     sdp.result = result;
     sdp.res = res;
