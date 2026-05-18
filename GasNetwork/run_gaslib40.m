@@ -96,19 +96,26 @@ close;
 
 %% get convex hull of each clique
 convex_hulls = cell(length(cliques), 1);
+effective_id_num = 0;
 for clique_id = 1: length(cliques)
     clique = cliques{clique_id};
     x_clique = x(clique);
     y_clique = y(clique);
-    k = convhull(x_clique, y_clique);
-    x_convexhull = x_clique(k);
-    y_convexhull = y_clique(k);
+    if length(clique) > 2
+        effective_id_num = effective_id_num + 1;
+        k = convhull(x_clique', y_clique');
+        x_convexhull = x_clique(k);
+        y_convexhull = y_clique(k);
+    else
+        x_convexhull = x_clique;
+        y_convexhull = y_clique;
+    end
     convex_hulls{clique_id} = [x_convexhull; y_convexhull];
 end
 
 %% get approximated minimal enclosing ellipse for each clique
-ellipses = zeros(length(cliques), 5);
-for clique_id = 1: length(cliques)
+ellipses = zeros(effective_id_num, 5);
+for clique_id = 1: effective_id_num
     convexhull = convex_hulls{clique_id};
     xh = convexhull(1, 1:end-1);
     yh = convexhull(2, 1:end-1);
@@ -144,7 +151,7 @@ h.EdgeColor = [0, 0, 1];        % Change edge color to blue
 h.EdgeAlpha = 0.35;              % Set edge transparency
 
 hold on;
-for clique_id = 1: length(cliques)
+for clique_id = 1: effective_id_num
     data = ellipses(clique_id, :);
     xc = data(1); yc = data(2); a = data(3); b = data(4); theta = data(5);
     t = linspace(0, 2*pi, 100);
@@ -153,8 +160,8 @@ for clique_id = 1: length(cliques)
     plot(x_ellipse, y_ellipse, 'r', 'LineWidth', 2.0);
 end
 
-exportgraphics(gcf, prefix + 'test.tiff', 'Resolution', 600);
-% print('-dpng', '-r300', prefix + "test.png");
+exportgraphics(gcf, 'test.tiff', 'Resolution', 600);
+print('-dpng', '-r300', "test.png");
 
 %% helper functions
 function [xc, yc, a, b, theta] = get_approx_min_enclosing_ellipse(xh, yh)
