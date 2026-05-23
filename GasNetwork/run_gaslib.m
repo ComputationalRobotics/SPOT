@@ -1,13 +1,14 @@
-%RUN_GASLIB40  Run GasLib-40 through run_gaslib_mgsp (NLP, then SDP relaxation).
+%RUN_GASLIB  Run GasLib test instances through run_gaslib_mgsp (NLP, then SDP).
 %
-% Expects GasLib-40 files under GasNetwork/data/:
-%   GasLib-40-v1-20211130.net
-%   GasLib-40-v1-20211130.scn
+% Three instances under GasNetwork/data/ (set instance_key below):
+%   gaslib40_original  GasLib-40-v1-20211130.net + .scn, scn_id = nomination_1
+%   gaslib40_modified  GasLib-40-v1-20211130.net + GasLib-40-gasmodels-ls-converted.scn
+%   gaslib135          GasLib-135-v1-20211130.net + .scn, scn_id = nomination_1
 %
 % Requires SPOT (msspoly) and CSTSS_mex for the SDP step.
 %
 % Usage (from MATLAB, with GasNetwork on the path):
-%   run_gaslib40
+%   run_gaslib
 
 % clean and addpath
 clc; clear; close all;
@@ -16,12 +17,40 @@ addpath("../pathinfo/");
 my_path;
 
 thisdir = fileparts(mfilename('fullpath'));
-net_file = fullfile(thisdir, 'data', 'GasLib-40-v1-20211130.net');
-% scn_file = fullfile(thisdir, 'data', 'GasLib-40-v1-20211130.scn');
-% scn_id = 'nomination_1';
-scn_file = fullfile(thisdir, 'data', 'GasLib-40-gasmodels-ls-converted.scn');
-scn_id = 'gasmodels_ls_mgs_bounds';
-% scn_id = 'gasmodels_ls_fixed_nominal';
+datadir = fullfile(thisdir, 'data');
+
+% --- instance selector: 'gaslib40_original' | 'gaslib40_modified' | 'gaslib135'
+instance_key = 'gaslib135';
+
+instances.gaslib40_original = struct( ...
+    'label', 'GasLib-40 (original)', ...
+    'net_file', fullfile(datadir, 'GasLib-40-v1-20211130.net'), ...
+    'scn_file', fullfile(datadir, 'GasLib-40-v1-20211130.scn'), ...
+    'scn_id', 'nomination_1');
+
+instances.gaslib40_modified = struct( ...
+    'label', 'GasLib-40 (gasmodels LS)', ...
+    'net_file', fullfile(datadir, 'GasLib-40-v1-20211130.net'), ...
+    'scn_file', fullfile(datadir, 'GasLib-40-gasmodels-ls-converted.scn'), ...
+    'scn_id', 'gasmodels_ls_mgs_bounds');  % alt: 'gasmodels_ls_fixed_nominal'
+
+instances.gaslib135 = struct( ...
+    'label', 'GasLib-135', ...
+    'net_file', fullfile(datadir, 'GasLib-135-v1-20211130.net'), ...
+    'scn_file', fullfile(datadir, 'GasLib-135-v1-20211130.scn'), ...
+    'scn_id', 'nomination_1');
+
+if ~isfield(instances, instance_key)
+    error('run_gaslib40:Instance', ...
+        'Unknown instance_key ''%s''. Use gaslib40_original, gaslib40_modified, or gaslib135.', ...
+        instance_key);
+end
+inst = instances.(instance_key);
+net_file = inst.net_file;
+scn_file = inst.scn_file;
+scn_id = inst.scn_id;
+fprintf('Instance: %s\n  net: %s\n  scn: %s  (id=%s)\n', ...
+    inst.label, net_file, scn_file, scn_id);
 
 opts = struct();
 opts.run_sdp = true;
@@ -49,12 +78,29 @@ opts.fmincon_options = optimoptions('fmincon', ...
 out = run_gaslib_mgsp(net_file, scn_file, scn_id, opts);
 
 
+% plot the histogram of clique sizes, and also correlative sparsity pattern graph
 params = out.sdp.relax_info;
 cliques = params.cliques;
 n = params.total_var_num;
 C = containers.Map('KeyType', 'uint64', 'ValueType', 'any');
 
+% Print the maximum number of variables in cliques and the number of cliques
+clique_sizes = cellfun(@length, cliques);
+max_clique_size = max(clique_sizes);
+num_cliques = numel(cliques);
+fprintf('Maximum number of variables in cliques: %d\n', max_clique_size);
+fprintf('Number of cliques: %d\n', num_cliques);
+
+% Plot the histogram of clique sizes
+figure;
+histogram(clique_sizes);
+xlabel('Clique size', 'FontSize', 30);
+ylabel('Frequency', 'FontSize', 30);
+set(gca, 'FontSize', 24);
+
+
 %% embed graph
+figure;
 % suppose we only have CS
 for clique_id = 1: length(cliques)
     clique = cliques{clique_id};
@@ -135,7 +181,7 @@ end
 % end
 
 %% draw final embedding 
-figure;
+figure('Position', [100, 100, 800, 800]);
 G = graph(edges(:,1), edges(:,2));
 h = plot(G, 'Layout', 'force');
 
